@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "schedule_configs",
+  "info": {
+    "singularName": "schedule-config",
+    "pluralName": "schedule-configs",
+    "displayName": "Schedule Config",
+    "description": "Global scheduling configuration"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "academicPeriod": {
+      "type": "string",
+      "required": true
+    },
+    "weekdayStart": {
+      "type": "time",
+      "required": true
+    },
+    "weekdayEnd": {
+      "type": "time",
+      "required": true
+    },
+    "saturdayStart": {
+      "type": "time"
+    },
+    "saturdayEnd": {
+      "type": "time"
+    },
+    "lunchStart": {
+      "type": "time",
+      "required": true
+    },
+    "lunchEnd": {
+      "type": "time",
+      "required": true
+    },
+    "classSizeTolerancePercent": {
+      "type": "integer",
+      "default": 10,
+      "min": 0
+    },
+    "closeSectionBelow": {
+      "type": "integer",
+      "default": 10,
+      "min": 0
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "academicGroups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::academic-group.academic-group",
+      "mappedBy": "scheduleConfig"
+    },
+    "hardRules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::hard-rule.hard-rule",
+      "mappedBy": "scheduleConfig"
+    },
+    "softRules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::soft-rule.soft-rule",
+      "mappedBy": "scheduleConfig"
+    }
+  }
+}

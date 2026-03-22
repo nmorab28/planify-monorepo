@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hard_rules",
+  "info": {
+    "singularName": "hard-rule",
+    "pluralName": "hard-rules",
+    "displayName": "Hard Rule",
+    "description": "Mandatory scheduling rules"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "isEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "parameters": {
+      "type": "json"
+    },
+    "scheduleConfig": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::schedule-config.schedule-config",
+      "inversedBy": "hardRules"
+    }
+  }
+}

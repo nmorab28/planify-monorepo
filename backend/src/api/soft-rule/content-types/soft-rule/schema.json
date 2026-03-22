@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "soft_rules",
+  "info": {
+    "singularName": "soft-rule",
+    "pluralName": "soft-rules",
+    "displayName": "Soft Rule",
+    "description": "Weighted optimization rules"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "weight": {
+      "type": "integer",
+      "required": true,
+      "default": 50,
+      "min": 1,
+      "max": 100
+    },
+    "isEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "parameters": {
+      "type": "json"
+    },
+    "scheduleConfig": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::schedule-config.schedule-config",
+      "inversedBy": "softRules"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "availabilities",
+  "info": {
+    "singularName": "availability",
+    "pluralName": "availabilities",
+    "displayName": "Availability",
+    "description": "Teacher availability slots"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "dayOfWeek": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 6
+    },
+    "startTime": {
+      "type": "time",
+      "required": true
+    },
+    "endTime": {
+      "type": "time",
+      "required": true
+    },
+    "isAvailable": {
+      "type": "boolean",
+      "default": true
+    },
+    "teacher": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::teacher.teacher",
+      "inversedBy": "availabilities"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "classroom_features",
+  "info": {
+    "singularName": "classroom-feature",
+    "pluralName": "classroom-features",
+    "displayName": "Classroom Feature",
+    "description": "Classroom resources and features"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "classrooms": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::classroom.classroom",
+      "mappedBy": "features"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course.course",
+      "mappedBy": "requiredFeatures"
+    }
+  }
+}
