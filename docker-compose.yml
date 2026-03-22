@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: planify-postgres
+    restart: unless-stopped
+    env_file:
+      - .env.postgres
+    volumes:
+      - planify_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  strapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: planify-strapi
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    working_dir: /app
+    ports:
+      - "${STRAPI_PORT}:1337"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - planify_strapi_node_modules:/app/node_modules
+      - planify_strapi_cache:/app/.cache
+    command: sh -c "npm install && npm run develop"
+
+volumes:
+  planify_postgres_data:
+  planify_strapi_node_modules:
+  planify_strapi_cache:
