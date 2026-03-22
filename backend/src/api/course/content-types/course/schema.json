@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "singularName": "course",
+    "pluralName": "courses",
+    "displayName": "Course",
+    "description": "Academic courses"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "weeklySessions": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "sessionDurationMinutes": {
+      "type": "integer",
+      "required": true,
+      "default": 60
+    },
+    "needsNonConsecutiveDays": {
+      "type": "boolean",
+      "default": false
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "academicGroups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::academic-group.academic-group",
+      "mappedBy": "course"
+    },
+    "requiredFeatures": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::classroom-feature.classroom-feature",
+      "inversedBy": "courses"
+    }
+  }
+}

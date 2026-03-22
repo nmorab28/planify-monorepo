@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "classrooms",
+  "info": {
+    "singularName": "classroom",
+    "pluralName": "classrooms",
+    "displayName": "Classroom",
+    "description": "Physical classrooms"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "capacity": {
+      "type": "integer",
+      "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "features": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::classroom-feature.classroom-feature",
+      "inversedBy": "classrooms"
+    },
+    "classSessions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::class-session.class-session",
+      "mappedBy": "classroom"
+    }
+  }
+}

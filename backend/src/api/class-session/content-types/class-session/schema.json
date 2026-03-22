@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "class_sessions",
+  "info": {
+    "singularName": "class-session",
+    "pluralName": "class-sessions",
+    "displayName": "Class Session",
+    "description": "Scheduled class sessions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "dayOfWeek": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 6
+    },
+    "startTime": {
+      "type": "time",
+      "required": true
+    },
+    "endTime": {
+      "type": "time",
+      "required": true
+    },
+    "sessionOrder": {
+      "type": "integer",
+      "default": 1,
+      "min": 1
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["draft", "planned", "published", "blocked", "cancelled"],
+      "default": "draft"
+    },
+    "isLocked": {
+      "type": "boolean",
+      "default": false
+    },
+    "academicGroup": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::academic-group.academic-group",
+      "inversedBy": "classSessions"
+    },
+    "classroom": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::classroom.classroom",
+      "inversedBy": "classSessions"
+    }
+  }
+}

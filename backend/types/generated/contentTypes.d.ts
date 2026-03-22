@@ -430,6 +430,505 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAcademicGroupAcademicGroup
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'academic_groups';
+  info: {
+    description: 'Course sections or groups';
+    displayName: 'Academic Group';
+    pluralName: 'academic-groups';
+    singularName: 'academic-group';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    capacityTarget: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    classSessions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-session.class-session'
+    >;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::academic-group.academic-group'
+    > &
+      Schema.Attribute.Private;
+    maxStudents: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<40>;
+    minStudents: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+    publishedAt: Schema.Attribute.DateTime;
+    scheduleConfig: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::schedule-config.schedule-config'
+    >;
+    status: Schema.Attribute.Enumeration<
+      ['draft', 'planned', 'published', 'closed']
+    > &
+      Schema.Attribute.DefaultTo<'draft'>;
+    teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAvailabilityAvailability
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'availabilities';
+  info: {
+    description: 'Teacher availability slots';
+    displayName: 'Availability';
+    pluralName: 'availabilities';
+    singularName: 'availability';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dayOfWeek: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 6;
+          min: 1;
+        },
+        number
+      >;
+    endTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    isAvailable: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::availability.availability'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    startTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiClassSessionClassSession
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'class_sessions';
+  info: {
+    description: 'Scheduled class sessions';
+    displayName: 'Class Session';
+    pluralName: 'class-sessions';
+    singularName: 'class-session';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    academicGroup: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::academic-group.academic-group'
+    >;
+    classroom: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::classroom.classroom'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dayOfWeek: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 6;
+          min: 1;
+        },
+        number
+      >;
+    endTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    isLocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-session.class-session'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sessionOrder: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    startTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    status: Schema.Attribute.Enumeration<
+      ['draft', 'planned', 'published', 'blocked', 'cancelled']
+    > &
+      Schema.Attribute.DefaultTo<'draft'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiClassroomFeatureClassroomFeature
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'classroom_features';
+  info: {
+    description: 'Classroom resources and features';
+    displayName: 'Classroom Feature';
+    pluralName: 'classroom-features';
+    singularName: 'classroom-feature';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    classrooms: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::classroom.classroom'
+    >;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    courses: Schema.Attribute.Relation<'manyToMany', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::classroom-feature.classroom-feature'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiClassroomClassroom extends Struct.CollectionTypeSchema {
+  collectionName: 'classrooms';
+  info: {
+    description: 'Physical classrooms';
+    displayName: 'Classroom';
+    pluralName: 'classrooms';
+    singularName: 'classroom';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    capacity: Schema.Attribute.Integer & Schema.Attribute.Required;
+    classSessions: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-session.class-session'
+    >;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    features: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::classroom-feature.classroom-feature'
+    >;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::classroom.classroom'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
+  collectionName: 'courses';
+  info: {
+    description: 'Academic courses';
+    displayName: 'Course';
+    pluralName: 'courses';
+    singularName: 'course';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    academicGroups: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::academic-group.academic-group'
+    >;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::course.course'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    needsNonConsecutiveDays: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    publishedAt: Schema.Attribute.DateTime;
+    requiredFeatures: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::classroom-feature.classroom-feature'
+    >;
+    sessionDurationMinutes: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<60>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    weeklySessions: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<1>;
+  };
+}
+
+export interface ApiHardRuleHardRule extends Struct.CollectionTypeSchema {
+  collectionName: 'hard_rules';
+  info: {
+    description: 'Mandatory scheduling rules';
+    displayName: 'Hard Rule';
+    pluralName: 'hard-rules';
+    singularName: 'hard-rule';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isEnabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::hard-rule.hard-rule'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    parameters: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    scheduleConfig: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::schedule-config.schedule-config'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiScheduleConfigScheduleConfig
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'schedule_configs';
+  info: {
+    description: 'Global scheduling configuration';
+    displayName: 'Schedule Config';
+    pluralName: 'schedule-configs';
+    singularName: 'schedule-config';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    academicGroups: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::academic-group.academic-group'
+    >;
+    academicPeriod: Schema.Attribute.String & Schema.Attribute.Required;
+    classSizeTolerancePercent: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+    closeSectionBelow: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<10>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hardRules: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::hard-rule.hard-rule'
+    >;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::schedule-config.schedule-config'
+    > &
+      Schema.Attribute.Private;
+    lunchEnd: Schema.Attribute.Time & Schema.Attribute.Required;
+    lunchStart: Schema.Attribute.Time & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    saturdayEnd: Schema.Attribute.Time;
+    saturdayStart: Schema.Attribute.Time;
+    softRules: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::soft-rule.soft-rule'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    weekdayEnd: Schema.Attribute.Time & Schema.Attribute.Required;
+    weekdayStart: Schema.Attribute.Time & Schema.Attribute.Required;
+  };
+}
+
+export interface ApiSoftRuleSoftRule extends Struct.CollectionTypeSchema {
+  collectionName: 'soft_rules';
+  info: {
+    description: 'Weighted optimization rules';
+    displayName: 'Soft Rule';
+    pluralName: 'soft-rules';
+    singularName: 'soft-rule';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isEnabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::soft-rule.soft-rule'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    parameters: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    scheduleConfig: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::schedule-config.schedule-config'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    weight: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<50>;
+  };
+}
+
+export interface ApiTeacherTeacher extends Struct.CollectionTypeSchema {
+  collectionName: 'teachers';
+  info: {
+    description: 'Academic teachers';
+    displayName: 'Teacher';
+    pluralName: 'teachers';
+    singularName: 'teacher';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    academicGroups: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::academic-group.academic-group'
+    >;
+    availabilities: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::availability.availability'
+    >;
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    firstName: Schema.Attribute.String & Schema.Attribute.Required;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    lastName: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::teacher.teacher'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -941,6 +1440,16 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::academic-group.academic-group': ApiAcademicGroupAcademicGroup;
+      'api::availability.availability': ApiAvailabilityAvailability;
+      'api::class-session.class-session': ApiClassSessionClassSession;
+      'api::classroom-feature.classroom-feature': ApiClassroomFeatureClassroomFeature;
+      'api::classroom.classroom': ApiClassroomClassroom;
+      'api::course.course': ApiCourseCourse;
+      'api::hard-rule.hard-rule': ApiHardRuleHardRule;
+      'api::schedule-config.schedule-config': ApiScheduleConfigScheduleConfig;
+      'api::soft-rule.soft-rule': ApiSoftRuleSoftRule;
+      'api::teacher.teacher': ApiTeacherTeacher;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

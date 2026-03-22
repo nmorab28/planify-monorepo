@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teachers",
+  "info": {
+    "singularName": "teacher",
+    "pluralName": "teachers",
+    "displayName": "Teacher",
+    "description": "Academic teachers"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "availabilities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::availability.availability",
+      "mappedBy": "teacher"
+    },
+    "academicGroups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::academic-group.academic-group",
+      "mappedBy": "teacher"
+    }
+  }
+}

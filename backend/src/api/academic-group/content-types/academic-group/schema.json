@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "academic_groups",
+  "info": {
+    "singularName": "academic-group",
+    "pluralName": "academic-groups",
+    "displayName": "Academic Group",
+    "description": "Course sections or groups"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "capacityTarget": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "minStudents": {
+      "type": "integer",
+      "default": 10,
+      "min": 0
+    },
+    "maxStudents": {
+      "type": "integer",
+      "default": 40,
+      "min": 1
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["draft", "planned", "published", "closed"],
+      "default": "draft"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "academicGroups"
+    },
+    "teacher": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::teacher.teacher",
+      "inversedBy": "academicGroups"
+    },
+    "scheduleConfig": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::schedule-config.schedule-config",
+      "inversedBy": "academicGroups"
+    },
+    "classSessions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::class-session.class-session",
+      "mappedBy": "academicGroup"
+    }
+  }
+}
