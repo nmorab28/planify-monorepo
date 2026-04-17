@@ -1,106 +1,80 @@
-import axios from 'axios';
-// import swal from "sweetalert";
+import axios from "axios";
 import Swal from "sweetalert2";
-import {
-    loginConfirmedAction,
-    Logout,
-} from '../store/actions/AuthActions';
+import { loginConfirmedAction, Logout } from "../store/actions/AuthActions";
 
-export function signUp(email, password) {
-    //axios call
-    const postData = {
-        email,
-        password,
-        returnSecureToken: true,
-    };
-    return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
-        postData,
-    );
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:1337/api";
+
+export async function login(email, password) {
+  const authResponse = await axios.post(`${API_BASE_URL}/auth/local`, {
+    identifier: email,
+    password,
+  });
+
+  return {
+    jwt: authResponse.data.jwt,
+    user: authResponse.data.user,
+  };
 }
 
-export function login(email, password) {
-    const postData = {
-        email,
-        password,
-        returnSecureToken: true,
-    };
-    return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
-        postData,
-    );
-}
+// Se deja comentado por si más adelante vuelven a usar registro
+// export function signUp(email, password) {
+//     return axios.post(`${API_BASE_URL}/auth/local/register`, {
+//         username: email,
+//         email,
+//         password,
+//     });
+// }
 
 export function formatError(errorResponse) {
-    switch (errorResponse.error.message) {
-        case 'EMAIL_EXISTS':
-            //return 'Email already exists';
-            // swal("Oops", "Email already exists", "error");
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops',
-                text: 'Email already exists',                        
-              })
-            break;
-        case 'EMAIL_NOT_FOUND':
-             Swal.fire({
-                icon: 'error',
-                title: 'Oops',
-                text: 'Email not found',                        
-              })
-            //return 'Email not found';
-                //swal("Oops", "Email not found", "error",{ button: "Try Again!",});
-           break;
-        case 'INVALID_PASSWORD':
-            //return 'Invalid Password';
-            // swal("Oops", "Invalid Password", "error",{ button: "Try Again!",});
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops',
-                text: 'Invalid Password',                        
-            })
-            break;
-        case 'USER_DISABLED':
-            return 'User Disabled';
+  const backendMessage =
+    errorResponse?.response?.data?.error?.message ||
+    errorResponse?.message ||
+    "Authentication failed";
 
-        default:
-            return '';
-    }
+  Swal.fire({
+    icon: "error",
+    title: "Oops",
+    text: backendMessage,
+  });
+
+  return backendMessage;
+}
+
+export function normalizeAuthData(authData) {
+  const jwt = authData.jwt;
+  const user = authData.user;
+
+  return {
+    idToken: jwt,
+    jwt,
+    user,
+    email: user?.email || "",
+    username: user?.username || "",
+    role: user?.role?.type || "",
+    roleName: user?.role?.name || "",
+    loggedInAt: new Date().toISOString(),
+  };
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
-    tokenDetails.expireDate = new Date(
-        new Date().getTime() + tokenDetails.expiresIn * 1000,
-    );
-    localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
-}
-
-export function runLogoutTimer(dispatch, timer, navigate) {
-    setTimeout(() => {
-        //dispatch(Logout(history));
-        dispatch(Logout(navigate));
-    }, timer);
+  localStorage.setItem("userDetails", JSON.stringify(tokenDetails));
 }
 
 export function checkAutoLogin(dispatch, navigate) {
-    const tokenDetailsString = localStorage.getItem('userDetails');
-    let tokenDetails = '';
-    if (!tokenDetailsString) {
-        dispatch(Logout(navigate));
-		return;
-    }
+  const tokenDetailsString = localStorage.getItem("userDetails");
 
-    tokenDetails = JSON.parse(tokenDetailsString);
-    let expireDate = new Date(tokenDetails.expireDate);
-    let todaysDate = new Date();
+  if (!tokenDetailsString) {
+    dispatch(Logout(navigate));
+    return;
+  }
 
-    if (todaysDate > expireDate) {
-        dispatch(Logout(navigate));
-        return;
-    }
-		
-    dispatch(loginConfirmedAction(tokenDetails));
-	
-    const timer = expireDate.getTime() - todaysDate.getTime();
-    runLogoutTimer(dispatch, timer, navigate);
+  const tokenDetails = JSON.parse(tokenDetailsString);
+
+  if (!tokenDetails?.idToken) {
+    dispatch(Logout(navigate));
+    return;
+  }
+
+  dispatch(loginConfirmedAction(tokenDetails));
 }
