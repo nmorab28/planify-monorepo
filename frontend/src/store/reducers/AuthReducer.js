@@ -48,7 +48,7 @@ export function AuthReducer(state = initialState, action) {
         ...action.payload,
       },
       errorMessage: "",
-      successMessage: "Login Successfully Completed",
+      successMessage: "Sesión iniciada correctamente",
       showLoading: false,
     };
   }
