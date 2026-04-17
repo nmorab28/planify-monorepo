@@ -1,12 +1,17 @@
 import type { Core } from '@strapi/strapi';
 
-/** Content-API actions for classroom-feature (rol Public por defecto). Idempotente. */
-const CLASSROOM_FEATURE_PUBLIC_ACTIONS = [
+/** Acciones Content-API concedidas al rol Public al arrancar (idempotente). */
+const PUBLIC_CONTENT_API_ACTIONS = [
   'api::classroom-feature.classroom-feature.find',
   'api::classroom-feature.classroom-feature.findOne',
   'api::classroom-feature.classroom-feature.create',
   'api::classroom-feature.classroom-feature.update',
   'api::classroom-feature.classroom-feature.delete',
+  'api::academic-group.academic-group.find',
+  'api::academic-group.academic-group.findOne',
+  'api::academic-group.academic-group.create',
+  'api::academic-group.academic-group.update',
+  'api::academic-group.academic-group.delete',
 ] as const;
 
 export default {
@@ -36,7 +41,7 @@ export default {
       (publicRole.permissions ?? []).map((p: { action: string }) => p.action)
     );
 
-    for (const action of CLASSROOM_FEATURE_PUBLIC_ACTIONS) {
+    for (const action of PUBLIC_CONTENT_API_ACTIONS) {
       if (!existing.has(action)) {
         await strapi.db.query('plugin::users-permissions.permission').create({
           data: { action, role: publicRole.id },

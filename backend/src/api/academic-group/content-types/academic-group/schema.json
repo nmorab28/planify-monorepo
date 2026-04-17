@@ -40,13 +40,15 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::course.course",
-      "inversedBy": "academicGroups"
+      "inversedBy": "academicGroups",
+      "required": true
     },
     "teacher": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::teacher.teacher",
-      "inversedBy": "academicGroups"
+      "inversedBy": "academicGroups",
+      "required": true
     },
     "scheduleConfig": {
       "type": "relation",

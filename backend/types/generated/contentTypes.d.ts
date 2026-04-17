@@ -458,7 +458,8 @@ export interface ApiAcademicGroupAcademicGroup
     code: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -493,7 +494,8 @@ export interface ApiAcademicGroupAcademicGroup
       ['draft', 'planned', 'published', 'closed']
     > &
       Schema.Attribute.DefaultTo<'draft'>;
-    teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'>;
+    teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'> &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
