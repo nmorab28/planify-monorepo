@@ -18,7 +18,6 @@
     "chart.js": "^4.3.3",
     "formik": "^2.4.3",
     "lightgallery": "^2.7.1",
-    "node-sass": "^9.0.0",
     "p-min-delay": "^4.0.2",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
