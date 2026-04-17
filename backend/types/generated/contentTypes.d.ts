@@ -537,7 +537,8 @@ export interface ApiAvailabilityAvailability
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     startTime: Schema.Attribute.Time & Schema.Attribute.Required;
-    teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'>;
+    teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'> &
+      Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -12,6 +12,11 @@ const PUBLIC_CONTENT_API_ACTIONS = [
   'api::academic-group.academic-group.create',
   'api::academic-group.academic-group.update',
   'api::academic-group.academic-group.delete',
+  'api::availability.availability.find',
+  'api::availability.availability.findOne',
+  'api::availability.availability.create',
+  'api::availability.availability.update',
+  'api::availability.availability.delete',
 ] as const;
 
 export default {
