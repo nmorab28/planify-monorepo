@@ -174,7 +174,7 @@ const Markup = () => {
     //Professors
     { url: "all-professors", component: <AllProfessor/> },    
     { url: "add-professor", component: <AddProfessor/> },    
-    { url: "edit-professor", component: <EditProfessor/> },    
+    { url: "edit-professor/:documentId", component: <EditProfessor/> },    
     { url: "professor-profile", component: <ProfileProfessor/> }, 
     
     //Student
@@ -306,14 +306,7 @@ const Markup = () => {
 
 
   function NotFound(){    
-    const url = allroutes.map((route) => route.url);
-    let path = window.location.pathname
-    path = path.split('/')
-    path = path[path.length - 1]    
-      
-    if(url.indexOf(path) <= 0){     
-      return <Error404 />
-    }
+    return <Error404 />
   }   
 
   return (
