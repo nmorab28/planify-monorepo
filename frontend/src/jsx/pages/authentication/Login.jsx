@@ -24,12 +24,12 @@ function Login(props) {
     const errorObj = { ...errorsObj };
 
     if (email === "") {
-      errorObj.email = "Email is Required";
+      errorObj.email = "El correo es obligatorio";
       error = true;
     }
 
     if (password === "") {
-      errorObj.password = "Password is Required";
+      errorObj.password = "La contraseña es obligatoria";
       error = true;
     }
 
@@ -115,7 +115,7 @@ function Login(props) {
                           className="form-check-label"
                           htmlFor="basic_checkbox_1"
                         >
-                          Recordar
+                          Recordarme
                         </label>
                       </div>
                     </div>
