@@ -33,7 +33,8 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::teacher.teacher",
-      "inversedBy": "availabilities"
+      "inversedBy": "availabilities",
+      "required": true
     }
   }
 }
