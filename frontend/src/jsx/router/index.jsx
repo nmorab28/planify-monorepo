@@ -29,6 +29,21 @@ import AddProfessor from './../pages/professors/AddProfessor';
 import EditProfessor from './../pages/professors/EditProfessor';
 import ProfileProfessor from './../pages/professors/ProfileProfessor';
 
+//Classroom Features
+import AllClassroomFeatures from './../pages/classroom-features/AllClassroomFeatures';
+import AddClassroomFeature from './../pages/classroom-features/AddClassroomFeature';
+import EditClassroomFeature from './../pages/classroom-features/EditClassroomFeature';
+
+//Academic Groups
+import AllAcademicGroups from './../pages/academic-groups/AllAcademicGroups';
+import AddAcademicGroup from './../pages/academic-groups/AddAcademicGroup';
+import EditAcademicGroup from './../pages/academic-groups/EditAcademicGroup';
+
+//Availabilities
+import AllAvailabilities from './../pages/availabilities/AllAvailabilities';
+import AddAvailability from './../pages/availabilities/AddAvailability';
+import EditAvailability from './../pages/availabilities/EditAvailability';
+
 //Student
 import AllStudent from './../pages/students/AllStudent';
 import AddStudent from './../pages/students/AddStudent';
@@ -176,6 +191,21 @@ const Markup = () => {
     { url: "add-professor", component: <AddProfessor/> },    
     { url: "edit-professor/:documentId", component: <EditProfessor/> },    
     { url: "professor-profile", component: <ProfileProfessor/> }, 
+
+    //Classroom Features
+    { url: "all-classroom-features", component: <AllClassroomFeatures/> },
+    { url: "add-classroom-feature", component: <AddClassroomFeature/> },
+    { url: "edit-classroom-feature/:documentId", component: <EditClassroomFeature/> },
+
+    //Academic Groups
+    { url: "all-academic-groups", component: <AllAcademicGroups/> },
+    { url: "add-academic-group", component: <AddAcademicGroup/> },
+    { url: "edit-academic-group/:documentId", component: <EditAcademicGroup/> },
+
+    //Availabilities
+    { url: "all-availabilities", component: <AllAvailabilities/> },
+    { url: "add-availability", component: <AddAvailability/> },
+    { url: "edit-availability/:documentId", component: <EditAvailability/> },
     
     //Student
     { url: "all-students", component: <AllStudent/> }, 

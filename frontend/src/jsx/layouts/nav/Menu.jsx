@@ -13,16 +13,12 @@ export const MenuList = [
         content: [
             {
                 title: 'All Academic Groups',
-                to: 'all-library',					
+                to: 'all-academic-groups',					
             },
             {
-                title: 'Add Academic Groups',
-                to: 'add-library',
+                title: 'Add Academic Group',
+                to: 'add-academic-group',
             },
-            {
-                title: 'Edit Academic Groups',
-                to: 'edit-library',
-            },            
            
         ],
     },
@@ -34,16 +30,29 @@ export const MenuList = [
         content: [
             {
                 title: 'All Availabilities',
-                to: 'all-library',					
+                to: 'all-availabilities',					
             },
             {
                 title: 'Add Availability',
-                to: 'add-library',
+                to: 'add-availability',
+            },
+           
+        ],
+    },
+    //Classroom Features
+    {
+        title: 'Classroom Features',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-cogs" />,
+        content: [
+            {
+                title: 'All Classroom Features',
+                to: 'all-classroom-features',					
             },
             {
-                title: 'Edit Availability',
-                to: 'edit-library',
-            },            
+                title: 'Add Classroom Feature',
+                to: 'add-classroom-feature',
+            },
            
         ],
     },
