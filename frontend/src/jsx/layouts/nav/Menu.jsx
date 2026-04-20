@@ -5,37 +5,144 @@ export const MenuList = [
         classsChange: "menu-title",
         extraclass:"first"
     },
-    // //Dashboard
-    // {   
-    //     title: 'Dashboard',	
-    //     classsChange: 'mm-collapse',		
-    //     iconStyle: <i className="la la-home" />,
-    //     content: [
-    //         {
-    //             title: 'Dashboard 1',
-    //             to: 'dashboard',					
-    //         },
-    //         {
-    //             title: 'Dashboard 2',
-    //             to: 'index-2',
-    //         },
-    //         {
-    //             title: 'Dashboard 3',
-    //             to: 'index-3',
-    //         },
+    //Academic Group    
+    {
+        title: 'Academic Group',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-th-list" />,
+        content: [
+            {
+                title: 'All Academic Groups',
+                to: 'all-library',					
+            },
+            {
+                title: 'Add Academic Groups',
+                to: 'add-library',
+            },
+            {
+                title: 'Edit Academic Groups',
+                to: 'edit-library',
+            },            
            
-    //     ],
-    // },
-    
+        ],
+    },
+    //Availability
+    {
+        title: 'Availability',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-calendar" />,
+        content: [
+            {
+                title: 'All Availabilities',
+                to: 'all-library',					
+            },
+            {
+                title: 'Add Availability',
+                to: 'add-library',
+            },
+            {
+                title: 'Edit Availability',
+                to: 'edit-library',
+            },            
+           
+        ],
+    },
+    //Class Session
+    {
+        title: 'Class Session',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-book" />,
+        content: [
+            {
+                title: 'All Class Sessions',
+                to: 'all-departments',					
+            },
+            {
+                title: 'Add Class Sessions',
+                to: 'add-departments',
+            },
+            {
+                title: 'Edit Class Sessions',
+                to: 'edit-departments',
+            },            
+           
+        ],
+    },
+    //Classrooms    
+    {
+        title: 'Classrooms',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-building" />,
+        content: [
+            {
+                title: 'All Classrooms',
+                to: 'all-departments',					
+            },
+            {
+                title: 'Add Classrooms',
+                to: 'add-departments',
+            },
+            {
+                title: 'Edit Classrooms',
+                to: 'edit-departments',
+            },            
+           
+        ],
+    },
+    //Courses    
+    {
+        title: 'Courses',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-graduation-cap" />,
+        content: [
+            {
+                title: 'All Courses',
+                to: 'all-courses',					
+            },
+            {
+                title: 'Add Courses',
+                to: 'add-courses',
+            },
+            {
+                title: 'Edit Courses',
+                to: 'edit-courses',
+            },
+            {
+                title: 'About Courses',
+                to: 'about-courses',
+            },
+           
+        ],
+    },
+    //Dashboard
+    {   
+        title: 'Dashboard',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-home" />,
+        content: [
+            {
+                title: 'Dashboard',
+                to: 'dashboard',					
+            },
+            // {
+            //     title: 'Dashboard 2',
+            //     to: 'index-2',
+            // },
+            // {
+            //     title: 'Dashboard 3',
+            //     to: 'index-3',
+            // },
+           
+        ],
+    },
 
-    // //Management
-    // {
-    //     title: 'Event Management',	        
-    //     to:"event-management",
-    //     iconStyle: <i className="la la-calendar" />,        
-    // },
+    //Management
+    {
+        title: 'Event Management',	        
+        to:"event-management",
+        iconStyle: <i className="la la-calendar" />,        
+    },
     
-
     //Professors    
     {
         title: 'Professors',	
@@ -61,99 +168,31 @@ export const MenuList = [
            
         ],
     },
-    // //Student    
-    // {
-    //     title: 'Students',	
-    //     classsChange: 'mm-collapse',		
-    //     iconStyle: <i className="la la-users" />,
-    //     content: [
-    //         {
-    //             title: 'All Students',
-    //             to: 'all-students',					
-    //         },
-    //         {
-    //             title: 'Add Students',
-    //             to: 'add-student',
-    //         },
-    //         {
-    //             title: 'Edit Students',
-    //             to: 'edit-student',
-    //         },
-    //         {
-    //             title: 'About Students',
-    //             to: 'about-student',
-    //         },
+    //Student    
+    {
+        title: 'Students',	
+        classsChange: 'mm-collapse',		
+        iconStyle: <i className="la la-users" />,
+        content: [
+            {
+                title: 'All Students',
+                to: 'all-students',					
+            },
+            {
+                title: 'Add Students',
+                to: 'add-student',
+            },
+            {
+                title: 'Edit Students',
+                to: 'edit-student',
+            },
+            // {
+            //     title: 'About Students',
+            //     to: 'about-student',
+            // },
            
-    //     ],
-    // },
-
-    // //Courses    
-    // {
-    //     title: 'Courses',	
-    //     classsChange: 'mm-collapse',		
-    //     iconStyle: <i className="la la-graduation-cap" />,
-    //     content: [
-    //         {
-    //             title: 'All Courses',
-    //             to: 'all-courses',					
-    //         },
-    //         {
-    //             title: 'Add Courses',
-    //             to: 'add-courses',
-    //         },
-    //         {
-    //             title: 'Edit Courses',
-    //             to: 'edit-courses',
-    //         },
-    //         {
-    //             title: 'About Courses',
-    //             to: 'about-courses',
-    //         },
-           
-    //     ],
-    // },
-    // //Library    
-    // {
-    //     title: 'Library',	
-    //     classsChange: 'mm-collapse',		
-    //     iconStyle: <i className="la la-book" />,
-    //     content: [
-    //         {
-    //             title: 'All Library',
-    //             to: 'all-library',					
-    //         },
-    //         {
-    //             title: 'Add Library',
-    //             to: 'add-library',
-    //         },
-    //         {
-    //             title: 'Edit Library',
-    //             to: 'edit-library',
-    //         },            
-           
-    //     ],
-    // },
-    // //Departments    
-    // {
-    //     title: 'Departments',	
-    //     classsChange: 'mm-collapse',		
-    //     iconStyle: <i className="la la-building" />,
-    //     content: [
-    //         {
-    //             title: 'All Departments',
-    //             to: 'all-departments',					
-    //         },
-    //         {
-    //             title: 'Add Departments',
-    //             to: 'add-departments',
-    //         },
-    //         {
-    //             title: 'Edit Departments',
-    //             to: 'edit-departments',
-    //         },            
-           
-    //     ],
-    // },
+        ],
+    },
     // //Staff    
     // {
     //     title: 'Staff',	
@@ -178,7 +217,7 @@ export const MenuList = [
     //         },       
     //     ],
     // },
-    // //Holiday    
+    //Holiday    
     // {
     //     title: 'Holiday',	
     //     classsChange: 'mm-collapse',		
@@ -224,87 +263,87 @@ export const MenuList = [
     //     ],
     // },
 
-    // //Apps
-    // {
-    //     title:"Apps",
-    //     classsChange: "menu-title"
-    // },
-    // {
-    //     title: 'Apps',	
-    //     classsChange: 'mm-collapse',
-    //     iconStyle: <i className="la la-users" />,
-    //     content: [
-    //         {
-    //             title: 'Profile',
-    //             to: 'app-profile'
-    //         },
-    //         {
-    //             title: 'Edit Profile',
-    //             to: 'edit-profile'
-    //         },
-    //         {
-    //             title: 'Post Details',
-    //             to: 'post-details'
-    //         },
-    //         {
-    //             title: 'Email',                
-    //             hasMenu : true,
-    //             content: [
-    //                 {
-    //                     title: 'Compose',
-    //                     to: 'email-compose',
-    //                 },
-    //                 {
-    //                     title: 'Index',
-    //                     to: 'email-inbox',
-    //                 },
-    //                 {
-    //                     title: 'Read',
-    //                     to: 'email-read',
-    //                 }
-    //             ],
-    //         },
-    //         {
-    //             title:'Calendar',
-    //             to: 'app-calender'
-    //         },
-    //         {
-    //             title: 'Shop',
-    //             //to: './',
-    //             hasMenu : true,
-    //             content: [
-    //                 {
-    //                     title: 'Product Grid',
-    //                     to: 'ecom-product-grid',
-    //                 },
-    //                 {
-    //                     title: 'Product List',
-    //                     to: 'ecom-product-list',
-    //                 },
-    //                 {
-    //                     title: 'Product Details',
-    //                     to: 'ecom-product-detail',
-    //                 },
-    //                 {
-    //                     title: 'Order',
-    //                     to: 'ecom-product-order',
-    //                 },
-    //                 {
-    //                     title: 'Checkout',
-    //                     to: 'ecom-checkout',
-    //                 },
-    //                 {
-    //                     title: 'Invoice',
-    //                     to: 'ecom-invoice',
-    //                 },
-    //                 {
-    //                     title: 'Customers',
-    //                     to: 'ecom-customers',
-    //                 },
-    //             ],
-    //         },
-    //     ],
-    // },
+    //Apps
+    {
+        title:"Apps",
+        classsChange: "menu-title"
+    },
+    {
+        title: 'Apps',	
+        classsChange: 'mm-collapse',
+        iconStyle: <i className="la la-users" />,
+        content: [
+            // {
+            //     title: 'Profile',
+            //     to: 'app-profile'
+            // },
+            // {
+            //     title: 'Edit Profile',
+            //     to: 'edit-profile'
+            // },
+            // {
+            //     title: 'Post Details',
+            //     to: 'post-details'
+            // },
+            // {
+            //     title: 'Email',                
+            //     hasMenu : true,
+            //     content: [
+            //         {
+            //             title: 'Compose',
+            //             to: 'email-compose',
+            //         },
+            //         {
+            //             title: 'Index',
+            //             to: 'email-inbox',
+            //         },
+            //         {
+            //             title: 'Read',
+            //             to: 'email-read',
+            //         }
+            //     ],
+            // },
+            {
+                title:'Calendar',
+                to: 'app-calender'
+            },
+            // {
+            //     title: 'Shop',
+            //     //to: './',
+            //     hasMenu : true,
+            //     content: [
+            //         {
+            //             title: 'Product Grid',
+            //             to: 'ecom-product-grid',
+            //         },
+            //         {
+            //             title: 'Product List',
+            //             to: 'ecom-product-list',
+            //         },
+            //         {
+            //             title: 'Product Details',
+            //             to: 'ecom-product-detail',
+            //         },
+            //         {
+            //             title: 'Order',
+            //             to: 'ecom-product-order',
+            //         },
+            //         {
+            //             title: 'Checkout',
+            //             to: 'ecom-checkout',
+            //         },
+            //         {
+            //             title: 'Invoice',
+            //             to: 'ecom-invoice',
+            //         },
+            //         {
+            //             title: 'Customers',
+            //             to: 'ecom-customers',
+            //         },
+            //     ],
+            // },
+        ],
+    },
 
     // //CMS
     // {
@@ -555,49 +594,49 @@ export const MenuList = [
 
     //     ]
     // },
-    // //Pages
-    // //Table
-    // {
-    //     title:"Extra",
-    //     classsChange:"menu-title"
-    // },
-    // {
-    //     title:'Pages',
-    //     classsChange: 'mm-collapse',
-    //     iconStyle: <i className="la la-th-list" />,
-    //     content : [
-    //         {
-    //             title:'Error',
-    //             hasMenu : true,
-    //             content : [
-    //                 {
-    //                     title: 'Error 400',
-    //                     to : 'page-error-400',
-    //                 },
-    //                 {
-    //                     title: 'Error 403',
-    //                     to : 'page-error-403',
-    //                 },
-    //                 {
-    //                     title: 'Error 404',
-    //                     to : 'page-error-404',
-    //                 },
-    //                 {
-    //                     title: 'Error 500',
-    //                     to : 'page-error-500',
-    //                 },
-    //                 {
-    //                     title: 'Error 503',
-    //                     to : 'page-error-503',
-    //                 },
-    //             ],
-    //         },
-    //         {
-    //             title:'Lock Screen',
-    //             to: 'page-lock-screen',
-    //         },
+    //Pages
+    //Table
+    {
+        title:"Extra",
+        classsChange:"menu-title"
+    },
+    {
+        title:'Pages',
+        classsChange: 'mm-collapse',
+        iconStyle: <i className="la la-th-list" />,
+        content : [
+            {
+                title:'Error',
+                hasMenu : true,
+                content : [
+                    {
+                        title: 'Error 400',
+                        to : 'page-error-400',
+                    },
+                    {
+                        title: 'Error 403',
+                        to : 'page-error-403',
+                    },
+                    {
+                        title: 'Error 404',
+                        to : 'page-error-404',
+                    },
+                    {
+                        title: 'Error 500',
+                        to : 'page-error-500',
+                    },
+                    {
+                        title: 'Error 503',
+                        to : 'page-error-503',
+                    },
+                ],
+            },
+            {
+                title:'Lock Screen',
+                to: 'page-lock-screen',
+            },
 
-    //     ]
-    // },
+        ]
+    },
     
 ]
