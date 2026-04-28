@@ -1,5 +1,7 @@
 import type { Core } from "@strapi/strapi";
 
+import { seedDemoSchedulingData } from "./bootstrap/seed-demo-scheduling-data";
+
 type RoleSeed = {
   type: string;
   name: string;
@@ -73,6 +75,22 @@ const ACADEMIC_COORDINATOR_ACTIONS = [
   "api::availability.availability.create",
   "api::availability.availability.update",
   "api::availability.availability.delete",
+
+  "api::class-session.class-session.find",
+  "api::class-session.class-session.findOne",
+  "api::class-session.class-session.create",
+  "api::class-session.class-session.update",
+  "api::class-session.class-session.delete",
+  "api::class-session.class-session.findByTeacher",
+  "api::class-session.class-session.findByClassroom",
+  "api::class-session.class-session.findByAcademicGroup",
+
+  "api::schedule-config.schedule-config.find",
+  "api::schedule-config.schedule-config.findOne",
+  "api::schedule-config.schedule-config.create",
+  "api::schedule-config.schedule-config.update",
+  "api::schedule-config.schedule-config.delete",
+  "api::schedule-config.schedule-config.getProcessedRules",
 ] as const;
 
 const TEACHER_ACTIONS = [
@@ -84,6 +102,11 @@ const TEACHER_ACTIONS = [
   "api::academic-group.academic-group.findOne",
   "api::availability.availability.find",
   "api::availability.availability.findOne",
+
+  "api::class-session.class-session.findByTeacher",
+  "api::class-session.class-session.findByClassroom",
+  "api::class-session.class-session.findByAcademicGroup",
+  "api::schedule-config.schedule-config.getProcessedRules",
 ] as const;
 
 const STUDENT_ACTIONS = [
@@ -233,6 +256,42 @@ async function syncRolePermissions(
   }
 }
 
+function isAllowPublicAcademicApi(): boolean {
+  const v = process.env.ALLOW_PUBLIC_ACADEMIC_API?.trim().toLowerCase();
+  return v === "true" || v === "1" || v === "yes";
+}
+
+/** Solo desarrollo: añade al rol Public los permisos de TEACHER_ACTIONS sin borrar el resto (p. ej. auth.local). */
+async function ensurePublicDevTeacherPermissions(
+  strapi: Core.Strapi
+): Promise<void> {
+  const publicRole = await findRoleByType(strapi, "public");
+  if (!publicRole?.id) {
+    return;
+  }
+
+  const existingPermissions = (await strapi.db
+    .query("plugin::users-permissions.permission")
+    .findMany({
+      where: { role: publicRole.id },
+    })) as PermissionRecord[];
+
+  const existingActions = new Set(
+    existingPermissions.map((permission) => permission.action)
+  );
+
+  for (const action of TEACHER_ACTIONS) {
+    if (!existingActions.has(action)) {
+      await strapi.db.query("plugin::users-permissions.permission").create({
+        data: {
+          action,
+          role: publicRole.id,
+        },
+      });
+    }
+  }
+}
+
 async function removeDangerousPublicPermissions(
   strapi: Core.Strapi
 ): Promise<void> {
@@ -310,7 +369,14 @@ export default {
   register() {},
 
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
-    await removeDangerousPublicPermissions(strapi);
+    if (isAllowPublicAcademicApi()) {
+      strapi.log.warn(
+        "[bootstrap] ALLOW_PUBLIC_ACADEMIC_API: el rol Public recibe permisos de lectura tipo Teacher (solo para desarrollo; no uses esto en producción)."
+      );
+      await ensurePublicDevTeacherPermissions(strapi);
+    } else {
+      await removeDangerousPublicPermissions(strapi);
+    }
 
     for (const roleSeed of ROLE_SEEDS) {
       const role = await ensureRole(strapi, roleSeed);
@@ -328,5 +394,7 @@ export default {
 
       await ensureUser(strapi, userSeed, role.id);
     }
+
+    await seedDemoSchedulingData(strapi);
   },
 };
