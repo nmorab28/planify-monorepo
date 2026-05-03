@@ -84,6 +84,7 @@ const ACADEMIC_COORDINATOR_ACTIONS = [
   "api::class-session.class-session.findByTeacher",
   "api::class-session.class-session.findByClassroom",
   "api::class-session.class-session.findByAcademicGroup",
+  "api::class-session.class-session.validateSession",
 
   "api::schedule-config.schedule-config.find",
   "api::schedule-config.schedule-config.findOne",
@@ -91,6 +92,7 @@ const ACADEMIC_COORDINATOR_ACTIONS = [
   "api::schedule-config.schedule-config.update",
   "api::schedule-config.schedule-config.delete",
   "api::schedule-config.schedule-config.getProcessedRules",
+  "api::schedule-config.schedule-config.validateSchedule",
 ] as const;
 
 const TEACHER_ACTIONS = [
@@ -106,7 +108,9 @@ const TEACHER_ACTIONS = [
   "api::class-session.class-session.findByTeacher",
   "api::class-session.class-session.findByClassroom",
   "api::class-session.class-session.findByAcademicGroup",
+  "api::class-session.class-session.validateSession",
   "api::schedule-config.schedule-config.getProcessedRules",
+  "api::schedule-config.schedule-config.validateSchedule",
 ] as const;
 
 const STUDENT_ACTIONS = [

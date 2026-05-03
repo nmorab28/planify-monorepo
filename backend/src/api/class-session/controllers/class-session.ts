@@ -58,5 +58,43 @@ export default factories.createCoreController(
 
       ctx.body = { data: sessions };
     },
+
+    async validateSession(ctx) {
+      const body = ctx.request.body as Record<string, unknown> | null;
+
+      if (!body) {
+        return ctx.badRequest("Request body is required");
+      }
+
+      const { dayOfWeek, startTime, endTime } = body;
+
+      if (typeof dayOfWeek !== "number" || dayOfWeek < 1 || dayOfWeek > 6) {
+        return ctx.badRequest("dayOfWeek must be an integer between 1 and 6");
+      }
+
+      if (typeof startTime !== "string" || !startTime.trim()) {
+        return ctx.badRequest("startTime is required (format HH:MM)");
+      }
+
+      if (typeof endTime !== "string" || !endTime.trim()) {
+        return ctx.badRequest("endTime is required (format HH:MM)");
+      }
+
+      const result = await strapi
+        .service("api::class-session.class-session")
+        .validateSession({
+          dayOfWeek: dayOfWeek as number,
+          startTime: startTime as string,
+          endTime: endTime as string,
+          teacherDocumentId: normalizeDocumentId(body.teacherDocumentId),
+          classroomDocumentId: normalizeDocumentId(body.classroomDocumentId),
+          academicGroupDocumentId: normalizeDocumentId(
+            body.academicGroupDocumentId
+          ),
+          sessionDocumentId: normalizeDocumentId(body.sessionDocumentId),
+        });
+
+      ctx.body = { data: result };
+    },
   })
 );
