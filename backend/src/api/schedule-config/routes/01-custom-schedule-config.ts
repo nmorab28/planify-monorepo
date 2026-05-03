@@ -9,5 +9,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: "GET",
+      path: "/schedule-configs/:scheduleConfigDocumentId/validar-horario",
+      handler: "schedule-config.validateSchedule",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

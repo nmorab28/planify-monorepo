@@ -27,5 +27,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: "POST",
+      path: "/class-sessions/validar-sesion",
+      handler: "class-session.validateSession",
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

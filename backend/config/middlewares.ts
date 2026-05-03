@@ -17,7 +17,6 @@ const config: Core.Config.Middlewares = [
           ...(isDev
             ? {
                 'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-                'upgrade-insecure-requests': null,
               }
             : {}),
         },
