@@ -34,16 +34,12 @@ export const MenuList = [
         content: [
             {
                 title: 'All Availabilities',
-                to: 'all-library',					
+                to: 'all-availability',					
             },
             {
                 title: 'Add Availability',
-                to: 'add-library',
+                to: 'add-availability',
             },
-            {
-                title: 'Edit Availability',
-                to: 'edit-library',
-            },            
            
         ],
     },

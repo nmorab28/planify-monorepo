@@ -1,6 +1,4 @@
 import { factories } from "@strapi/strapi";
-<<<<<<< HEAD
-=======
 import {
   checkSessionConflicts,
   isWithinScheduleHours,
@@ -8,15 +6,12 @@ import {
   type ExistingSession,
   type SessionConflict,
 } from "../validation/session-validation";
->>>>>>> 8916ee7 (feat(PLN-48): endpoints validar-sesion y validar-horario con pruebas unitarias)
 
 type QueryOptions = {
   sort?: unknown;
   pagination?: unknown;
 };
 
-<<<<<<< HEAD
-=======
 export type ValidateSessionInput = {
   dayOfWeek: number;
   startTime: string;
@@ -32,7 +27,6 @@ export type ValidateSessionResult = {
   conflicts: SessionConflict[];
 };
 
->>>>>>> 8916ee7 (feat(PLN-48): endpoints validar-sesion y validar-horario con pruebas unitarias)
 const defaultPopulate = {
   academicGroup: {
     populate: {
