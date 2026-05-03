@@ -34,6 +34,11 @@ import AllAvailability from './../pages/availabilities/AllAvailability';
 import AddAvailability from './../pages/availabilities/AddAvailability';
 import EditAvailability from './../pages/availabilities/EditAvailability';
 
+//Classrooms
+import AllClassrooms from './../pages/classrooms/AllClassrooms';
+import AddClassroom from './../pages/classrooms/AddClassroom';
+import EditClassroom from './../pages/classrooms/EditClassroom';
+
 //Student
 import AllStudent from './../pages/students/AllStudent';
 import AddStudent from './../pages/students/AddStudent';
@@ -186,6 +191,11 @@ const Markup = () => {
     { url: "all-availability", component: <AllAvailability/> },
     { url: "add-availability", component: <AddAvailability/> },
     { url: "edit-availability/:documentId", component: <EditAvailability/> }, 
+
+    //Classrooms
+    { url: "all-classrooms", component: <AllClassrooms/> },
+    { url: "add-classroom", component: <AddClassroom/> },
+    { url: "edit-classroom/:documentId", component: <EditClassroom/> },
     
     //Student
     { url: "all-students", component: <AllStudent/> }, 

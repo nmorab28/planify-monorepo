@@ -37,6 +37,28 @@ const handleResponse = async (res) => {
   return data;
 };
 
+/**
+ * Strapi 5 exige el formato HH:mm:ss.SSS para campos `time` vía REST.
+ * Aceptamos HH:MM, HH:MM:SS o HH:MM:SS.SSS y normalizamos.
+ * Devuelve undefined si la entrada no es parseable (deja que el backend lo rechace).
+ */
+const normalizeTime = (value) => {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  if (trimmed === "") return undefined;
+
+  const re = /^(\d{1,2}):(\d{2})(?::(\d{2}))?(?:\.(\d{1,3}))?$/;
+  const match = re.exec(trimmed);
+  if (!match) return trimmed;
+
+  const hh = match[1].padStart(2, "0");
+  const mm = match[2];
+  const ss = (match[3] || "00").padStart(2, "0");
+  const ms = (match[4] || "000").padEnd(3, "0").slice(0, 3);
+
+  return `${hh}:${mm}:${ss}.${ms}`;
+};
+
 const buildAvailabilitiesUrl = ({ teacherDocumentId } = {}) => {
   const params = new URLSearchParams();
   params.set("populate", "teacher");
@@ -84,8 +106,8 @@ export const createAvailability = async ({
     body: JSON.stringify({
       data: {
         dayOfWeek,
-        startTime,
-        endTime,
+        startTime: normalizeTime(startTime),
+        endTime: normalizeTime(endTime),
         isAvailable,
         teacher: { connect: [{ documentId: teacherDocumentId }] },
       },
@@ -96,9 +118,11 @@ export const createAvailability = async ({
 };
 
 export const updateAvailability = async (documentId, payload) => {
-  const { teacherDocumentId, ...rest } = payload || {};
+  const { teacherDocumentId, startTime, endTime, ...rest } = payload || {};
 
   const data = { ...rest };
+  if (startTime !== undefined) data.startTime = normalizeTime(startTime);
+  if (endTime !== undefined) data.endTime = normalizeTime(endTime);
   if (teacherDocumentId) {
     data.teacher = { connect: [{ documentId: teacherDocumentId }] };
   }
