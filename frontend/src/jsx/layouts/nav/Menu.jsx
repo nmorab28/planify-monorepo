@@ -72,16 +72,12 @@ export const MenuList = [
         content: [
             {
                 title: 'All Classrooms',
-                to: 'all-departments',					
+                to: 'all-classrooms',					
             },
             {
-                title: 'Add Classrooms',
-                to: 'add-departments',
+                title: 'Add Classroom',
+                to: 'add-classroom',
             },
-            {
-                title: 'Edit Classrooms',
-                to: 'edit-departments',
-            },            
            
         ],
     },
