@@ -1,12 +1,9 @@
 import { factories } from "@strapi/strapi";
-<<<<<<< HEAD
-=======
 import {
   checkSessionConflicts,
   type ExistingSession,
   type SessionConflict,
 } from "../../class-session/validation/session-validation";
->>>>>>> 8916ee7 (feat(PLN-48): endpoints validar-sesion y validar-horario con pruebas unitarias)
 
 type RuleRecord = {
   documentId: string;

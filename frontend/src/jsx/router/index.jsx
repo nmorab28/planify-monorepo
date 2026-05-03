@@ -29,6 +29,11 @@ import AddProfessor from './../pages/professors/AddProfessor';
 import EditProfessor from './../pages/professors/EditProfessor';
 import ProfileProfessor from './../pages/professors/ProfileProfessor';
 
+//Availability
+import AllAvailability from './../pages/availabilities/AllAvailability';
+import AddAvailability from './../pages/availabilities/AddAvailability';
+import EditAvailability from './../pages/availabilities/EditAvailability';
+
 //Student
 import AllStudent from './../pages/students/AllStudent';
 import AddStudent from './../pages/students/AddStudent';
@@ -176,6 +181,11 @@ const Markup = () => {
     { url: "add-professor", component: <AddProfessor/> },    
     { url: "edit-professor/:documentId", component: <EditProfessor/> },    
     { url: "professor-profile", component: <ProfileProfessor/> }, 
+
+    //Availability
+    { url: "all-availability", component: <AllAvailability/> },
+    { url: "add-availability", component: <AddAvailability/> },
+    { url: "edit-availability/:documentId", component: <EditAvailability/> }, 
     
     //Student
     { url: "all-students", component: <AllStudent/> }, 
