@@ -34,6 +34,9 @@ import AllAvailability from './../pages/availabilities/AllAvailability';
 import AddAvailability from './../pages/availabilities/AddAvailability';
 import EditAvailability from './../pages/availabilities/EditAvailability';
 
+//Schedule config
+import ScheduleConfig from './../pages/schedule-config/ScheduleConfig';
+
 //Classrooms
 import AllClassrooms from './../pages/classrooms/AllClassrooms';
 import AddClassroom from './../pages/classrooms/AddClassroom';
@@ -184,6 +187,9 @@ const Markup = () => {
     { url: 'all-availability', component: <AllAvailability /> },
     { url: 'add-availability', component: <AddAvailability /> },
     { url: 'edit-availability/:documentId', component: <EditAvailability /> },
+
+    //Schedule config
+    { url: "schedule-config", component: <ScheduleConfig/> },
 
     //Classrooms
     { url: 'all-classrooms', component: <AllClassrooms /> },
