@@ -10,67 +10,67 @@ class EventCalendar extends Component {
    state = {
       calendarEvents: [
          {
-				title: "Atlanta Monster",
+				title: "Clase de matematicas",
 				start: new Date("2024-01-01 00:00"),
 				id: "99991255",
 			},
             {
-				title: "Atlanta Monster",
+				title: "Laboratorio de biologia",
 				start: new Date("2024-01-04 00:00"),
 				id: "99991297",
 			},
 			{
-				title: "Birthday Party",
+				title: "Reunion academica",
 				start: new Date("2024-01-15 00:00"),
 				id: "12912998",
 			},
 			{
-				title: "Atlanta Monster",
+				title: "Clase de programacion",
 				start: new Date("2024-01-25 00:00"),
 				id: "99999997",
 			 },
 			 {
-				title: "Birthday Party",
+				title: "Entrega de notas",
 				start: new Date("2024-02-10 00:00"),
 				id: "99999998",
 			},
 			{
-				title: "My Favorite Murder",
+				title: "Consejo de facultad",
 				start: new Date("2024-02-19 00:00"),
 				id: "99999999",
 			},
 			{
-				title: "Atlanta Monster",
+				title: "Clase de matematicas",
 				start: new Date("2024-03-01 00:00"),
 				id: "99991255",
 			},
             {
-				title: "Atlanta Monster",
+				title: "Laboratorio de biologia",
 				start: new Date("2024-03-04 00:00"),
 				id: "99991297",
 			},
 			{
-				title: "Birthday Party",
+				title: "Reunion academica",
 				start: new Date("2024-03-15 00:00"),
 				id: "12912998",
 			},
 			{
-				title: "Atlanta Monster",
+				title: "Clase de programacion",
 				start: new Date("2024-03-25 00:00"),
 				id: "99999997",
 			 },
 			 {
-				title: "Birthday Party",
+				title: "Entrega de notas",
 				start: new Date("2024-03-29 00:00"),
 				id: "99999998",
 			},
       ],
       events: [
-         { title: "Event 1", id: "1" },
-         { title: "Event 2", id: "2" },
-         { title: "Event 3", id: "3" },
-         { title: "Event 4", id: "4" },
-         { title: "Event 5", id: "5" },
+         { title: "Clase magistral", id: "1" },
+         { title: "Laboratorio", id: "2" },
+         { title: "Tutorias", id: "3" },
+         { title: "Examen parcial", id: "4" },
+         { title: "Reunion docente", id: "5" },
       ],
    };
 
@@ -100,13 +100,13 @@ class EventCalendar extends Component {
       <table className="table">
       <tbody>
       <tr >
-      <td>Title</td>
+      <td>Titulo</td>
       <td><strong>` +
             eventClick.event.title +
             `</strong></td>
       </tr>
       <tr >
-      <td>Start Time</td>
+      <td>Hora de inicio</td>
       <td><strong>
       ` +
             eventClick.event.start +
@@ -120,12 +120,12 @@ class EventCalendar extends Component {
          showCancelButton: true,
          confirmButtonColor: "#d33",
          cancelButtonColor: "#3085d6",
-         confirmButtonText: "Remove Event",
-         cancelButtonText: "Close",
+         confirmButtonText: "Eliminar evento",
+         cancelButtonText: "Cerrar",
       }).then((result) => {
          if (result.value) {
             eventClick.event.remove(); // It will remove event from the calendar
-            Alert.fire("Deleted!", "Your Event has been deleted.", "success");
+            Alert.fire("Eliminado", "El evento fue eliminado.", "success");
          }
       });
    };
@@ -137,7 +137,7 @@ class EventCalendar extends Component {
                <Col lg={3}>
                   <Card>
                      <div className="card-header border-0 pb-0">
-                        <h4 className="fs-20 mb-0">Events</h4>
+                        <h4 className="fs-20 mb-0">Eventos</h4>
                      </div>
                      <Card.Body>
                         <div id="external-events">

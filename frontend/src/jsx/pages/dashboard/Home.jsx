@@ -1,18 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
-import {SparklinesBars, 
-	SparklinesLine,Sparklines
-} 
-from "react-sparklines";
 
 import loadable from "@loadable/component";
 import pMinDelay from "p-min-delay";
 
 //Import Components
 import { BgCard } from '../../elements/CardDesign';
-import { IMAGES } from '../../constant/theme';
-import CkEditorBlog from '../../elements/CkEditor/CkEditorBlog';
 
 //Charts
 const SurveyChart = loadable(() =>
@@ -26,35 +19,10 @@ const University = loadable(() =>
 );
 
 const bgCarddBlog = [
-    {title:"Total Students", number:'3180', icon: <i className="la la-users" />, percent:'80%', color:"primary"},
-    {title:"New Students", number:'360', icon:<i className="la la-user" />, percent:'50%', color:"warning"},
-    {title:"Total Course", number:'28', icon:<i className="la la-graduation-cap" />, percent:'60%', color:"secondary"},
-    {title:"Fees Collection", number:'1290$', icon:<i className="la la-dollar" />, percent:'35%', color:"danger"},
-];
-
-const detailCard = [
-	{title:"When Is the Best Time to Take an Education Course?", name:'Jack Ronan', image:IMAGES.course1},
-	{title:"Education Courses: A Guide to Unlocking Your Potential", name:'Jimmy Morris', image:IMAGES.course2},
-	{title:"A Comprehensive Guide to Taking an Education Course", name:'Konne Backfield', image:IMAGES.course3},
-	{title:"Why Should You Consider Taking an Education Course?", name:'Nashid Martines', image:IMAGES.course4},
-];
-
-const examTable = [
-	{roll:'542', name:' Jack Ronan' },
-	{roll:'360', name:'Jimmy Morris' },
-	{roll:'450', name:'Samantha' },
-	{roll:'296', name:'Roman Aurora' },
-	{roll:'520', name:'Nashid Martines' },
-	{roll:'620', name:'Daigno' },
-];
-
-const tabelData = [
-	{no:'01', name : "Jack Ronan",  proff:"Airi Satou", date:"02 jan 2024", status:'Checkin', color:'primary', subject:'Commerce', fees:'120'},
-	{no:'02', name : "Jimmy Morris",  proff:"Angelica Ramos", date:"02 jan 2024", status:'Pending', color:'warning', subject:'Mechanical', fees:'205'},
-	{no:'03', name : "Nashid Martines",  proff:"Ashton Cox", date:"04 jan 2024", status:'Canceled', color:'danger', subject:'Science', fees:'180'},
-	{no:'04', name : "Roman Aurora",  proff:"Cara Stevens", date:"05 jan 2024", status:'Process', color:'info', subject:'Arts', fees:'200'},
-	{no:'05', name : "Samantha",  proff:"Bruno Nash", date:"06 jan 2024", status:'Checkin', color:'primary', subject:'Maths', fees:'210'},
-	
+    {title:"Total estudiantes", number:'3180', icon: <i className="la la-users" />, percent:'80%', color:"primary"},
+    {title:"Nuevos estudiantes", number:'360', icon:<i className="la la-user" />, percent:'50%', color:"warning"},
+    {title:"Total cursos", number:'28', icon:<i className="la la-graduation-cap" />, percent:'60%', color:"secondary"},
+    {title:"Recaudo de matriculas", number:'1290$', icon:<i className="la la-dollar" />, percent:'35%', color:"danger"},
 ];
 
 const Home = () => {		
@@ -73,7 +41,7 @@ const Home = () => {
 				<Col xl={'6'} xxl={'6'} lg={'12'} sm={'12'}>
 					<div className="card">
 						<div className="card-header">
-							<h3 className="card-title">University Survey</h3>
+							<h3 className="card-title">Encuesta universitaria</h3>
 						</div>
 						<div className="card-body">
 							<SurveyChart />							
@@ -83,7 +51,7 @@ const Home = () => {
 				<Col xl={"3"} xxl={"3"} sm={"6"}>
 					<div className="card">
 						<div className="card-header">
-							<h3 className="card-title">Donught Chart</h3>
+							<h3 className="card-title">Grafico de dona</h3>
 						</div>
 						<div className="card-body">
 							<DonughtChart />							
@@ -93,7 +61,7 @@ const Home = () => {
 				<Col xl={"3"} xxl={"3"} sm={"6"}>
 					<div className="card">
 						<div className="card-header">
-							<h3 className="card-title">University Survey</h3>
+							<h3 className="card-title">Resumen universitario</h3>
 						</div>
 						<div className="card-body">							
 							<University />

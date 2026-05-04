@@ -7,35 +7,35 @@ import { IMAGES } from '../../constant/theme';
 import {gridDataBlog} from '../staff/GridData';
 
 const holidayTable = [
-    { id:1,rollno:'05', name:'Garrett Winters', profile:IMAGES.smallpic1, education:'B.A, B.C.A', mobile:'987 654 3210', email:'info@example.com',  join:'2020/07/25' },
-    { id:10,rollno:'07', name:'Airi Satou', profile:IMAGES.smallpic2, education:'B.A, B.C.A', mobile:'987 654 3210', email:'info@example.com',  join:'2021/11/28' },
-    { id:3,rollno:'10', name:'Tiger Nixon', profile:IMAGES.smallpic3, education:'B.Sc', mobile:'123 456 7890', email:'info@example.com',  join:'2019/04/25' },
-    { id:4,rollno:'15', name:'Cedric Kelly', profile:IMAGES.smallpic4, education:'BTech', mobile:'123 456 7890', email:'info@example.com',  join:'2018/04/25' },
-    { id:2,rollno:'25', name:'Gavin Joyce', profile:IMAGES.smallpic5, education:'B.Com, M.Com', mobile:'(123) 4567 890', email:'info@example.com',  join:'2020/04/25' },
-    { id:9,rollno:'30', name:'Angelica Ramos', profile:IMAGES.smallpic6, education:'BTech, MTech', mobile:'987 654 3210', email:'info@example.com',  join:'2015/08/25' },
-    { id:7,rollno:'02', name:'Paul Byrd', profile:IMAGES.smallpic7, education:'B.Sc, M.Sc', mobile:'987 654 3210', email:'info@example.com',  join:'2023/09/01' },
-    { id:8,rollno:'01', name:'Ashton Cox', profile:IMAGES.smallpic8, education:'BTech', mobile:'(123) 4567 890', email:'info@example.com',  join:'2015/02/22' },
-    { id:6,rollno:'08', name:'Rhona Davidson', profile:IMAGES.smallpic9, education:'B.Sc', mobile:'(123) 4567 890', email:'info@example.com',  join:'2018/06/12' },
-    { id:5,rollno:'09', name:'Colleen Hurst', profile:IMAGES.smallpic10, education:'B.Com, M.Com', mobile:'(123) 4567 890', email:'info@example.com',  join:'2021/11/19' },
-    { id:11,rollno:'17', name:'Tiger Nixon', profile:IMAGES.smallpic3, education:'B.Sc', mobile:'123 456 7890', email:'info@example.com',  join:'2019/04/25' },
-    { id:12,rollno:'20', name:'Cedric Kelly', profile:IMAGES.smallpic4, education:'BTech', mobile:'123 456 7890', email:'info@example.com',  join:'2018/04/25' },
-    { id:13,rollno:'32', name:'Gavin Joyce', profile:IMAGES.smallpic5, education:'B.Com, M.Com', mobile:'(123) 4567 890', email:'info@example.com',  join:'2020/04/25' },
-    { id:14,rollno:'16', name:'Angelica Ramos', profile:IMAGES.smallpic6, education:'BTech, MTech', mobile:'987 654 3210', email:'info@example.com',  join:'2015/08/25' },
-    { id:15,rollno:'25', name:'Paul Byrd', profile:IMAGES.smallpic7, education:'B.Sc, M.Sc', mobile:'987 654 3210', email:'info@example.com',  join:'2023/09/01' },
-    { id:16,rollno:'45', name:'Ashton Cox', profile:IMAGES.smallpic8, education:'BTech', mobile:'(123) 4567 890', email:'info@example.com',  join:'2015/02/22' },
-    { id:17,rollno:'23', name:'Rhona Davidson', profile:IMAGES.smallpic9, education:'B.Sc', mobile:'(123) 4567 890', email:'info@example.com',  join:'2018/06/12' },
+    { id:1,rollno:'05', name:'Juan Perez', profile:IMAGES.smallpic1, education:'Ing. Sistemas', mobile:'+57 300 654 3210', email:'juan.perez@ejemplo.edu',  join:'2020/07/25' },
+    { id:10,rollno:'07', name:'Ana Garcia', profile:IMAGES.smallpic2, education:'Lic. Biologia', mobile:'+57 301 654 3210', email:'ana.garcia@ejemplo.edu',  join:'2021/11/28' },
+    { id:3,rollno:'10', name:'Miguel Torres', profile:IMAGES.smallpic3, education:'Ing. Ambiental', mobile:'+57 302 456 7890', email:'miguel.torres@ejemplo.edu',  join:'2019/04/25' },
+    { id:4,rollno:'15', name:'Camila Rojas', profile:IMAGES.smallpic4, education:'Matematicas', mobile:'+57 303 456 7890', email:'camila.rojas@ejemplo.edu',  join:'2018/04/25' },
+    { id:2,rollno:'25', name:'Santiago Diaz', profile:IMAGES.smallpic5, education:'Administracion', mobile:'+57 304 456 7890', email:'santiago.diaz@ejemplo.edu',  join:'2020/04/25' },
+    { id:9,rollno:'30', name:'Valentina Lopez', profile:IMAGES.smallpic6, education:'Ing. Industrial', mobile:'+57 305 654 3210', email:'valentina.lopez@ejemplo.edu',  join:'2015/08/25' },
+    { id:7,rollno:'02', name:'Daniel Moreno', profile:IMAGES.smallpic7, education:'Fisica', mobile:'+57 306 654 3210', email:'daniel.moreno@ejemplo.edu',  join:'2023/09/01' },
+    { id:8,rollno:'01', name:'Isabella Castro', profile:IMAGES.smallpic8, education:'Ing. Software', mobile:'+57 307 456 7890', email:'isabella.castro@ejemplo.edu',  join:'2015/02/22' },
+    { id:6,rollno:'08', name:'Nicolas Herrera', profile:IMAGES.smallpic9, education:'Quimica', mobile:'+57 308 456 7890', email:'nicolas.herrera@ejemplo.edu',  join:'2018/06/12' },
+    { id:5,rollno:'09', name:'Mariana Vargas', profile:IMAGES.smallpic10, education:'Contaduria', mobile:'+57 309 456 7890', email:'mariana.vargas@ejemplo.edu',  join:'2021/11/19' },
+    { id:11,rollno:'17', name:'Mateo Ortiz', profile:IMAGES.smallpic3, education:'Fisica', mobile:'+57 310 456 7890', email:'mateo.ortiz@ejemplo.edu',  join:'2019/04/25' },
+    { id:12,rollno:'20', name:'Lucia Medina', profile:IMAGES.smallpic4, education:'Ing. Civil', mobile:'+57 311 456 7890', email:'lucia.medina@ejemplo.edu',  join:'2018/04/25' },
+    { id:13,rollno:'32', name:'Sebastian Ruiz', profile:IMAGES.smallpic5, education:'Economia', mobile:'+57 312 456 7890', email:'sebastian.ruiz@ejemplo.edu',  join:'2020/04/25' },
+    { id:14,rollno:'16', name:'Sofia Molina', profile:IMAGES.smallpic6, education:'Ing. Electronica', mobile:'+57 313 654 3210', email:'sofia.molina@ejemplo.edu',  join:'2015/08/25' },
+    { id:15,rollno:'25', name:'David Cardenas', profile:IMAGES.smallpic7, education:'Estadistica', mobile:'+57 314 654 3210', email:'david.cardenas@ejemplo.edu',  join:'2023/09/01' },
+    { id:16,rollno:'45', name:'Maria Salazar', profile:IMAGES.smallpic8, education:'Ing. Sistemas', mobile:'+57 315 456 7890', email:'maria.salazar@ejemplo.edu',  join:'2015/02/22' },
+    { id:17,rollno:'23', name:'Felipe Navarro', profile:IMAGES.smallpic9, education:'Biologia', mobile:'+57 316 456 7890', email:'felipe.navarro@ejemplo.edu',  join:'2018/06/12' },
     
 ];
 
 const theadData = [
-    {heading: 'Profile', sortingVale:"profile"},
-    {heading: 'Roll No.', sortingVale:"rollno"},
-    {heading: 'Name', sortingVale:"name"},
-    {heading: 'Education', sortingVale:"education"},
-    {heading: 'Mobile', sortingVale:"mobile"},
+    {heading: 'Perfil', sortingVale:"profile"},
+    {heading: 'Codigo', sortingVale:"rollno"},
+    {heading: 'Nombre', sortingVale:"name"},
+    {heading: 'Programa', sortingVale:"education"},
+    {heading: 'Celular', sortingVale:"mobile"},
     {heading: 'Email', sortingVale:"email"},
-    {heading: 'Admission Date', sortingVale:"join"},
-    {heading: 'Action', sortingVale:"action"}
+    {heading: 'Fecha de ingreso', sortingVale:"join"},
+    {heading: 'Accion', sortingVale:"action"}
 ];
 
 
@@ -121,13 +121,13 @@ const AllStudent = () => {
     }
     return (
         <>
-            <PageTitle activeMenu={"All Student"} motherMenu={"Students"}/>
+            <PageTitle activeMenu={"Estudiantes"} motherMenu={"Estudiantes"}/>
             <Row>
                 <Tab.Container defaultActiveKey={"List"}>
                     <div className="col-lg-12">
                         <Nav as="ul" className="nav nav-pills mb-3">
-                            <Nav.Item as="li"><Nav.Link eventKey="List" className="me-1">List View</Nav.Link></Nav.Item>
-                            <Nav.Item as="li"><Nav.Link eventKey="Grid" >Grid View</Nav.Link></Nav.Item>
+                            <Nav.Item as="li"><Nav.Link eventKey="List" className="me-1">Vista de lista</Nav.Link></Nav.Item>
+                            <Nav.Item as="li"><Nav.Link eventKey="Grid" >Vista de tarjetas</Nav.Link></Nav.Item>
                         </Nav>
                     </div>
                     <div className="col-lg-12">
@@ -135,8 +135,8 @@ const AllStudent = () => {
 							<Tab.Pane eventKey="List" className="col-lg-12">
                                 <div className="card">
                                     <div className="card-header">
-                                        <h4 className="card-title">All Students List </h4>
-                                        <Link to={"/add-student"} className="btn btn-primary">+ Add New</Link>
+                                        <h4 className="card-title">Listado de estudiantes</h4>
+                                        <Link to={"/add-student"} className="btn btn-primary">+ Agregar</Link>
                                     </div>
                                     <div className="card-body">
                                         <div className="table-responsive">
@@ -144,7 +144,7 @@ const AllStudent = () => {
                                                 <div className='justify-content-between d-sm-flex'>                                    
                                                     <div className='dataTables_length'>
                                                         <label className='d-flex align-items-center'>
-                                                            Show
+                                                            Mostrar
                                                             <Dropdown className='search-drop'>
                                                                 <Dropdown.Toggle as="div" className="search-drop-btn">
                                                                     {sort}
@@ -155,11 +155,11 @@ const AllStudent = () => {
                                                                     <Dropdown.Item onClick={()=>setSortata('30')}>30</Dropdown.Item>
                                                                 </Dropdown.Menu>
                                                             </Dropdown>
-                                                            entries
+                                                            registros
                                                         </label>
                                                     </div>
                                                     <div className="dataTables_filter">
-                                                        <label>Search : <input type="search" className="" placeholder="" 
+                                                        <label>Buscar : <input type="search" className="" placeholder="" 
                                                                 onChange={DataSearch}
                                                             />
                                                         </label>
@@ -208,11 +208,11 @@ const AllStudent = () => {
                                                 </table>
                                                 <div className='d-sm-flex text-center justify-content-between align-items-center mt-3'>
                                                     <div className='dataTables_info'>
-                                                        Showing {activePag.current * sort + 1} to{' '}
+                                                        Mostrando {activePag.current * sort + 1} a{' '}
                                                         {data.length > (activePag.current + 1) * sort
                                                             ? (activePag.current + 1) * sort
                                                             : data.length}{' '}
-                                                        of {data.length} entries
+                                                        de {data.length} registros
                                                     </div>
                                                     <div
                                                         className='dataTables_paginate paging_simple_numbers'
@@ -225,7 +225,7 @@ const AllStudent = () => {
                                                                 activePag.current > 0 && onClick(activePag.current - 1)
                                                             }
                                                         >                                                
-                                                            Previous
+                                                            Anterior
                                                         </Link>
                                                         <span>
                                                             {paggination.map((number, i) => (
@@ -249,7 +249,7 @@ const AllStudent = () => {
                                                                 onClick(activePag.current + 1)
                                                             }
                                                         >                                                
-                                                            Next
+                                                            Siguiente
                                                         </Link>
                                                     </div>
                                                 </div>
@@ -270,8 +270,8 @@ const AllStudent = () => {
                                                         </Dropdown.Toggle>
                                                         <Dropdown.Menu align="end" className="dropdown-menu dropdown-menu-right border py-0">
                                                             <div className="py-2">
-                                                                <Link to={"#"} className="dropdown-item">Edit</Link>
-                                                                <Link to={"#"} className="dropdown-item text-danger">Delete</Link>
+                                                                <Link to={"#"} className="dropdown-item">Editar</Link>
+                                                                <Link to={"#"} className="dropdown-item text-danger">Eliminar</Link>
                                                             </div>
                                                         </Dropdown.Menu>
                                                     </Dropdown>
@@ -290,7 +290,7 @@ const AllStudent = () => {
                                                                 </li>
                                                             ))}                                                           
                                                         </ul>
-                                                        <Link to={"/about-student"} className="btn btn-outline-primary btn-rounded mt-3 px-4">Read More</Link>
+                                                        <Link to={"/about-student"} className="btn btn-outline-primary btn-rounded mt-3 px-4">Ver mas</Link>
                                                     </div>
                                                 </div>
                                             </div>
