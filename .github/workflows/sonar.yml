@@ -33,6 +33,16 @@ jobs:
           cd backend
           npm install
 
+      - name: Lint Frontend
+        run: |
+          cd frontend
+          npm run lint
+
+      - name: Lint Backend
+        run: |
+          cd backend
+          npm run lint
+
       - name: Sonar Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:

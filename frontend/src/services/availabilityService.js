@@ -3,7 +3,7 @@ const STATIC_API_TOKEN = process.env.REACT_APP_STRAPI_API_TOKEN;
 
 const getStoredToken = () => {
   try {
-    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     return userDetails?.idToken || userDetails?.jwt || null;
   } catch {
     return null;
@@ -15,7 +15,7 @@ const getAuthHeaders = () => {
   const token = storedToken || STATIC_API_TOKEN;
 
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   if (token) {
@@ -29,8 +29,7 @@ const handleResponse = async (res) => {
   const data = await res.json().catch(() => null);
 
   if (!res.ok) {
-    const errorMessage =
-      data?.error?.message || data?.message || "Unexpected error";
+    const errorMessage = data?.error?.message || data?.message || 'Unexpected error';
     throw new Error(errorMessage);
   }
 
@@ -43,28 +42,28 @@ const handleResponse = async (res) => {
  * Devuelve undefined si la entrada no es parseable (deja que el backend lo rechace).
  */
 const normalizeTime = (value) => {
-  if (typeof value !== "string") return undefined;
+  if (typeof value !== 'string') return undefined;
   const trimmed = value.trim();
-  if (trimmed === "") return undefined;
+  if (trimmed === '') return undefined;
 
   const re = /^(\d{1,2}):(\d{2})(?::(\d{2}))?(?:\.(\d{1,3}))?$/;
   const match = re.exec(trimmed);
   if (!match) return trimmed;
 
-  const hh = match[1].padStart(2, "0");
+  const hh = match[1].padStart(2, '0');
   const mm = match[2];
-  const ss = (match[3] || "00").padStart(2, "0");
-  const ms = (match[4] || "000").padEnd(3, "0").slice(0, 3);
+  const ss = (match[3] || '00').padStart(2, '0');
+  const ms = (match[4] || '000').padEnd(3, '0').slice(0, 3);
 
   return `${hh}:${mm}:${ss}.${ms}`;
 };
 
 const buildAvailabilitiesUrl = ({ teacherDocumentId } = {}) => {
   const params = new URLSearchParams();
-  params.set("populate", "teacher");
+  params.set('populate', 'teacher');
 
   if (teacherDocumentId) {
-    params.set("filters[teacher][documentId][$eq]", teacherDocumentId);
+    params.set('filters[teacher][documentId][$eq]', teacherDocumentId);
   }
 
   return `${API_URL}/api/availabilities?${params.toString()}`;
@@ -72,7 +71,7 @@ const buildAvailabilitiesUrl = ({ teacherDocumentId } = {}) => {
 
 export const getAvailabilities = async ({ teacherDocumentId } = {}) => {
   const res = await fetch(buildAvailabilitiesUrl({ teacherDocumentId }), {
-    method: "GET",
+    method: 'GET',
     headers: getAuthHeaders(),
   });
 
@@ -81,13 +80,10 @@ export const getAvailabilities = async ({ teacherDocumentId } = {}) => {
 };
 
 export const getAvailabilityById = async (documentId) => {
-  const res = await fetch(
-    `${API_URL}/api/availabilities/${documentId}?populate=teacher`,
-    {
-      method: "GET",
-      headers: getAuthHeaders(),
-    }
-  );
+  const res = await fetch(`${API_URL}/api/availabilities/${documentId}?populate=teacher`, {
+    method: 'GET',
+    headers: getAuthHeaders(),
+  });
 
   const data = await handleResponse(res);
   return data.data;
@@ -101,7 +97,7 @@ export const createAvailability = async ({
   teacherDocumentId,
 }) => {
   const res = await fetch(`${API_URL}/api/availabilities`, {
-    method: "POST",
+    method: 'POST',
     headers: getAuthHeaders(),
     body: JSON.stringify({
       data: {
@@ -128,7 +124,7 @@ export const updateAvailability = async (documentId, payload) => {
   }
 
   const res = await fetch(`${API_URL}/api/availabilities/${documentId}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: getAuthHeaders(),
     body: JSON.stringify({ data }),
   });
@@ -138,7 +134,7 @@ export const updateAvailability = async (documentId, payload) => {
 
 export const deleteAvailability = async (documentId) => {
   const res = await fetch(`${API_URL}/api/availabilities/${documentId}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: getAuthHeaders(),
   });
 

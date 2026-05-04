@@ -1,43 +1,43 @@
-import React, { Fragment, useReducer } from "react";
-import { Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
+import React, { Fragment, useReducer } from 'react';
+import { Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 
-import PageTitle from "../../../layouts/PageTitle";
+import PageTitle from '../../../layouts/PageTitle';
 
 // images
-import avatar1 from "../../../../assets/images/avatar/1.jpg";
-import product2 from "../../../../assets/images/product/2.jpg";
-import product3 from "../../../../assets/images/product/3.jpg";
-import product4 from "../../../../assets/images/product/4.jpg";
-import product5 from "../../../../assets/images/product/5.jpg";
-import product6 from "../../../../assets/images/product/6.jpg";
-import product7 from "../../../../assets/images/product/7.jpg";
+import avatar1 from '../../../../assets/images/avatar/1.jpg';
+import product2 from '../../../../assets/images/product/2.jpg';
+import product3 from '../../../../assets/images/product/3.jpg';
+import product4 from '../../../../assets/images/product/4.jpg';
+import product5 from '../../../../assets/images/product/5.jpg';
+import product6 from '../../../../assets/images/product/6.jpg';
+import product7 from '../../../../assets/images/product/7.jpg';
 
 const init = false;
-const reducer = (state, action) =>{
-	if(action.type==='reviewModal'){
-		return { ...state, reviewModal: !state.reviewModal}
-	}
-	return state;
-}
+const reducer = (state, action) => {
+  if (action.type === 'reviewModal') {
+    return { ...state, reviewModal: !state.reviewModal };
+  }
+  return state;
+};
 
 const productData = [
-  {image: product2, title:'Blue blazers for girls School Uniform', price:'320', },
-  {image: product3, title:"Maison deducation French School Dress", price:'325', },
-  {image: product4, title:'Skirt for School kids School Uniform', price:'480', },
-  {image: product5, title:'Girl with books Indian School uniform', price:'658', },
-  {image: product6, title:'Skirt for School kids USA Uniform', price:'280', },
-  {image: product7, title:'Back Bag Kid Uniform', price:'350', }
+  { image: product2, title: 'Blue blazers for girls School Uniform', price: '320' },
+  { image: product3, title: 'Maison deducation French School Dress', price: '325' },
+  { image: product4, title: 'Skirt for School kids School Uniform', price: '480' },
+  { image: product5, title: 'Girl with books Indian School uniform', price: '658' },
+  { image: product6, title: 'Skirt for School kids USA Uniform', price: '280' },
+  { image: product7, title: 'Back Bag Kid Uniform', price: '350' },
 ];
 
 const ProductList = () => {
-	const [state, dispatch] = useReducer(reducer ,init);		
+  const [state, dispatch] = useReducer(reducer, init);
   return (
     <Fragment>
       <PageTitle activeMenu="Product List" motherMenu="Shop" />
 
       <div className="row">
-        {productData.map((item, index)=>(
+        {productData.map((item, index) => (
           <div className="col-lg-12 col-xl-6" key={index}>
             <div className="card">
               <div className="card-body">
@@ -52,25 +52,23 @@ const ProductList = () => {
                   <div className="col-md-7 col-xxl-12">
                     <div className="new-arrival-content position-relative">
                       <h4>
-                        <Link to="/ecom-product-detail">
-                          {item.title}
-                        </Link>
+                        <Link to="/ecom-product-detail">{item.title}</Link>
                       </h4>
                       <div className="comment-review star-rating">
                         <ul>
-                          {" "}
+                          {' '}
                           <li>
                             <i className="fa fa-star" />
-                          </li>{" "}
+                          </li>{' '}
                           <li>
                             <i className="fa fa-star" />
-                          </li>{" "}
+                          </li>{' '}
                           <li>
                             <i className="fa fa-star" />
-                          </li>{" "}
+                          </li>{' '}
                           <li>
                             <i className="fa fa-star-half-alt" />
-                          </li>{" "}
+                          </li>{' '}
                           <li>
                             <i className="fa fa-star-half-alt" />
                           </li>
@@ -80,31 +78,26 @@ const ProductList = () => {
                           className="product-review"
                           to="/ecom-product-list"
                           data-toggle="modal"
-                          onClick={() => dispatch({type:'reviewModal'})}                        
+                          onClick={() => dispatch({ type: 'reviewModal' })}
                         >
                           Write a review?
                         </Link>
                         <p className="price">${item.price}.00</p>
                       </div>
                       <p>
-                        
-                        <span className="item fs-14">
-                          Availability:{" "}                          
-                          
-                        </span>
-                        {" "}
-                          In stock{" "} <i className="fa fa-check-circle text-success" />
+                        <span className="item fs-14">Availability: </span> In stock{' '}
+                        <i className="fa fa-check-circle text-success" />
                       </p>
                       <p>
-                        <span className="item fs-14">Product code:  </span>{" "}0405689
+                        <span className="item fs-14">Product code: </span> 0405689
                       </p>
                       <p>
-                         <span className="item fs-14">Brand:</span> Lee
+                        <span className="item fs-14">Brand:</span> Lee
                       </p>
                       <p className="text-content">
-                        There are many variations of passages of Lorem Ipsum
-                        available, but the majority have suffered alteration in
-                        some form, by injected humour, or randomised words.
+                        There are many variations of passages of Lorem Ipsum available, but the
+                        majority have suffered alteration in some form, by injected humour, or
+                        randomised words.
                       </p>
                     </div>
                   </div>
@@ -112,9 +105,14 @@ const ProductList = () => {
               </div>
             </div>
           </div>
-        ))}        
+        ))}
         {/* review */}
-        <Modal show={state.reviewModal} onHide={() => dispatch({type:'reviewModal'})} className="modal fade" id="reviewModal">
+        <Modal
+          show={state.reviewModal}
+          onHide={() => dispatch({ type: 'reviewModal' })}
+          className="modal fade"
+          id="reviewModal"
+        >
           <>
             <div className="modal-content">
               <div className="modal-header">
@@ -123,49 +121,40 @@ const ProductList = () => {
                   type="button"
                   className="btn-close"
                   data-dismiss="modal"
-                  onClick={() => dispatch({type:'reviewModal'})}
-                >
-                </button>
+                  onClick={() => dispatch({ type: 'reviewModal' })}
+                ></button>
               </div>
               <div className="modal-body">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    
-					 dispatch({type:'reviewModal'})
+
+                    dispatch({ type: 'reviewModal' });
                   }}
                 >
                   <div className="text-center mb-4">
-                    <img
-                      className="img-fluid rounded"
-                      width={78}
-                      src={avatar1}
-                      alt="DexignZone"
-                    />
+                    <img className="img-fluid rounded" width={78} src={avatar1} alt="DexignZone" />
                   </div>
                   <div className="form-group">
                     <div className="rating-widget mb-4 text-center">
                       {/* Rating Stars Box */}
                       <div className="rating-stars">
-                        <ul
-                          id="stars"
-                          className="d-flex justify-content-center align-items-center"
-                        >	
-						  <li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star me-1" />
-							</li>{" "}
-							<li>
-							  <i className="fa fa-star" />
-							</li>
+                        <ul id="stars" className="d-flex justify-content-center align-items-center">
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{' '}
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{' '}
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{' '}
+                          <li>
+                            <i className="fa fa-star me-1" />
+                          </li>{' '}
+                          <li>
+                            <i className="fa fa-star" />
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -175,7 +164,7 @@ const ProductList = () => {
                       className="form-control"
                       placeholder="Comment"
                       rows={5}
-                      defaultValue={""}
+                      defaultValue={''}
                     />
                   </div>
                   <button className="btn btn-success btn-block">RATE</button>

@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 class ApexLine3 extends React.Component {
   constructor(props) {
@@ -8,14 +8,14 @@ class ApexLine3 extends React.Component {
     this.state = {
       series: [
         {
-          name: "Running",
+          name: 'Running',
           data: [20, 40, 20, 80, 40, 40, 20, 60, 60, 20, 110, 60],
         },
       ],
       options: {
         chart: {
           height: 350,
-          type: "area",
+          type: 'area',
           toolbar: {
             show: false,
           },
@@ -26,49 +26,49 @@ class ApexLine3 extends React.Component {
 
         stroke: {
           width: [4],
-          colors: ["var(--primary)"],
-          curve: "straight",
+          colors: ['var(--primary)'],
+          curve: 'straight',
         },
-		grid:{
-			 borderColor: '#ffffff1a',
-		},
+        grid: {
+          borderColor: '#ffffff1a',
+        },
         xaxis: {
-			axisBorder: {
-			   show: false,
-			},
-		    axisTicks: {
-				show: false,
-			},
-          type: "text",
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+          type: 'text',
           categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
           ],
         },
-        colors: ["#4D44B5"],
+        colors: ['#4D44B5'],
         markers: {
           size: [6],
           strokeWidth: [4],
-          strokeColors: ["var(--primary)"],
+          strokeColors: ['var(--primary)'],
           border: 0,
-          colors: ["#fff"],
+          colors: ['#fff'],
           hover: {
             size: 10,
           },
         },
         yaxis: {
           title: {
-            text: "",
+            text: '',
           },
         },
       },

@@ -1,8 +1,8 @@
-import React, {  useRef } from "react";
-import {  Badge } from "react-bootstrap";
+import React, { useRef } from 'react';
+import { Badge } from 'react-bootstrap';
 
-import { Link } from "react-router-dom";
-import data from "./tableData";
+import { Link } from 'react-router-dom';
+import data from './tableData';
 
 const FeesCollection = () => {
   const sort = 3;
@@ -12,10 +12,7 @@ const FeesCollection = () => {
 
   const activePag = useRef(0);
   const jobData = useRef(
-    data.feeTable.data.slice(
-      activePag.current * sort,
-      (activePag.current + 1) * sort
-    )
+    data.feeTable.data.slice(activePag.current * sort, (activePag.current + 1) * sort)
   );
   //const [demo, setdemo] = useState();
   const onClick = (i) => {
@@ -54,11 +51,11 @@ const FeesCollection = () => {
                     <tr key={i}>
                       {d.map((da, ii) => (
                         <td key={ii}>
-                          {da === "Paid" ? (
+                          {da === 'Paid' ? (
                             <Badge variant="success light">Paid</Badge>
-                          ) : da === "Unpaid" ? (
+                          ) : da === 'Unpaid' ? (
                             <Badge variant="danger light">Unpaid</Badge>
-                          ) : da === "Panding" ? (
+                          ) : da === 'Panding' ? (
                             <Badge variant="warning light">Panding</Badge>
                           ) : (
                             da
@@ -68,14 +65,13 @@ const FeesCollection = () => {
                     </tr>
                   ))}
                 </tbody>
-                
               </table>
               <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-2">
                 <div className="dataTables_info">
-                  Showing {activePag.current * sort + 1} to{" "}
+                  Showing {activePag.current * sort + 1} to{' '}
                   {data.length > (activePag.current + 1) * sort
                     ? (activePag.current + 1) * sort
-                    : data.length}{" "}
+                    : data.length}{' '}
                   of {data.length} entries
                 </div>
                 <div
@@ -85,9 +81,7 @@ const FeesCollection = () => {
                   <Link
                     className="paginate_button previous disabled"
                     to="/table-datatable-basic"
-                    onClick={() =>
-                      activePag.current > 0 && onClick(activePag.current - 1)
-                    }
+                    onClick={() => activePag.current > 0 && onClick(activePag.current - 1)}
                   >
                     <i className="fa fa-angle-left" aria-hidden="true"></i>
                   </Link>
@@ -96,9 +90,7 @@ const FeesCollection = () => {
                       <Link
                         key={i}
                         to="/table-datatable-basic"
-                        className={`paginate_button  ${
-                          activePag.current === i ? "current" : ""
-                        } `}
+                        className={`paginate_button  ${activePag.current === i ? 'current' : ''} `}
                         onClick={() => onClick(i)}
                       >
                         {number}
@@ -109,8 +101,7 @@ const FeesCollection = () => {
                     className="paginate_button next"
                     to="/table-datatable-basic"
                     onClick={() =>
-                      activePag.current + 1 < jobPagination.length &&
-                      onClick(activePag.current + 1)
+                      activePag.current + 1 < jobPagination.length && onClick(activePag.current + 1)
                     }
                   >
                     <i className="fa fa-angle-right" aria-hidden="true"></i>

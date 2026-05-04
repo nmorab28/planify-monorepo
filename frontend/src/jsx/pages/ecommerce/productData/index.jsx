@@ -1,4 +1,4 @@
-import allProduct from "./allProducts";
+import allProduct from './allProducts';
 
 const productData = [...allProduct];
 

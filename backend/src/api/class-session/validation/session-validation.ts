@@ -23,15 +23,12 @@ export type ExistingSession = {
   academicGroupDocumentId?: string | null;
 };
 
-export type ConflictType = "teacher" | "classroom" | "academicGroup";
+export type ConflictType = 'teacher' | 'classroom' | 'academicGroup';
 
 export type SessionConflict = {
   type: ConflictType;
   message: string;
-  conflictingSession: Pick<
-    ExistingSession,
-    "documentId" | "dayOfWeek" | "startTime" | "endTime"
-  >;
+  conflictingSession: Pick<ExistingSession, 'documentId' | 'dayOfWeek' | 'startTime' | 'endTime'>;
 };
 
 export type ScheduleConfig = {
@@ -48,7 +45,7 @@ export type ScheduleConfig = {
  * Retorna NaN si el formato es inválido.
  */
 export function timeToMinutes(time: string): number {
-  const parts = time.split(":");
+  const parts = time.split(':');
   if (parts.length < 2) return NaN;
   const hours = parseInt(parts[0], 10);
   const minutes = parseInt(parts[1], 10);
@@ -60,12 +57,7 @@ export function timeToMinutes(time: string): number {
  * Verifica si dos franjas horarias se solapan (solapamiento estricto; bordes exactos NO solapan).
  * Asume que startA < endA y startB < endB.
  */
-export function isTimeOverlap(
-  startA: string,
-  endA: string,
-  startB: string,
-  endB: string
-): boolean {
+export function isTimeOverlap(startA: string, endA: string, startB: string, endB: string): boolean {
   const sA = timeToMinutes(startA);
   const eA = timeToMinutes(endA);
   const sB = timeToMinutes(startB);
@@ -87,10 +79,7 @@ export function checkSessionConflicts(
   const conflicts: SessionConflict[] = [];
 
   for (const session of existing) {
-    if (
-      candidate.sessionDocumentId &&
-      session.documentId === candidate.sessionDocumentId
-    ) {
+    if (candidate.sessionDocumentId && session.documentId === candidate.sessionDocumentId) {
       continue;
     }
 
@@ -111,7 +100,7 @@ export function checkSessionConflicts(
       candidate.teacherDocumentId === session.teacherDocumentId
     ) {
       conflicts.push({
-        type: "teacher",
+        type: 'teacher',
         message: `El docente ya tiene una sesión asignada el día ${candidate.dayOfWeek} entre ${session.startTime} y ${session.endTime}`,
         conflictingSession: {
           documentId: session.documentId,
@@ -128,7 +117,7 @@ export function checkSessionConflicts(
       candidate.classroomDocumentId === session.classroomDocumentId
     ) {
       conflicts.push({
-        type: "classroom",
+        type: 'classroom',
         message: `El aula ya está ocupada el día ${candidate.dayOfWeek} entre ${session.startTime} y ${session.endTime}`,
         conflictingSession: {
           documentId: session.documentId,
@@ -145,7 +134,7 @@ export function checkSessionConflicts(
       candidate.academicGroupDocumentId === session.academicGroupDocumentId
     ) {
       conflicts.push({
-        type: "academicGroup",
+        type: 'academicGroup',
         message: `El grupo académico ya tiene una sesión el día ${candidate.dayOfWeek} entre ${session.startTime} y ${session.endTime}`,
         conflictingSession: {
           documentId: session.documentId,
@@ -166,7 +155,7 @@ export function checkSessionConflicts(
  * Retorna null si es válido, o un mensaje de error si no lo es.
  */
 export function isWithinScheduleHours(
-  session: Pick<SessionCandidate, "dayOfWeek" | "startTime" | "endTime">,
+  session: Pick<SessionCandidate, 'dayOfWeek' | 'startTime' | 'endTime'>,
   config: ScheduleConfig
 ): string | null {
   const isSaturday = session.dayOfWeek === 6;
@@ -176,7 +165,7 @@ export function isWithinScheduleHours(
 
   if (isSaturday) {
     if (!config.saturdayStart || !config.saturdayEnd) {
-      return "El horario no tiene configuración para sábados";
+      return 'El horario no tiene configuración para sábados';
     }
     allowedStart = config.saturdayStart;
     allowedEnd = config.saturdayEnd;

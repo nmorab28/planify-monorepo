@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 class NewStudent extends Component {
   render() {
@@ -7,50 +7,48 @@ class NewStudent extends Component {
       labels: [33, 22, 68, 54, 8, 30, 74, 7, 36, 5, 41, 19, 43],
       datasets: [
         {
-          label: "My First dataset",
+          label: 'My First dataset',
           data: [33, 22, 68, 54, 8, 30, 74, 7, 36, 5, 41, 19, 43],
-          borderColor: "#FFCE78",
-          borderWidth: "0",
-          backgroundColor: "#FFCE78",
+          borderColor: '#FFCE78',
+          borderWidth: '0',
+          backgroundColor: '#FFCE78',
           barPercentage: 0.5,
         },
       ],
     };
 
     const options = {
-      plugins:{
-		    legend: false,
-		    responsive: true,
-	    },
+      plugins: {
+        legend: false,
+        responsive: true,
+      },
       maintainAspectRatio: false,
       scales: {
-        y:
-          {
-            max: 100,
-            min: 0,
+        y: {
+          max: 100,
+          min: 0,
+          display: false,
+          ticks: {
+            beginAtZero: true,
             display: false,
-            ticks: {
-              beginAtZero: true,
-              display: false,             
-              stepSize: 10,
-            },
-            grid: {
-              display: false,
-              drawBorder: false,
-            },
+            stepSize: 10,
           },
-        x: 
-          {
+          grid: {
             display: false,
-            
-            grid: {
-              display: false,
-              drawBorder: false,
-            },
-            ticks: {
-              display: false,
-            },
+            drawBorder: false,
           },
+        },
+        x: {
+          display: false,
+
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+          ticks: {
+            display: false,
+          },
+        },
       },
     };
 

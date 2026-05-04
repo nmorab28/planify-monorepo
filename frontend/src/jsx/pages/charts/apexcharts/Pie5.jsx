@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 class ApexRedialBar2 extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class ApexRedialBar2 extends React.Component {
       series: [71, 63, 90],
       options: {
         chart: {
-          type: "radialBar",
+          type: 'radialBar',
           //width:320,
           // height: 370,
           offsetY: 0,
@@ -21,20 +21,18 @@ class ApexRedialBar2 extends React.Component {
             inverseOrder: false,
             hollow: {
               margin: 0,
-              size: "30%",
-              background: "transparent",
+              size: '30%',
+              background: 'transparent',
             },
 
             track: {
               show: true,
-              background: "var(--primary)",
-              strokeWidth: "10%",
+              background: 'var(--primary)',
+              strokeWidth: '10%',
               opacity: 1,
               margin: 18, // margin is in pixels
             },
-			
           },
-		
         },
         responsive: [
           {
@@ -45,14 +43,14 @@ class ApexRedialBar2 extends React.Component {
                 offsetX: 0,
               },
               legend: {
-                position: "bottom",
+                position: 'bottom',
                 offsetX: 0,
                 offsetY: 0,
               },
               plotOptions: {
                 radialBar: {
                   hollow: {
-                    size: "20%",
+                    size: '20%',
                   },
                 },
               },
@@ -66,14 +64,14 @@ class ApexRedialBar2 extends React.Component {
                 offsetX: 0,
               },
               legend: {
-                position: "bottom",
+                position: 'bottom',
                 offsetX: 0,
                 offsetY: 0,
               },
               plotOptions: {
                 radialBar: {
                   hollow: {
-                    size: "10%",
+                    size: '10%',
                   },
                 },
               },
@@ -87,14 +85,14 @@ class ApexRedialBar2 extends React.Component {
                 offsetX: 0,
               },
               legend: {
-                position: "bottom",
+                position: 'bottom',
                 offsetX: 0,
                 offsetY: 0,
               },
               plotOptions: {
                 radialBar: {
                   hollow: {
-                    size: "30%",
+                    size: '30%',
                   },
                 },
               },
@@ -108,14 +106,14 @@ class ApexRedialBar2 extends React.Component {
                 offsetX: 0,
               },
               legend: {
-                position: "bottom",
+                position: 'bottom',
                 offsetX: 0,
                 offsetY: 0,
               },
               plotOptions: {
                 radialBar: {
                   hollow: {
-                    size: "20%",
+                    size: '20%',
                   },
                 },
               },
@@ -126,16 +124,15 @@ class ApexRedialBar2 extends React.Component {
         fill: {
           opacity: 1,
         },
-        colors: ["var(--primary)", "var(--primary)", "var(--primary)"],
-        labels: ["Ticket A", "Ticket B", "Ticket C"],
+        colors: ['var(--primary)', 'var(--primary)', 'var(--primary)'],
+        labels: ['Ticket A', 'Ticket B', 'Ticket C'],
         legend: {
-			fontSize: "14px",
-			show: true,
-			position: "bottom",
-			labels: {
-				colors: "#787878",
-			},
-		  
+          fontSize: '14px',
+          show: true,
+          position: 'bottom',
+          labels: {
+            colors: '#787878',
+          },
         },
       },
     };

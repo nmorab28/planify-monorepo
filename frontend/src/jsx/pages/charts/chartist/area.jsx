@@ -1,9 +1,9 @@
-import React from "react";
-import ChartistGraph from "react-chartist";
+import React from 'react';
+import ChartistGraph from 'react-chartist';
 
 function AreaChart() {
   var data = {
-    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     series: [[12, 9, 7, 8, 5]],
   };
 
@@ -19,7 +19,7 @@ function AreaChart() {
     },
   };
 
-  var type = "Line";
+  var type = 'Line';
 
   return (
     <>

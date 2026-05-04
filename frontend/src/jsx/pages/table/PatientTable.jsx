@@ -1,13 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import {  Dropdown } from "react-bootstrap";
+import React, { useState, useRef, useEffect } from 'react';
+import { Dropdown } from 'react-bootstrap';
 
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 const PatientTable = () => {
-  const [data, setData] = useState(
-    document.querySelectorAll("#patientTable_basic_table tbody tr")
-  );
+  const [data, setData] = useState(document.querySelectorAll('#patientTable_basic_table tbody tr'));
   const sort = 5;
   const activePag = useRef(0);
   //const [test, settest] = useState(0);
@@ -16,16 +13,16 @@ const PatientTable = () => {
   const chageData = (frist, sec) => {
     for (var i = 0; i < data.length; ++i) {
       if (i >= frist && i < sec) {
-        data[i].classList.remove("d-none");
+        data[i].classList.remove('d-none');
       } else {
-        data[i].classList.add("d-none");
+        data[i].classList.add('d-none');
       }
     }
   };
   // use effect
   useEffect(() => {
-    setData(document.querySelectorAll("#patientTable_basic_table tbody tr"));
-   // chackboxFun();
+    setData(document.querySelectorAll('#patientTable_basic_table tbody tr'));
+    // chackboxFun();
   }, []);
 
   // Active pagginarion
@@ -41,12 +38,12 @@ const PatientTable = () => {
     chageData(activePag.current * sort, (activePag.current + 1) * sort);
     //settest(i);
   };
-  const chackbox = document.querySelectorAll(".sorting_1 input");
-  const motherChackBox = document.querySelector(".sorting_asc input");
+  const chackbox = document.querySelectorAll('.sorting_1 input');
+  const motherChackBox = document.querySelector('.sorting_asc input');
   const chackboxFun = (type) => {
     for (let i = 0; i < chackbox.length; i++) {
       const element = chackbox[i];
-      if (type === "all") {
+      if (type === 'all') {
         if (motherChackBox.checked) {
           element.checked = true;
         } else {
@@ -93,15 +90,12 @@ const PatientTable = () => {
                       <div className="form-check custom-checkbox">
                         <input
                           type="checkbox"
-                          onClick={() => chackboxFun("all")}
+                          onClick={() => chackboxFun('all')}
                           className="form-check-input"
                           id="checkAll"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="checkAll"
-                        />
+                        <label className="form-check-label" htmlFor="checkAll" />
                       </div>
                     </th>
                     <th
@@ -205,10 +199,7 @@ const PatientTable = () => {
                           id="customCheckBox2"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox2"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox2" />
                       </div>
                     </td>
                     <td>#P-00001</td>
@@ -230,18 +221,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -267,10 +248,7 @@ const PatientTable = () => {
                           id="customCheckBox3"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox3"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox3" />
                       </div>
                     </td>
                     <td>#P-00002</td>
@@ -292,18 +270,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -329,10 +297,7 @@ const PatientTable = () => {
                           id="customCheckBox4"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox4"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox4" />
                       </div>
                     </td>
                     <td>#P-00003</td>
@@ -354,18 +319,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -391,10 +346,7 @@ const PatientTable = () => {
                           id="customCheckBox5"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox5"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox5" />
                       </div>
                     </td>
                     <td>#P-00004</td>
@@ -416,18 +368,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -453,10 +395,7 @@ const PatientTable = () => {
                           id="customCheckBox6"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox6"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox6" />
                       </div>
                     </td>
                     <td>#P-00005</td>
@@ -478,18 +417,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -515,10 +444,7 @@ const PatientTable = () => {
                           id="customCheckBox7"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox7"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox7" />
                       </div>
                     </td>
                     <td>#P-00006</td>
@@ -540,18 +466,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -577,10 +493,7 @@ const PatientTable = () => {
                           id="customCheckBox8"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox8"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox8" />
                       </div>
                     </td>
                     <td>#P-00007</td>
@@ -602,18 +515,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -639,10 +542,7 @@ const PatientTable = () => {
                           id="customCheckBox9"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox9"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox9" />
                       </div>
                     </td>
                     <td>#P-00008</td>
@@ -664,18 +564,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -701,10 +591,7 @@ const PatientTable = () => {
                           id="customCheckBox10"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox10"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox10" />
                       </div>
                     </td>
                     <td>#P-00009</td>
@@ -726,18 +613,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -763,10 +640,7 @@ const PatientTable = () => {
                           id="customCheckBox11"
                           required
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customCheckBox11"
-                        />
+                        <label className="form-check-label" htmlFor="customCheckBox11" />
                       </div>
                     </td>
                     <td>#P-00010</td>
@@ -788,18 +662,8 @@ const PatientTable = () => {
                           className="btn-link i-false"
                           data-toggle="dropdown"
                         >
-                          <svg
-                            width="24px"
-                            height="24px"
-                            viewBox="0 0 24 24"
-                            version="1.1"
-                          >
-                            <g
-                              stroke="none"
-                              strokeWidth={1}
-                              fill="none"
-                              fillRule="evenodd"
-                            >
+                          <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                               <rect x={0} y={0} width={24} height={24} />
                               <circle fill="#000000" cx={5} cy={12} r={2} />
                               <circle fill="#000000" cx={12} cy={12} r={2} />
@@ -820,10 +684,10 @@ const PatientTable = () => {
 
               <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-2">
                 <div className="dataTables_info">
-                  Showing {activePag.current * sort + 1} to{" "}
+                  Showing {activePag.current * sort + 1} to{' '}
                   {data.length > (activePag.current + 1) * sort
                     ? (activePag.current + 1) * sort
-                    : data.length}{" "}
+                    : data.length}{' '}
                   of {data.length} entries
                 </div>
                 <div
@@ -833,9 +697,7 @@ const PatientTable = () => {
                   <Link
                     className="paginate_button previous disabled"
                     to="/table-datatable-basic"
-                    onClick={() =>
-                      activePag.current > 0 && onClick(activePag.current - 1)
-                    }
+                    onClick={() => activePag.current > 0 && onClick(activePag.current - 1)}
                   >
                     <i className="fa fa-angle-left" aria-hidden="true"></i>
                   </Link>
@@ -844,9 +706,7 @@ const PatientTable = () => {
                       <Link
                         key={i}
                         to="/table-datatable-basic"
-                        className={`paginate_button  ${
-                          activePag.current === i ? "current" : ""
-                        } `}
+                        className={`paginate_button  ${activePag.current === i ? 'current' : ''} `}
                         onClick={() => onClick(i)}
                       >
                         {number}
@@ -857,8 +717,7 @@ const PatientTable = () => {
                     className="paginate_button next"
                     to="/table-datatable-basic"
                     onClick={() =>
-                      activePag.current + 1 < paggination.length &&
-                      onClick(activePag.current + 1)
+                      activePag.current + 1 < paggination.length && onClick(activePag.current + 1)
                     }
                   >
                     <i className="fa fa-angle-right" aria-hidden="true"></i>

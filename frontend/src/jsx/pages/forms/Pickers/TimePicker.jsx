@@ -7,21 +7,20 @@ import 'react-clock/dist/Clock.css';
 function TimePicker() {
   const [value, onChange] = useState(new Date());
 
-     return (
-        <div>
-            <TimePickerPicker onChange={onChange} value={value} />
-        </div>
-    );
+  return (
+    <div>
+      <TimePickerPicker onChange={onChange} value={value} />
+    </div>
+  );
 }
 
-
-function CurrentTimePicker(){
-    const [value2, onChange2] = useState('10:00');
-    return(
-        <>
-            <TimePickerPicker onChange={onChange2} value={value2} />
-        </>
-    )
+function CurrentTimePicker() {
+  const [value2, onChange2] = useState('10:00');
+  return (
+    <>
+      <TimePickerPicker onChange={onChange2} value={value2} />
+    </>
+  );
 }
-export {CurrentTimePicker};
+export { CurrentTimePicker };
 export default TimePicker;

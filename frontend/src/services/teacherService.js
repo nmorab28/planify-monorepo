@@ -3,7 +3,7 @@ const STATIC_API_TOKEN = process.env.REACT_APP_STRAPI_API_TOKEN;
 
 const getStoredToken = () => {
   try {
-    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     return userDetails?.idToken || userDetails?.jwt || null;
   } catch {
     return null;
@@ -15,7 +15,7 @@ const getAuthHeaders = () => {
   const token = storedToken || STATIC_API_TOKEN;
 
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   if (token) {
@@ -29,8 +29,7 @@ const handleResponse = async (res) => {
   const data = await res.json().catch(() => null);
 
   if (!res.ok) {
-    const errorMessage =
-      data?.error?.message || data?.message || "Unexpected error";
+    const errorMessage = data?.error?.message || data?.message || 'Unexpected error';
     throw new Error(errorMessage);
   }
 
@@ -39,7 +38,7 @@ const handleResponse = async (res) => {
 
 export const getTeachers = async () => {
   const res = await fetch(`${API_URL}/api/teachers`, {
-    method: "GET",
+    method: 'GET',
     headers: getAuthHeaders(),
   });
 
@@ -49,7 +48,7 @@ export const getTeachers = async () => {
 
 export const createTeacher = async (teacher) => {
   const res = await fetch(`${API_URL}/api/teachers`, {
-    method: "POST",
+    method: 'POST',
     headers: getAuthHeaders(),
     body: JSON.stringify({
       data: teacher,
@@ -61,7 +60,7 @@ export const createTeacher = async (teacher) => {
 
 export const updateTeacher = async (documentId, teacher) => {
   const res = await fetch(`${API_URL}/api/teachers/${documentId}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: getAuthHeaders(),
     body: JSON.stringify({
       data: teacher,
@@ -73,7 +72,7 @@ export const updateTeacher = async (documentId, teacher) => {
 
 export const deleteTeacher = async (documentId) => {
   const res = await fetch(`${API_URL}/api/teachers/${documentId}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: getAuthHeaders(),
   });
 
@@ -82,7 +81,7 @@ export const deleteTeacher = async (documentId) => {
 
 export const getTeacherById = async (documentId) => {
   const res = await fetch(`${API_URL}/api/teachers/${documentId}`, {
-    method: "GET",
+    method: 'GET',
     headers: getAuthHeaders(),
   });
 

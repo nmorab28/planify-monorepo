@@ -1,4 +1,4 @@
-import type { Core } from "@strapi/strapi";
+import type { Core } from '@strapi/strapi';
 
 /**
  * Hook reservado para datos demo vía Document Service.
@@ -6,6 +6,6 @@ import type { Core } from "@strapi/strapi";
  */
 export async function seedDemoSchedulingData(strapi: Core.Strapi): Promise<void> {
   strapi.log.info(
-    "[seed-demo-scheduling-data] Sin inserciones automáticas. Usá scripts/seed-planify-api-test-data.sql si necesitás datos en Postgres."
+    '[seed-demo-scheduling-data] Sin inserciones automáticas. Usá scripts/seed-planify-api-test-data.sql si necesitás datos en Postgres.'
   );
 }

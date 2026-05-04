@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import ReactApexChart from "react-apexcharts";
+import ReactApexChart from 'react-apexcharts';
 
 class ApexBar2 extends React.Component {
   constructor(props) {
@@ -9,13 +9,13 @@ class ApexBar2 extends React.Component {
     this.state = {
       series: [
         {
-          name: "Cycling",
+          name: 'Cycling',
           data: [80, 40, 55, 20, 45, 30, 80, 90, 85, 90, 30, 85],
         },
       ],
       options: {
         chart: {
-          type: "bar",
+          type: 'bar',
           height: 230,
           toolbar: {
             show: false,
@@ -25,27 +25,27 @@ class ApexBar2 extends React.Component {
           bar: {
             horizontal: false,
             dataLabels: {
-              position: "top",
+              position: 'top',
             },
           },
         },
-        colors: ["var(--primary)"],
+        colors: ['var(--primary)'],
         legend: {
           show: false,
-          position: "top",
-          horizontalAlign: "left",
+          position: 'top',
+          horizontalAlign: 'left',
         },
         dataLabels: {
           enabled: false,
           offsetX: -6,
           style: {
-            fontSize: "12px",
-             colors: ["#fff"],
+            fontSize: '12px',
+            colors: ['#fff'],
           },
         },
-          grid:{
-            borderColor: '#ffffff1a',
-          },
+        grid: {
+          borderColor: '#ffffff1a',
+        },
         stroke: {
           show: false,
         },
@@ -54,15 +54,15 @@ class ApexBar2 extends React.Component {
             show: false,
           },
         },
-		
+
         xaxis: {
           show: false,
-          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007,2008,2009,2010,2011,2012],
+          categories: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
           axisBorder: {
             show: false,
           },
-            axisTicks: {
-              show: false,
+          axisTicks: {
+            show: false,
           },
         },
       },

@@ -1,3 +1,3 @@
-import { factories } from "@strapi/strapi";
+import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter("api::academic-group.academic-group");
+export default factories.createCoreRouter('api::academic-group.academic-group');

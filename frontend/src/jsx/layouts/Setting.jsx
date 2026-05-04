@@ -1,20 +1,11 @@
-import React, { Fragment } from "react";
-
-
-
+import React, { Fragment } from 'react';
 
 const Setting = () => {
- 
   return (
-	<>
-		<Fragment>
-
-		</Fragment>
-		
-	</>
+    <>
+      <Fragment></Fragment>
+    </>
   );
 };
 
 export default Setting;
-
-
