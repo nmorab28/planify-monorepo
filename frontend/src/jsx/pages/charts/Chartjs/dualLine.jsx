@@ -1,62 +1,59 @@
-import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 
 const data = {
-  defaultFontFamily: "Poppins",
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+  defaultFontFamily: 'Poppins',
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
   datasets: [
     {
-      label: "My First dataset",
+      label: 'My First dataset',
       data: [25, 20, 60, 41, 66, 45, 80],
-      borderColor: "rgba(106,115,250,1)",
-      borderWidth: "2",
-      backgroundColor: "rgba(106,115,250,1)",
-      pointBackgroundColor: "rgba(106,115,250, 1)",
-	  tension:0.4
+      borderColor: 'rgba(106,115,250,1)',
+      borderWidth: '2',
+      backgroundColor: 'rgba(106,115,250,1)',
+      pointBackgroundColor: 'rgba(106,115,250, 1)',
+      tension: 0.4,
     },
     {
-      label: "My Second dataset",
+      label: 'My Second dataset',
       data: [5, 20, 15, 41, 35, 65, 80],
-      borderColor: "rgba(255,97,117,0.6)",
-      borderWidth: "2",
-      backgroundColor: "transparent",
-      pointBackgroundColor: "rgba(255,97,117,0.6)",
-	  tension:0.4
+      borderColor: 'rgba(255,97,117,0.6)',
+      borderWidth: '2',
+      backgroundColor: 'transparent',
+      pointBackgroundColor: 'rgba(255,97,117,0.6)',
+      tension: 0.4,
     },
   ],
 };
 
 const options = {
-  plugins:{
-	  legend: false,
-	  tooltips: {
-		intersect: false,
-	  },
-	  hover: {
-		  intersect: true,
-	  }
+  plugins: {
+    legend: false,
+    tooltips: {
+      intersect: false,
+    },
+    hover: {
+      intersect: true,
+    },
   },
   scales: {
-    y: 
-      {
-        ticks: {
-			color: "#fff",
-          beginAtZero: true,
-          max: 100,
-          min: 0,
-          stepSize: 20,
-          padding: 10,
-        },
+    y: {
+      ticks: {
+        color: '#fff',
+        beginAtZero: true,
+        max: 100,
+        min: 0,
+        stepSize: 20,
+        padding: 10,
       },
-    
-    x: 
-      {
-        ticks: {
-		color:"#fff",
-          padding: 5,
-        },
+    },
+
+    x: {
+      ticks: {
+        color: '#fff',
+        padding: 5,
       },
-    
+    },
   },
 };
 class DualLine extends Component {

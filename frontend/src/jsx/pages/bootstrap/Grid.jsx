@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import PageTitle from "../../layouts/PageTitle";
-import { Row, Col, Card, Table } from "react-bootstrap";
+import React, { Fragment } from 'react';
+import PageTitle from '../../layouts/PageTitle';
+import { Row, Col, Card, Table } from 'react-bootstrap';
 
 const UiGrid = () => {
   return (
@@ -14,10 +14,9 @@ const UiGrid = () => {
             </Card.Header>
             <Card.Body>
               <p>
-                While Bootstrap u ses or for defining most sizes,are used for
-                grid breakpoints and container widths. This is because the
-                viewport width is in pixels and does not change with the font
-                size. See how aspects of the Bootstrap grid system work across
+                While Bootstrap u ses or for defining most sizes,are used for grid breakpoints and
+                container widths. This is because the viewport width is in pixels and does not
+                change with the font size. See how aspects of the Bootstrap grid system work across
                 multiple devices with a handy table.
               </p>
               <Table bordered striped responsive>
@@ -120,11 +119,9 @@ const UiGrid = () => {
             </Card.Header>
             <Card.Body>
               <p>
-                Using a single set of grid classes, you can create a default
-                grid system that starts out stacked on mobile devices and tablet
-                devices (the extra small to small range) before becoming
-                horizontal on desktop (medium) devices. Place grid columns in
-                any
+                Using a single set of grid classes, you can create a default grid system that starts
+                out stacked on mobile devices and tablet devices (the extra small to small range)
+                before becoming horizontal on desktop (medium) devices. Place grid columns in any
               </p>
               <Row>
                 <Col lg={12}>

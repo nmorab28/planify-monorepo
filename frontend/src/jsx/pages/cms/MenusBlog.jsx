@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Tab, Nav, Collapse } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Tab, Nav, Collapse } from 'react-bootstrap';
 
 const formDataLabel = [
-  { key: "0", title: "Privacy Policy", id: "12", checked: false },
-  { key: "1", title: "Contact Us", id: "13", checked: false },
-  { key: "2", title: "Important Information", id: "14", checked: false },
-  { key: "3", title: "About Us", id: "15", checked: false },
-  { key: "4", title: "Dummy Co", id: "16", checked: false },
+  { key: '0', title: 'Privacy Policy', id: '12', checked: false },
+  { key: '1', title: 'Contact Us', id: '13', checked: false },
+  { key: '2', title: 'Important Information', id: '14', checked: false },
+  { key: '3', title: 'About Us', id: '15', checked: false },
+  { key: '4', title: 'Dummy Co', id: '16', checked: false },
 ];
 
 const MenusBlog = () => {
@@ -16,27 +16,17 @@ const MenusBlog = () => {
   const [checkedInput, setCheckedInput] = useState(false);
   const [openFirst, setOpenFirst] = useState(true);
 
-
   function checkBox(ind) {
-    
     setCheckedInput(false);
-
-   
   }
 
   return (
     <>
       <div className="filter cm-content-box box-primary">
-        <div className="content-title"
-          onClick={() => setOpenFirst(!openFirst)}
-        >
+        <div className="content-title" onClick={() => setOpenFirst(!openFirst)}>
           <div className="cpa">Menus</div>
           <div className="tools">
-            <Link
-              to={"#"}
-              className={`SlideToolHeader ${openFirst ? "collapse" : "expand"}`}
-              
-            >
+            <Link to={'#'} className={`SlideToolHeader ${openFirst ? 'collapse' : 'expand'}`}>
               <i className="fas fa-angle-up" />
             </Link>
           </div>
@@ -45,18 +35,10 @@ const MenusBlog = () => {
           <div className="cm-content-body form excerpt">
             <div className="card-body">
               <div className="filter cm-content-box box-primary border">
-                <div className="content-title border-0"
-                   onClick={() => setOpen(!open)}
-                >
+                <div className="content-title border-0" onClick={() => setOpen(!open)}>
                   <div className="cpa">Page</div>
                   <div className="tools">
-                    <Link
-                      to={"#"}
-                      className={`SlideToolHeader ${
-                        open ? "collapse" : "expand"
-                      }`}
-                     
-                    >
+                    <Link to={'#'} className={`SlideToolHeader ${open ? 'collapse' : 'expand'}`}>
                       <i className="fas fa-angle-up"></i>
                     </Link>
                   </div>
@@ -65,26 +47,14 @@ const MenusBlog = () => {
                   <div className="cm-content-inner form excerpt border-top">
                     <div className="card-body">
                       <Tab.Container defaultActiveKey="View">
-                        <Nav
-                          as="ul"
-                          className=" tab-my nav nav-tabs"
-                          id="myTab"
-                        >
-                          <Nav.Item
-                            as="li"
-                            className="nav-item me-1"
-                            role="presentation"
-                          >
+                        <Nav as="ul" className=" tab-my nav nav-tabs" id="myTab">
+                          <Nav.Item as="li" className="nav-item me-1" role="presentation">
                             <Nav.Link as="button" eventKey="View" type="button">
                               View All
                             </Nav.Link>
                           </Nav.Item>
                           <Nav.Item as="li" className="nav-item">
-                            <Nav.Link
-                              as="button"
-                              eventKey="Search"
-                              type="button"
-                            >
+                            <Nav.Link as="button" eventKey="Search" type="button">
                               Search
                             </Nav.Link>
                           </Nav.Item>
@@ -112,7 +82,7 @@ const MenusBlog = () => {
 
                               <div className="d-flex align-items-center flex-wrap">
                                 <Link
-                                  to={"#"}
+                                  to={'#'}
                                   className="text-primary fs-14"
                                   onClick={() => {
                                     setCheckedInput(true);
@@ -122,7 +92,7 @@ const MenusBlog = () => {
                                 </Link>
                                 <span className="mx-2">|</span>
                                 <Link
-                                  to={"#"}
+                                  to={'#'}
                                   className="text-primary me-2 fs-14"
                                   onClick={() => {
                                     setCheckedInput(false);
@@ -135,10 +105,7 @@ const MenusBlog = () => {
                           </Tab.Pane>
                           <Tab.Pane eventKey="Search">
                             <div className="menu-tabs">
-                              <label
-                                htmlFor="exampleFormControlInput1"
-                                className="form-label"
-                              >
+                              <label htmlFor="exampleFormControlInput1" className="form-label">
                                 Search
                               </label>
                               <input
@@ -150,10 +117,7 @@ const MenusBlog = () => {
                             </div>
                           </Tab.Pane>
                           <div className="d-flex align-items-center flex-wrap">
-                            <button
-                              type="submit"
-                              className="btn btn-primary btn-sm dalb-menu-btn"
-                            >
+                            <button type="submit" className="btn btn-primary btn-sm dalb-menu-btn">
                               Add to Menu
                             </button>
                           </div>
@@ -164,18 +128,10 @@ const MenusBlog = () => {
                 </Collapse>
               </div>
               <div className="filter cm-content box-primary border">
-                <div className="content-title border-0"
-                   onClick={() => setOpen2(!open2)}
-                >
+                <div className="content-title border-0" onClick={() => setOpen2(!open2)}>
                   <div className="cpa">Links</div>
                   <div className="tools">
-                    <Link
-                      to={"#"}
-                      className={`SlideToolHeader ${
-                        open2 ? "collapse" : "expand"
-                      }`}
-                     
-                    >
+                    <Link to={'#'} className={`SlideToolHeader ${open2 ? 'collapse' : 'expand'}`}>
                       <i className="fas fa-angle-up"></i>
                     </Link>
                   </div>
@@ -188,13 +144,21 @@ const MenusBlog = () => {
                           <h6>URL</h6>
                         </div>
                         <div className="col-xl-8">
-                          <input type="text" className="form-control solid mb-2" placeholder="https://dexignlab.com/"/>
+                          <input
+                            type="text"
+                            className="form-control solid mb-2"
+                            placeholder="https://dexignlab.com/"
+                          />
                         </div>
                         <div className="col-xl-4">
                           <h6>Link Text</h6>
                         </div>
                         <div className="col-xl-8">
-                          <input type="text" className="form-control solid" placeholder="Menu items"/>
+                          <input
+                            type="text"
+                            className="form-control solid"
+                            placeholder="Menu items"
+                          />
                         </div>
                       </div>
                     </div>

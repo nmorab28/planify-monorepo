@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import {Link} from 'react-router-dom';
-import PageTitle from "../../layouts/PageTitle";
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import PageTitle from '../../layouts/PageTitle';
 import {
   Row,
   Col,
@@ -9,32 +9,26 @@ import {
   DropdownButton,
   ButtonGroup,
   SplitButton,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
 const UiDropDown = () => {
   return (
     <Fragment>
-      <PageTitle
-        activeMenu="Dropdown"
-        pageContent="Label"
-        motherMenu="Bootstrap"
-      />
+      <PageTitle activeMenu="Dropdown" pageContent="Label" motherMenu="Bootstrap" />
       <Row>
         <Col xl={4} lg={12}>
           <Card>
             <Card.Header className="d-block">
               <Card.Title>Basic Dropdown</Card.Title>
               <Card.Text className="m-0 subtitle">
-                A dropdown menu is a toggleable menu that allows the user to
-                choose one value from a predefined list
+                A dropdown menu is a toggleable menu that allows the user to choose one value from a
+                predefined list
               </Card.Text>
             </Card.Header>
             <Card.Body>
               <div className="basic-dropdown">
                 <Dropdown>
-                  <Dropdown.Toggle variant="primary">
-                    Dropdown button
-                  </Dropdown.Toggle>
+                  <Dropdown.Toggle variant="primary">Dropdown button</Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="#">Link 1</Dropdown.Item>
                     <Dropdown.Item href="#">Link 2</Dropdown.Item>
@@ -51,16 +45,14 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Dropdown Divider</Card.Title>
               <Card.Text className="m-0 subtitle">
-                The <code>.dropdown-divider</code> class is used to separate
-                links inside the dropdown menu with a thin horizontal border
+                The <code>.dropdown-divider</code> class is used to separate links inside the
+                dropdown menu with a thin horizontal border
               </Card.Text>
             </Card.Header>
             <Card.Body>
               <div className="basic-dropdown">
                 <Dropdown>
-                  <Dropdown.Toggle variant="primary">
-                    Dropdown button
-                  </Dropdown.Toggle>
+                  <Dropdown.Toggle variant="primary">Dropdown button</Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="#">Link 1</Dropdown.Item>
                     <Dropdown.Item href="#">Link 2</Dropdown.Item>
@@ -79,16 +71,14 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Dropdown Header</Card.Title>
               <Card.Text className="m-0 subtitle">
-                The <code>.dropdown-header</code> class is used to add headers
-                inside the dropdown menu
+                The <code>.dropdown-header</code> class is used to add headers inside the dropdown
+                menu
               </Card.Text>
             </Card.Header>
             <Card.Body>
               <div className="basic-dropdown">
                 <Dropdown>
-                  <Dropdown.Toggle variant="primary">
-                    Dropdown button
-                  </Dropdown.Toggle>
+                  <Dropdown.Toggle variant="primary">Dropdown button</Dropdown.Toggle>
                   <Dropdown.Menu>
                     <h5 className="dropdown-header">Dropdown header</h5>
                     <Dropdown.Item href="#">Link 1</Dropdown.Item>
@@ -110,22 +100,20 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Disable and Active items</Card.Title>
               <Card.Text className="m-0 subtitle">
-                The <code>.dropdown-header</code> class is used to add headers
-                inside the dropdown menu
+                The <code>.dropdown-header</code> class is used to add headers inside the dropdown
+                menu
               </Card.Text>
             </Card.Header>
             <Card.Body>
               <div className="basic-dropdown">
                 <Dropdown>
-                  <Dropdown.Toggle variant="primary">
-                    Dropdown button
-                  </Dropdown.Toggle>
+                  <Dropdown.Toggle variant="primary">Dropdown button</Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="#">Normal</Dropdown.Item>
-                    <Link to={"#"} className="dropdown-item active">
+                    <Link to={'#'} className="dropdown-item active">
                       Active
                     </Link>
-                    <Link to={"#"} className="dropdown-item disabled">
+                    <Link to={'#'} className="dropdown-item disabled">
                       Disabled
                     </Link>
                   </Dropdown.Menu>
@@ -140,17 +128,14 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Align Right</Card.Title>
               <Card.Text className="m-0 subtitle">
-                To right-align the dropdown, add the{" "}
-                <code>.dropdown-menu-end</code> class to the element with
-                .dropdown-menu
+                To right-align the dropdown, add the <code>.dropdown-menu-end</code> class to the
+                element with .dropdown-menu
               </Card.Text>
             </Card.Header>
             <Card.Body>
               <div className="basic-dropdown">
                 <Dropdown>
-                  <Dropdown.Toggle variant="primary">
-                    Dropdown button
-                  </Dropdown.Toggle>
+                  <Dropdown.Toggle variant="primary">Dropdown button</Dropdown.Toggle>
                   <Dropdown.Menu className="dropdown-menu-right" drop="end">
                     <Dropdown.Item href="#">Link 1</Dropdown.Item>
                     <Dropdown.Item href="#">Link 2</Dropdown.Item>
@@ -167,12 +152,12 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Dropup</Card.Title>
               <Card.Text className="m-0 subtitle">
-                The <code>.dropup</code> class makes the dropdown menu expand
-                upwards instead of downwards
+                The <code>.dropup</code> class makes the dropdown menu expand upwards instead of
+                downwards
               </Card.Text>
             </Card.Header>
             <Card.Body>
-              <div className="basic-dropdown">                
+              <div className="basic-dropdown">
                 <DropdownButton
                   as={ButtonGroup}
                   id="dropdown-button-drop-up"
@@ -209,8 +194,8 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Dropright </Card.Title>
               <Card.Text className="m-0 subtitle">
-                Trigger dropdown menus at the right of the elements by adding{" "}
-                <code>.dropend</code> to the parent element
+                Trigger dropdown menus at the right of the elements by adding <code>.dropend</code>{' '}
+                to the parent element
               </Card.Text>
             </Card.Header>
             <Card.Body>
@@ -230,7 +215,7 @@ const UiDropDown = () => {
                     <Dropdown.Item href="#">Link 3</Dropdown.Item>
                   </DropdownButton>
                 </div>
-                
+
                 <div className="btn-group dropend ">
                   <SplitButton
                     as={ButtonGroup}
@@ -255,7 +240,7 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Dropstart </Card.Title>
               <Card.Text className="m-0 subtitle">
-                Trigger dropdown menus at the right of the elements by adding{" "}
+                Trigger dropdown menus at the right of the elements by adding{' '}
                 <code>.dropstart </code> to the parent element
               </Card.Text>
             </Card.Header>
@@ -304,14 +289,7 @@ const UiDropDown = () => {
             </Card.Header>
             <Card.Body>
               <div className="button-dropdown">
-                {[
-                  "Primary",
-                  "Secondary",
-                  "Success",
-                  "Info",
-                  "Warning",
-                  "Danger",
-                ].map((variant) => (
+                {['Primary', 'Secondary', 'Success', 'Info', 'Warning', 'Danger'].map((variant) => (
                   <SplitButton
                     key={variant}
                     as={ButtonGroup}
@@ -338,13 +316,12 @@ const UiDropDown = () => {
             <Card.Header className="d-block">
               <Card.Title>Sizing</Card.Title>
               <Card.Text className="m-0 subtitle">
-                Button dropdowns work with buttons of all sizes, including
-                default and split dropdown buttons.
+                Button dropdowns work with buttons of all sizes, including default and split
+                dropdown buttons.
               </Card.Text>
             </Card.Header>
             <Card.Body>
               <div className="dropdown-size">
-                
                 <DropdownButton
                   as={ButtonGroup}
                   id="dropdown-button-drop-down"
@@ -376,7 +353,7 @@ const UiDropDown = () => {
                   <div className="dropdown-divider"></div>
                   <Dropdown.Item href="#">Separated link</Dropdown.Item>
                 </SplitButton>
-                
+
                 <DropdownButton
                   as={ButtonGroup}
                   id="dropdown-button-drop-down"
@@ -440,11 +417,7 @@ const UiDropDown = () => {
 
                 <Col xl={3}>
                   <Dropdown>
-                    <Dropdown.Toggle
-                      variant="outline-primary"
-                      size="sm"
-                      className="mt-1 mb-2"
-                    >
+                    <Dropdown.Toggle variant="outline-primary" size="sm" className="mt-1 mb-2">
                       Last 7 days
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -457,11 +430,7 @@ const UiDropDown = () => {
 
                 <Col xl={3}>
                   <Dropdown>
-                    <Dropdown.Toggle
-                      variant="outline-primary"
-                      size="sm"
-                      className="mt-1 mb-2"
-                    >
+                    <Dropdown.Toggle variant="outline-primary" size="sm" className="mt-1 mb-2">
                       Last 1 Hour
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -474,11 +443,7 @@ const UiDropDown = () => {
 
                 <Col xl={3}>
                   <Dropdown>
-                    <Dropdown.Toggle
-                      variant="primary"
-                      size="sm"
-                      className="mt-1 mb-2"
-                    >
+                    <Dropdown.Toggle variant="primary" size="sm" className="mt-1 mb-2">
                       Last 1 Hour
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -514,8 +479,8 @@ const UiDropDown = () => {
                       id="whiteSpace"
                       className="mt-1 mb-2"
                     >
-                      <i className="ti-calendar m-r-5" /> March 20, 2018 &nbsp;
-                      To &nbsp;April 20, 2018
+                      <i className="ti-calendar m-r-5" /> March 20, 2018 &nbsp; To &nbsp;April 20,
+                      2018
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="#">
@@ -543,12 +508,7 @@ const UiDropDown = () => {
                         viewBox="0 0 24 24"
                         version="1.1"
                       >
-                        <g
-                          stroke="none"
-                          strokeWidth="1"
-                          fill="none"
-                          fillRule="evenodd"
-                        >
+                        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                           <rect x="0" y="0" width="24" height="24" />
                           <circle fill="#000000" cx="12" cy="5" r="2" />
                           <circle fill="#000000" cx="12" cy="12" r="2" />
@@ -580,12 +540,7 @@ const UiDropDown = () => {
                         viewBox="0 0 24 24"
                         version="1.1"
                       >
-                        <g
-                          stroke="none"
-                          strokeWidth="1"
-                          fill="none"
-                          fillRule="evenodd"
-                        >
+                        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                           <rect x="0" y="0" width="24" height="24" />
                           <circle fill="#000000" cx="12" cy="5" r="2" />
                           <circle fill="#000000" cx="12" cy="12" r="2" />

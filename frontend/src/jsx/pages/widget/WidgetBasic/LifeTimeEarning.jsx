@@ -1,71 +1,56 @@
-import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 class LifeTimeEarning extends Component {
   render() {
     const data = {
-      defaultFontFamily: "Poppins",
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      defaultFontFamily: 'Poppins',
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       datasets: [
         {
-          label: "My First dataset",
+          label: 'My First dataset',
           data: [65, 59, 80, 81, 56, 55, 40, 88, 45, 95, 54, 76],
-          borderColor: "#ffa132",
-          borderWidth: "0",
-          backgroundColor: "#ffa132",
-		      barThickness:12,
+          borderColor: '#ffa132',
+          borderWidth: '0',
+          backgroundColor: '#ffa132',
+          barThickness: 12,
         },
       ],
     };
 
     const options = {
-      plugins:{
-		legend: false,
-		responsive: true,  
-	  },
+      plugins: {
+        legend: false,
+        responsive: true,
+      },
       maintainAspectRatio: false,
       scales: {
-        y:
-          {
+        y: {
+          display: false,
+          ticks: {
+            beginAtZero: true,
             display: false,
-            ticks: {
-              beginAtZero: true,
-              display: false,
-              max: 100,
-              min: 0,
-              stepSize: 10,
-            },
-            grid: {
-              display: false,
-              drawBorder: false,
-            },
+            max: 100,
+            min: 0,
+            stepSize: 10,
           },
-        
-        x: 
-          {
+          grid: {
             display: false,
-            barPercentage: 0.6,
-            grid: {
-              display: false,
-              drawBorder: false,
-            },
-            ticks: {
-              display: false,
-            },
+            drawBorder: false,
           },
+        },
+
+        x: {
+          display: false,
+          barPercentage: 0.6,
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+          ticks: {
+            display: false,
+          },
+        },
       },
     };
 

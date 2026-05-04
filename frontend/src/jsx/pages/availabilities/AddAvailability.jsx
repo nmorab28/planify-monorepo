@@ -1,21 +1,18 @@
-import React, { useEffect, useMemo, useState } from "react";
-import Select from "react-select";
-import Swal from "sweetalert2";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from 'react';
+import Select from 'react-select';
+import Swal from 'sweetalert2';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import PageTitle from "../../layouts/PageTitle";
-import {
-  getAvailabilities,
-  createAvailability,
-} from "../../../services/availabilityService";
-import { getTeachers } from "../../../services/teacherService";
+import PageTitle from '../../layouts/PageTitle';
+import { getAvailabilities, createAvailability } from '../../../services/availabilityService';
+import { getTeachers } from '../../../services/teacherService';
 import {
   DAYS_OF_WEEK,
   validateRange,
   findOverlap,
   formatTime,
   dayLabel,
-} from "./availabilityValidation";
+} from './availabilityValidation';
 
 const useCurrentTeacherContext = () => {
   const [ctx, setCtx] = useState({
@@ -29,21 +26,21 @@ const useCurrentTeacherContext = () => {
     let cancelled = false;
 
     const resolve = async () => {
-      let role = "";
-      let email = "";
+      let role = '';
+      let email = '';
       try {
-        const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-        role = userDetails?.role || "";
-        email = userDetails?.email || "";
+        const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+        role = userDetails?.role || '';
+        email = userDetails?.email || '';
       } catch {
-        role = "";
+        role = '';
       }
 
-      if (role === "teacher") {
+      if (role === 'teacher') {
         try {
           const teachers = await getTeachers();
           const own = (teachers || []).find(
-            (t) => (t.email || "").toLowerCase() === email.toLowerCase()
+            (t) => (t.email || '').toLowerCase() === email.toLowerCase()
           );
 
           if (cancelled) return;
@@ -58,7 +55,7 @@ const useCurrentTeacherContext = () => {
             return;
           }
         } catch (err) {
-          console.error("No se pudo resolver el docente actual", err);
+          console.error('No se pudo resolver el docente actual', err);
         }
       }
 
@@ -91,20 +88,20 @@ const AddAvailability = () => {
 
   const prefill = useMemo(
     () => ({
-      day: searchParams.get("day"),
-      start: searchParams.get("start"),
-      end: searchParams.get("end"),
-      teacher: searchParams.get("teacher"),
+      day: searchParams.get('day'),
+      start: searchParams.get('start'),
+      end: searchParams.get('end'),
+      teacher: searchParams.get('teacher'),
     }),
     [searchParams]
   );
 
   const [formData, setFormData] = useState({
     dayOfWeek: prefill.day ? Number(prefill.day) : 1,
-    startTime: prefill.start ? formatTime(prefill.start) : "08:00",
-    endTime: prefill.end ? formatTime(prefill.end) : "10:00",
+    startTime: prefill.start ? formatTime(prefill.start) : '08:00',
+    endTime: prefill.end ? formatTime(prefill.end) : '10:00',
     isAvailable: true,
-    teacherDocumentId: prefill.teacher || "",
+    teacherDocumentId: prefill.teacher || '',
   });
 
   useEffect(() => {
@@ -113,11 +110,11 @@ const AddAvailability = () => {
     if (teacherCtx.isCoordinator) {
       getTeachers()
         .then((res) => setTeachers(res || []))
-        .catch((err) => console.error("Error fetching teachers", err));
+        .catch((err) => console.error('Error fetching teachers', err));
     } else {
       setFormData((prev) => ({
         ...prev,
-        teacherDocumentId: teacherCtx.currentTeacherDocumentId || "",
+        teacherDocumentId: teacherCtx.currentTeacherDocumentId || '',
       }));
     }
   }, [teacherCtx.loading, teacherCtx.isCoordinator, teacherCtx.currentTeacherDocumentId]);
@@ -139,8 +136,7 @@ const AddAvailability = () => {
   );
 
   const selectedTeacher = useMemo(
-    () =>
-      teacherOptions.find((t) => t.value === formData.teacherDocumentId) || null,
+    () => teacherOptions.find((t) => t.value === formData.teacherDocumentId) || null,
     [teacherOptions, formData.teacherDocumentId]
   );
 
@@ -148,7 +144,7 @@ const AddAvailability = () => {
     const { id, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id]: type === "checkbox" ? checked : value,
+      [id]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -158,9 +154,9 @@ const AddAvailability = () => {
 
     if (!formData.teacherDocumentId) {
       Swal.fire({
-        icon: "error",
-        title: "Falta el docente",
-        text: "Selecciona un docente antes de continuar.",
+        icon: 'error',
+        title: 'Falta el docente',
+        text: 'Selecciona un docente antes de continuar.',
       });
       return;
     }
@@ -173,8 +169,8 @@ const AddAvailability = () => {
 
     if (errors.length > 0) {
       Swal.fire({
-        icon: "error",
-        title: "Rango inválido",
+        icon: 'error',
+        title: 'Rango inválido',
         text: errors[0],
       });
       return;
@@ -197,13 +193,11 @@ const AddAvailability = () => {
 
       if (overlap) {
         Swal.fire({
-          icon: "error",
-          title: "Solapamiento detectado",
+          icon: 'error',
+          title: 'Solapamiento detectado',
           text: `El docente ya tiene un rango el ${dayLabel(
             overlap.dayOfWeek
-          )} entre ${formatTime(overlap.startTime)} y ${formatTime(
-            overlap.endTime
-          )}.`,
+          )} entre ${formatTime(overlap.startTime)} y ${formatTime(overlap.endTime)}.`,
         });
         setSubmitting(false);
         return;
@@ -218,19 +212,19 @@ const AddAvailability = () => {
       });
 
       await Swal.fire({
-        icon: "success",
-        title: "Disponibilidad creada",
+        icon: 'success',
+        title: 'Disponibilidad creada',
         timer: 1500,
         showConfirmButton: false,
       });
 
-      navigate("/all-availability");
+      navigate('/all-availability');
     } catch (err) {
       console.error(err);
       Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message || "No se pudo crear la disponibilidad",
+        icon: 'error',
+        title: 'Error',
+        text: err.message || 'No se pudo crear la disponibilidad',
       });
     } finally {
       setSubmitting(false);
@@ -241,7 +235,7 @@ const AddAvailability = () => {
 
   return (
     <>
-      <PageTitle activeMenu={"Add Availability"} motherMenu={"Availability"} />
+      <PageTitle activeMenu={'Add Availability'} motherMenu={'Availability'} />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
@@ -262,7 +256,7 @@ const AddAvailability = () => {
                           onChange={(opt) =>
                             setFormData((prev) => ({
                               ...prev,
-                              teacherDocumentId: opt?.value || "",
+                              teacherDocumentId: opt?.value || '',
                             }))
                           }
                           placeholder="Selecciona un docente"
@@ -279,7 +273,7 @@ const AddAvailability = () => {
                         <input
                           type="text"
                           className="form-control"
-                          value={teacherCtx.currentTeacherLabel || ""}
+                          value={teacherCtx.currentTeacherLabel || ''}
                           disabled
                         />
                       </div>
@@ -348,10 +342,7 @@ const AddAvailability = () => {
                           checked={formData.isAvailable}
                           onChange={handleChange}
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="isAvailable"
-                        >
+                        <label className="form-check-label" htmlFor="isAvailable">
                           Disponible
                         </label>
                       </div>
@@ -359,17 +350,13 @@ const AddAvailability = () => {
                   </div>
 
                   <div className="col-lg-12 col-md-12 col-sm-12">
-                    <button
-                      type="submit"
-                      className="btn btn-primary me-1"
-                      disabled={submitting}
-                    >
-                      {submitting ? "Guardando..." : "Submit"}
+                    <button type="submit" className="btn btn-primary me-1" disabled={submitting}>
+                      {submitting ? 'Guardando...' : 'Submit'}
                     </button>
                     <button
                       type="button"
                       className="btn btn-danger light"
-                      onClick={() => navigate("/all-availability")}
+                      onClick={() => navigate('/all-availability')}
                     >
                       Cancel
                     </button>

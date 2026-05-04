@@ -130,4 +130,9 @@ build
 .strapi-updater.json
 .strapi-cloud.json
 
+############################
+# Dependencies
+############################
+
+yarn.lock
 package-lock.json

@@ -3,15 +3,15 @@ import {
   login,
   saveTokenInLocalStorage,
   normalizeAuthData,
-} from "../../services/AuthService";
+} from '../../services/AuthService';
 
-export const SIGNUP_CONFIRMED_ACTION = "[signup action] confirmed signup";
-export const SIGNUP_FAILED_ACTION = "[signup action] failed signup";
-export const LOGIN_CONFIRMED_ACTION = "[login action] confirmed login";
-export const LOGIN_FAILED_ACTION = "[login action] failed login";
-export const LOADING_TOGGLE_ACTION = "[Loading action] toggle loading";
-export const LOGOUT_ACTION = "[Logout action] logout action";
-export const NAVTOGGLE = "NAVTOGGLE";
+export const SIGNUP_CONFIRMED_ACTION = '[signup action] confirmed signup';
+export const SIGNUP_FAILED_ACTION = '[signup action] failed signup';
+export const LOGIN_CONFIRMED_ACTION = '[login action] confirmed login';
+export const LOGIN_FAILED_ACTION = '[login action] failed login';
+export const LOADING_TOGGLE_ACTION = '[Loading action] toggle loading';
+export const LOGOUT_ACTION = '[Logout action] logout action';
+export const NAVTOGGLE = 'NAVTOGGLE';
 
 export function signupAction(email, password, navigate) {
   return (dispatch) => {
@@ -29,10 +29,10 @@ export function signupAction(email, password, navigate) {
 }
 
 export function Logout(navigate) {
-  localStorage.removeItem("userDetails");
+  localStorage.removeItem('userDetails');
 
   if (navigate) {
-    navigate("/login");
+    navigate('/login');
   }
 
   return {
@@ -50,7 +50,7 @@ export function loginAction(email, password, navigate) {
         dispatch(loginConfirmedAction(tokenDetails));
         dispatch(loadingToggleAction(false));
 
-        navigate("/dashboard");
+        navigate('/dashboard');
       })
       .catch((error) => {
         const errorMessage = formatError(error);

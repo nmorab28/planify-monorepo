@@ -1,16 +1,16 @@
-import React from "react";
-import { Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import PageTitle from "../../layouts/PageTitle";
+import React from 'react';
+import { Dropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import PageTitle from '../../layouts/PageTitle';
 
 const ProductOrder = () => {
   const chackboxFun = (type) => {
-    setTimeout(()=>{
-      const motherChackBox = document.querySelector(".product_order_single");
-      const chackbox = document.querySelectorAll(".product_order");
+    setTimeout(() => {
+      const motherChackBox = document.querySelector('.product_order_single');
+      const chackbox = document.querySelectorAll('.product_order');
       for (let i = 0; i < chackbox.length; i++) {
         const element = chackbox[i];
-        if (type === "all") {
+        if (type === 'all') {
           if (motherChackBox.checked) {
             element.checked = true;
           } else {
@@ -25,7 +25,7 @@ const ProductOrder = () => {
           }
         }
       }
-    },100)
+    }, 100);
   };
 
   return (
@@ -34,7 +34,7 @@ const ProductOrder = () => {
       <div className="row">
         <div className="col-lg-12">
           <div className="card">
-            <div className="card-body p-0" >
+            <div className="card-body p-0">
               <div className="table-responsive">
                 <table className="table table-sm mb-0 table-responsive-lg ">
                   <thead>
@@ -43,14 +43,11 @@ const ProductOrder = () => {
                         <div className="form-check custom-checkbox ">
                           <input
                             type="checkbox"
-                            onClick={() => chackboxFun("all")}
+                            onClick={() => chackboxFun('all')}
                             className="form-check-input  product_order_single"
                             id="checkAll"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkAll"
-                          />
+                          <label className="form-check-label" htmlFor="checkAll" />
                         </div>
                       </th>
                       <th className="align-middle">Order</th>
@@ -58,7 +55,7 @@ const ProductOrder = () => {
                       <th className="align-middle minw200">Ship To</th>
                       <th className="align-middle text-right">Status</th>
                       <th className="align-middle text-right">Amount</th>
-                      <th className="no-sort" >Action</th>
+                      <th className="no-sort">Action</th>
                     </tr>
                   </thead>
                   <tbody id="orders">
@@ -71,24 +68,20 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#181</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Ricky Antony</strong>
                         <br />
                         <a href="mailto:ricky@example.com">ricky@example.com</a>
                       </td>
                       <td className="py-2">20/04/2023</td>
                       <td className="py-2">
-                        Ricky Antony, 2392 Main Avenue, Penasauka, New Jersey
-                        02149
+                        Ricky Antony, 2392 Main Avenue, Penasauka, New Jersey 02149
                         <p className="mb-0 text-500">Via Flat Rate</p>
                       </td>
                       <td className="py-2 text-right">
@@ -119,26 +112,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -148,35 +126,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -193,24 +156,20 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox1"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox1"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox1" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#182</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Kin Rossow</strong>
                         <br />
                         <a href="mailto:kin@example.com">kin@example.com</a>
                       </td>
                       <td className="py-2">20/04/2023</td>
                       <td className="py-2">
-                        Kin Rossow, 1 Hollywood Blvd,Beverly Hills, California
-                        90210
+                        Kin Rossow, 1 Hollywood Blvd,Beverly Hills, California 90210
                         <p className="mb-0 text-500">Via Free Shipping</p>
                       </td>
                       <td className="py-2 text-right">
@@ -241,26 +200,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -270,35 +214,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -315,24 +244,20 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox2"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox2"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox2" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#183</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Merry Diana</strong>
                         <br />
                         <a href="mailto:merry@example.com">merry@example.com</a>
                       </td>
                       <td className="py-2">30/04/2023</td>
                       <td className="py-2">
-                        Merry Diana, 1 Infinite Loop, Cupertino, California
-                        90210
+                        Merry Diana, 1 Infinite Loop, Cupertino, California 90210
                         <p className="mb-0 text-500">Via Link Road</p>
                       </td>
                       <td className="py-2 text-right">
@@ -363,26 +288,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -392,35 +302,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -437,24 +332,20 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox3"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox3"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox3" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#184</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Bucky Robert</strong>
                         <br />
                         <a href="mailto:bucky@example.com">bucky@example.com</a>
                       </td>
                       <td className="py-2">30/04/2023</td>
                       <td className="py-2">
-                        Bucky Robert, 1 Infinite Loop, Cupertino, California
-                        90210
+                        Bucky Robert, 1 Infinite Loop, Cupertino, California 90210
                         <p className="mb-0 text-500">Via Free Shipping</p>
                       </td>
                       <td className="py-2 text-right">
@@ -485,26 +376,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -514,35 +390,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -559,24 +420,20 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox4"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox4"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox4" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#185</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Rocky Zampa</strong>
                         <br />
                         <a href="mailto:rocky@example.com">rocky@example.com</a>
                       </td>
                       <td className="py-2">30/04/2023</td>
                       <td className="py-2">
-                        Rocky Zampa, 1 Infinite Loop, Cupertino, California
-                        90210
+                        Rocky Zampa, 1 Infinite Loop, Cupertino, California 90210
                         <p className="mb-0 text-500">Via Free Road</p>
                       </td>
                       <td className="py-2 text-right">
@@ -607,26 +464,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -636,35 +478,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -681,16 +508,13 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox5"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox5"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox5" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#186</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Ricky John</strong>
                         <br />
                         <a href="mailto:ricky@example.com">ricky@example.com</a>
@@ -728,26 +552,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -757,35 +566,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -802,26 +596,20 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox6"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox6"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox6" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong>#187</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong>Cristofer Henric</strong>
                         <br />
-                        <a href="mailto:cristofer@example.com">
-                          cristofer@example.com
-                        </a>
+                        <a href="mailto:cristofer@example.com">cristofer@example.com</a>
                       </td>
                       <td className="py-2">30/04/2023</td>
                       <td className="py-2">
-                        Cristofer Henric, 1 Infinite Loop, Cupertino, California
-                        90210
+                        Cristofer Henric, 1 Infinite Loop, Cupertino, California 90210
                         <p className="mb-0 text-500">Via Flat Rate</p>
                       </td>
                       <td className="py-2 text-right">
@@ -852,26 +640,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -881,35 +654,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -926,16 +684,13 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox7"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox7"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox7" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#188</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Brate Lee</strong>
                         <br />
                         <a href="mailto:lee@example.com">lee@example.com</a>
@@ -973,26 +728,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -1002,35 +742,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -1047,21 +772,16 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox8"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox8"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox8" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#189</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Thomas Stephenson</strong>
                         <br />
-                        <a href="mailto:Stephenson@example.com">
-                          Stephenson@example.com
-                        </a>
+                        <a href="mailto:Stephenson@example.com">Stephenson@example.com</a>
                       </td>
                       <td className="py-2">29/04/2023</td>
                       <td className="py-2">
@@ -1096,26 +816,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -1125,35 +830,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -1170,21 +860,16 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox9"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox9"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox9" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#190</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Evie Singh</strong>
                         <br />
-                        <a href="mailto:eviewsing@example.com">
-                          eviewsing@example.com
-                        </a>
+                        <a href="mailto:eviewsing@example.com">eviewsing@example.com</a>
                       </td>
                       <td className="py-2">29/04/2023</td>
                       <td className="py-2">
@@ -1219,26 +904,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -1248,35 +918,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -1293,16 +948,13 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox10"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox10"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox10" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#191</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">David Peters</strong>
                         <br />
                         <a href="mailto:peter@example.com">peter@example.com</a>
@@ -1340,26 +992,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -1369,35 +1006,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>
@@ -1414,21 +1036,16 @@ const ProductOrder = () => {
                             className="form-check-input product_order"
                             id="checkbox11"
                           />
-                          <label
-                            className="form-check-label"
-                            htmlFor="checkbox11"
-                          />
+                          <label className="form-check-label" htmlFor="checkbox11" />
                         </div>
                       </td>
                       <td className="py-2">
                         <Link to="/ecom-product-order">
                           <strong className="text-primary">#192</strong>
-                        </Link>{" "}
+                        </Link>{' '}
                         by <strong className="text-primary">Jennifer Johnson</strong>
                         <br />
-                        <a href="mailto:jennifer@example.com">
-                          jennifer@example.com
-                        </a>
+                        <a href="mailto:jennifer@example.com">jennifer@example.com</a>
                       </td>
                       <td className="py-2">28/04/2023</td>
                       <td className="py-2">
@@ -1463,26 +1080,11 @@ const ProductOrder = () => {
                                 viewBox="0 0 24 24"
                                 version="1.1"
                               >
-                                <g
-                                  stroke="none"
-                                  strokeWidth={1}
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
+                                <g stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
                                   <rect x={0} y={0} width={24} height={24} />
                                   <circle fill="#000000" cx={5} cy={12} r={2} />
-                                  <circle
-                                    fill="#000000"
-                                    cx={12}
-                                    cy={12}
-                                    r={2}
-                                  />
-                                  <circle
-                                    fill="#000000"
-                                    cx={19}
-                                    cy={12}
-                                    r={2}
-                                  />
+                                  <circle fill="#000000" cx={12} cy={12} r={2} />
+                                  <circle fill="#000000" cx={19} cy={12} r={2} />
                                 </g>
                               </svg>
                             </span>
@@ -1492,35 +1094,20 @@ const ProductOrder = () => {
                             aria-labelledby="order-dropdown-0"
                           >
                             <div className="py-2">
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Completed
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Processing
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 On Hold
                               </Link>
-                              <Link
-                                className="dropdown-item"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item" to="/ecom-product-order">
                                 Pending
                               </Link>
                               <div className="dropdown-divider" />
-                              <Link
-                                className="dropdown-item text-danger"
-                                to="/ecom-product-order"
-                              >
+                              <Link className="dropdown-item text-danger" to="/ecom-product-order">
                                 Delete
                               </Link>
                             </div>

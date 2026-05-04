@@ -30,10 +30,10 @@ const MAX_NAME_LENGTH = 120;
  * Acepta strings numéricos como "30" → 30.
  */
 function toIntegerOrNaN(value: unknown): number {
-  if (typeof value === "number") {
+  if (typeof value === 'number') {
     return Number.isFinite(value) ? value : NaN;
   }
-  if (typeof value === "string") {
+  if (typeof value === 'string') {
     const trimmed = value.trim();
     if (!/^-?\d+$/.test(trimmed)) return NaN;
     const parsed = parseInt(trimmed, 10);
@@ -44,7 +44,7 @@ function toIntegerOrNaN(value: unknown): number {
 
 function isPresent(value: unknown): boolean {
   if (value === undefined || value === null) return false;
-  if (typeof value === "string" && value.trim() === "") return false;
+  if (typeof value === 'string' && value.trim() === '') return false;
   return true;
 }
 
@@ -62,17 +62,17 @@ export function validateClassroomCandidate(
   // ---- code -------------------------------------------------------------
   if (!isPresent(input.code)) {
     if (!partial) {
-      issues.push({ path: ["code"], message: "El código es obligatorio." });
+      issues.push({ path: ['code'], message: 'El código es obligatorio.' });
     }
-  } else if (typeof input.code !== "string") {
-    issues.push({ path: ["code"], message: "El código debe ser texto." });
+  } else if (typeof input.code !== 'string') {
+    issues.push({ path: ['code'], message: 'El código debe ser texto.' });
   } else {
     const code = input.code.trim();
     if (!CODE_REGEX.test(code)) {
       issues.push({
-        path: ["code"],
+        path: ['code'],
         message:
-          "El código debe tener entre 2 y 20 caracteres y sólo letras mayúsculas, números o guiones.",
+          'El código debe tener entre 2 y 20 caracteres y sólo letras mayúsculas, números o guiones.',
       });
     }
   }
@@ -80,20 +80,20 @@ export function validateClassroomCandidate(
   // ---- name -------------------------------------------------------------
   if (!isPresent(input.name)) {
     if (!partial) {
-      issues.push({ path: ["name"], message: "El nombre es obligatorio." });
+      issues.push({ path: ['name'], message: 'El nombre es obligatorio.' });
     }
-  } else if (typeof input.name !== "string") {
-    issues.push({ path: ["name"], message: "El nombre debe ser texto." });
+  } else if (typeof input.name !== 'string') {
+    issues.push({ path: ['name'], message: 'El nombre debe ser texto.' });
   } else {
     const name = input.name.trim();
     if (name.length < 2) {
       issues.push({
-        path: ["name"],
-        message: "El nombre debe tener al menos 2 caracteres.",
+        path: ['name'],
+        message: 'El nombre debe tener al menos 2 caracteres.',
       });
     } else if (name.length > MAX_NAME_LENGTH) {
       issues.push({
-        path: ["name"],
+        path: ['name'],
         message: `El nombre no puede superar ${MAX_NAME_LENGTH} caracteres.`,
       });
     }
@@ -103,25 +103,25 @@ export function validateClassroomCandidate(
   if (!isPresent(input.capacity)) {
     if (!partial) {
       issues.push({
-        path: ["capacity"],
-        message: "La capacidad es obligatoria.",
+        path: ['capacity'],
+        message: 'La capacidad es obligatoria.',
       });
     }
   } else {
     const capacity = toIntegerOrNaN(input.capacity);
     if (Number.isNaN(capacity)) {
       issues.push({
-        path: ["capacity"],
-        message: "La capacidad debe ser un número entero.",
+        path: ['capacity'],
+        message: 'La capacidad debe ser un número entero.',
       });
     } else if (capacity < MIN_CAPACITY) {
       issues.push({
-        path: ["capacity"],
+        path: ['capacity'],
         message: `La capacidad debe ser al menos ${MIN_CAPACITY}.`,
       });
     } else if (capacity > MAX_CAPACITY) {
       issues.push({
-        path: ["capacity"],
+        path: ['capacity'],
         message: `La capacidad no puede superar ${MAX_CAPACITY}.`,
       });
     }
@@ -143,28 +143,28 @@ export function validateClassroomFeatureCandidate(
 
   if (!isPresent(input.code)) {
     if (!partial) {
-      issues.push({ path: ["code"], message: "El código es obligatorio." });
+      issues.push({ path: ['code'], message: 'El código es obligatorio.' });
     }
-  } else if (typeof input.code !== "string") {
-    issues.push({ path: ["code"], message: "El código debe ser texto." });
+  } else if (typeof input.code !== 'string') {
+    issues.push({ path: ['code'], message: 'El código debe ser texto.' });
   } else if (!CODE_REGEX.test(input.code.trim())) {
     issues.push({
-      path: ["code"],
+      path: ['code'],
       message:
-        "El código debe tener entre 2 y 20 caracteres y sólo letras mayúsculas, números o guiones.",
+        'El código debe tener entre 2 y 20 caracteres y sólo letras mayúsculas, números o guiones.',
     });
   }
 
   if (!isPresent(input.name)) {
     if (!partial) {
-      issues.push({ path: ["name"], message: "El nombre es obligatorio." });
+      issues.push({ path: ['name'], message: 'El nombre es obligatorio.' });
     }
-  } else if (typeof input.name !== "string") {
-    issues.push({ path: ["name"], message: "El nombre debe ser texto." });
+  } else if (typeof input.name !== 'string') {
+    issues.push({ path: ['name'], message: 'El nombre debe ser texto.' });
   } else if (input.name.trim().length < 2) {
     issues.push({
-      path: ["name"],
-      message: "El nombre debe tener al menos 2 caracteres.",
+      path: ['name'],
+      message: 'El nombre debe tener al menos 2 caracteres.',
     });
   }
 

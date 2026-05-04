@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-import Swal from "sweetalert2";
+import React, { useState } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
-import { createClassroomFeature } from "../../../services/classroomFeatureService";
-import { validateFeature } from "./classroomValidation";
+import { createClassroomFeature } from '../../../services/classroomFeatureService';
+import { validateFeature } from './classroomValidation';
 
 const FeatureModal = ({ show, onHide, onCreated }) => {
-  const [code, setCode] = useState("");
-  const [name, setName] = useState("");
+  const [code, setCode] = useState('');
+  const [name, setName] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   const reset = () => {
-    setCode("");
-    setName("");
+    setCode('');
+    setName('');
   };
 
   const handleClose = () => {
@@ -28,8 +28,8 @@ const FeatureModal = ({ show, onHide, onCreated }) => {
     const errors = validateFeature({ code, name });
     if (errors.length > 0) {
       Swal.fire({
-        icon: "error",
-        title: "Característica inválida",
+        icon: 'error',
+        title: 'Característica inválida',
         text: errors[0],
       });
       return;
@@ -45,8 +45,8 @@ const FeatureModal = ({ show, onHide, onCreated }) => {
       const created = res?.data || null;
 
       await Swal.fire({
-        icon: "success",
-        title: "Característica creada",
+        icon: 'success',
+        title: 'Característica creada',
         timer: 1200,
         showConfirmButton: false,
       });
@@ -56,9 +56,9 @@ const FeatureModal = ({ show, onHide, onCreated }) => {
       onHide();
     } catch (err) {
       Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message || "No se pudo crear la característica",
+        icon: 'error',
+        title: 'Error',
+        text: err.message || 'No se pudo crear la característica',
       });
     } finally {
       setSubmitting(false);
@@ -103,7 +103,7 @@ const FeatureModal = ({ show, onHide, onCreated }) => {
             Cancelar
           </Button>
           <Button variant="primary" type="submit" disabled={submitting}>
-            {submitting ? "Guardando..." : "Crear"}
+            {submitting ? 'Guardando...' : 'Crear'}
           </Button>
         </Modal.Footer>
       </Form>

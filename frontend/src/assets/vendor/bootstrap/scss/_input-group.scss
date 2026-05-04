@@ -42,8 +42,12 @@
 
   > .form-control,
   > .custom-select {
-    &:not(:last-child) { @include border-right-radius(0); }
-    &:not(:first-child) { @include border-left-radius(0); }
+    &:not(:last-child) {
+      @include border-right-radius(0);
+    }
+    &:not(:first-child) {
+      @include border-left-radius(0);
+    }
   }
 
   // Custom file inputs have more complex markup, thus requiring different
@@ -53,11 +57,14 @@
     align-items: center;
 
     &:not(:last-child) .custom-file-label,
-    &:not(:last-child) .custom-file-label::after { @include border-right-radius(0); }
-    &:not(:first-child) .custom-file-label { @include border-left-radius(0); }
+    &:not(:last-child) .custom-file-label::after {
+      @include border-right-radius(0);
+    }
+    &:not(:first-child) .custom-file-label {
+      @include border-left-radius(0);
+    }
   }
 }
-
 
 // Prepend and append
 //
@@ -89,9 +96,12 @@
   }
 }
 
-.input-group-prepend { margin-#{$dlab-pos-right}: -$input-border-width; }
-.input-group-append { margin-#{$dlab-pos-left}: -$input-border-width; }
-
+.input-group-prepend {
+  margin-#{$dlab-pos-right}: -$input-border-width;
+}
+.input-group-append {
+  margin-#{$dlab-pos-left}: -$input-border-width;
+}
 
 // Textual addons
 //
@@ -114,12 +124,11 @@
   @include border-radius($input-border-radius);
 
   // Nuke default margins from checkboxes and radios to vertically center within.
-  input[type="radio"],
-  input[type="checkbox"] {
+  input[type='radio'],
+  input[type='checkbox'] {
     margin-top: 0;
   }
 }
-
 
 // Sizing
 //
@@ -165,13 +174,11 @@
   padding-#{$dlab-pos-right}: $custom-select-padding-x + $custom-select-indicator-padding;
 }
 
-
 // Prepend and append rounded corners
 //
 // These rulesets must come after the sizing ones to properly override sm and lg
 // border-radius values when extending. They're more specific than we'd like
 // with the `.input-group >` part, but without it, we cannot override the sizing.
-
 
 .input-group > .input-group-prepend > .btn,
 .input-group > .input-group-prepend > .input-group-text,

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
+import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 
 const sampleData = [79, 72, 29, 6, 52, 32, 73, 40, 14, 75, 77, 39, 9, 15, 10];
 
