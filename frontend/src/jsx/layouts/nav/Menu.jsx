@@ -43,6 +43,11 @@ export const MenuList = [
            
         ],
     },
+    {
+        title: 'Semester Config',
+        to: 'schedule-config',
+        iconStyle: <i className="la la-sliders" />,
+    },
     //Class Session
     {
         title: 'Class Session',	
