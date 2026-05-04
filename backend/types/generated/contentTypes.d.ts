@@ -825,6 +825,7 @@ export interface ApiScheduleConfigScheduleConfig
     lunchStart: Schema.Attribute.Time & Schema.Attribute.Required;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    saturdayEnabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     saturdayEnd: Schema.Attribute.Time;
     saturdayStart: Schema.Attribute.Time;
     softRules: Schema.Attribute.Relation<
