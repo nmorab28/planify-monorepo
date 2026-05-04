@@ -1,24 +1,18 @@
-import React, { Fragment } from "react";
-import { Row, Col, Card, Button, Dropdown, ButtonGroup } from "react-bootstrap";
-import PageTitle from "../../layouts/PageTitle";
+import React, { Fragment } from 'react';
+import { Row, Col, Card, Button, Dropdown, ButtonGroup } from 'react-bootstrap';
+import PageTitle from '../../layouts/PageTitle';
 
 const UiButton = () => {
   return (
     <Fragment>
-      <PageTitle
-        activeMenu="Buttons"
-        pageContent="Buttons"
-        motherMenu="Bootstrap"
-      />
+      <PageTitle activeMenu="Buttons" pageContent="Buttons" motherMenu="Bootstrap" />
       <div className="btn-page">
         <Row>
           <Col lg="12">
             <Card>
               <Card.Header className="d-block">
                 <Card.Title>Buttons</Card.Title>
-                <Card.Text className="mb-0 subtitle">
-                  Default button style
-                </Card.Text>
+                <Card.Text className="mb-0 subtitle">Default button style</Card.Text>
               </Card.Header>
               <div className="card-body">
                 <Button className="me-2" variant="primary">
@@ -50,9 +44,7 @@ const UiButton = () => {
             <Card>
               <Card.Header className="d-block">
                 <Card.Title>Buttons</Card.Title>
-                <Card.Text className="mb-0 subtitle">
-                  Button Light style
-                </Card.Text>
+                <Card.Text className="mb-0 subtitle">Button Light style</Card.Text>
               </Card.Header>
               <div className="card-body">
                 <Button className="me-2" variant="primary light">
@@ -84,9 +76,7 @@ const UiButton = () => {
             <Card>
               <Card.Header className="d-block">
                 <Card.Title>Outline Buttons</Card.Title>
-                <Card.Text className="mb-0 subtitle">
-                  Default outline button style
-                </Card.Text>
+                <Card.Text className="mb-0 subtitle">Default outline button style</Card.Text>
               </Card.Header>
               <div className="card-body">
                 <Button className="me-2" variant="outline-primary">
@@ -160,9 +150,7 @@ const UiButton = () => {
                 <Button className="me-2" variant="outline-primary btn-sm">
                   Small button
                 </Button>
-                <Button variant="outline-primary btn-xs">
-                  Extra small button
-                </Button>
+                <Button variant="outline-primary btn-xs">Extra small button</Button>
               </div>
             </Card>
           </Col>
@@ -211,31 +199,19 @@ const UiButton = () => {
               </Card.Header>
               <div className="card-body">
                 <div className="rounded-button">
-                  <Button
-                    className="me-2"
-                    variant="outline-primary btn-rounded"
-                  >
+                  <Button className="me-2" variant="outline-primary btn-rounded">
                     Primary
                   </Button>
-                  <Button
-                    className="me-2"
-                    variant="outline-secondary btn-rounded"
-                  >
+                  <Button className="me-2" variant="outline-secondary btn-rounded">
                     Secondary
                   </Button>
-                  <Button
-                    className="me-2"
-                    variant="outline-success btn-rounded"
-                  >
+                  <Button className="me-2" variant="outline-success btn-rounded">
                     Success
                   </Button>
                   <Button className="me-2" variant="outline-danger btn-rounded">
                     Danger
                   </Button>
-                  <Button
-                    className="me-2"
-                    variant="outline-warning btn-rounded"
-                  >
+                  <Button className="me-2" variant="outline-warning btn-rounded">
                     Warning
                   </Button>
                   <Button className="me-2" variant="outline-info btn-rounded">
@@ -259,37 +235,37 @@ const UiButton = () => {
               </Card.Header>
               <div className="card-body">
                 <Button className="me-2" variant="primary">
-                  Add to cart{" "}
+                  Add to cart{' '}
                   <span className="btn-icon-end">
                     <i className="fa fa-shopping-cart" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="info">
-                  Add to wishlist{" "}
+                  Add to wishlist{' '}
                   <span className="btn-icon-end">
                     <i className="fa fa-heart" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="danger">
-                  Remove{" "}
+                  Remove{' '}
                   <span className="btn-icon-end">
                     <i className="fas fa-times" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="secondary">
-                  Sent message{" "}
+                  Sent message{' '}
                   <span className="btn-icon-end">
                     <i className="fa fa-envelope" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="warning">
-                  Add bookmark{" "}
+                  Add bookmark{' '}
                   <span className="btn-icon-end">
                     <i className="fa fa-star" />
                   </span>
                 </Button>
                 <Button variant="success">
-                  Success{" "}
+                  Success{' '}
                   <span className="btn-icon-end">
                     <i className="fa fa-check" />
                   </span>
@@ -326,7 +302,7 @@ const UiButton = () => {
                 </Button>
                 <Button className="me-2" variant="secondary btn-rounded">
                   <span className="btn-icon-start text-secondary">
-                    <i className="fa fa-share-alt color-secondary" />{" "}
+                    <i className="fa fa-share-alt color-secondary" />{' '}
                   </span>
                   Share
                 </Button>
@@ -459,10 +435,7 @@ const UiButton = () => {
                 <Button className="me-2" variant="outline-primary btn-rounded">
                   Primary
                 </Button>
-                <Button
-                  className="me-2"
-                  variant="outline-secondary btn-rounded"
-                >
+                <Button className="me-2" variant="outline-secondary btn-rounded">
                   Secondary
                 </Button>
                 <Button className="me-2" variant="outline-success btn-rounded">
@@ -488,9 +461,7 @@ const UiButton = () => {
             <Card>
               <Card.Header className="d-block">
                 <Card.Title>Dropdown Button</Card.Title>
-                <Card.Text className="mb-0 subtitle">
-                  Default dropdown button style
-                </Card.Text>
+                <Card.Text className="mb-0 subtitle">Default dropdown button style</Card.Text>
               </Card.Header>
               <div className="card-body">
                 <ButtonGroup>
@@ -554,9 +525,7 @@ const UiButton = () => {
             <Card>
               <Card.Header className="d-block">
                 <Card.Title>Buttons Transparent</Card.Title>
-                <Card.Text className="mb-0 subtitle">
-                  Button transparent style
-                </Card.Text>
+                <Card.Text className="mb-0 subtitle">Button transparent style</Card.Text>
               </Card.Header>
               <div className="card-body">
                 <Button variant="primary tp-btn">Primary</Button>
@@ -574,9 +543,7 @@ const UiButton = () => {
             <Card>
               <Card.Header className="d-block">
                 <Card.Title>Buttons Transparent Light</Card.Title>
-                <Card.Text className="mb-0 subtitle">
-                  Button transparent light style
-                </Card.Text>
+                <Card.Text className="mb-0 subtitle">Button transparent light style</Card.Text>
               </Card.Header>
               <div className="card-body">
                 <Button variant="primary tp-btn-light">Primary</Button>
@@ -599,39 +566,19 @@ const UiButton = () => {
                 </Card.Text>
               </Card.Header>
               <div className="card-body">
-                <Button
-                  className="me-2"
-                  variant="primary btn-rounded"
-                  disabled="disabled"
-                >
+                <Button className="me-2" variant="primary btn-rounded" disabled="disabled">
                   Primary
                 </Button>
-                <Button
-                  className="me-2"
-                  variant="secondary btn-rounded"
-                  disabled="disabled"
-                >
+                <Button className="me-2" variant="secondary btn-rounded" disabled="disabled">
                   Secondary
                 </Button>
-                <Button
-                  className="me-2"
-                  variant="success btn-rounded"
-                  disabled="disabled"
-                >
+                <Button className="me-2" variant="success btn-rounded" disabled="disabled">
                   Success
                 </Button>
-                <Button
-                  className="me-2"
-                  variant="danger btn-rounded"
-                  disabled="disabled"
-                >
+                <Button className="me-2" variant="danger btn-rounded" disabled="disabled">
                   Danger
                 </Button>
-                <Button
-                  className="me-2"
-                  variant="warning btn-rounded"
-                  disabled="disabled"
-                >
+                <Button className="me-2" variant="warning btn-rounded" disabled="disabled">
                   Warning
                 </Button>
                 <Button variant="info btn-rounded" disabled="disabled">
@@ -645,115 +592,114 @@ const UiButton = () => {
               <Card.Header className="d-block">
                 <Card.Title>Socia icon Buttons with Name</Card.Title>
                 <Card.Text className="mb-0 subtitle">
-                  add <code>.btn-facebook, .btn-twitter, .btn-youtube...</code>{" "}
-                  to change the style
+                  add <code>.btn-facebook, .btn-twitter, .btn-youtube...</code> to change the style
                 </Card.Text>
               </Card.Header>
               <div className="card-body">
                 <Button className="me-2" variant="facebook">
-                  Facebook{" "}
+                  Facebook{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-facebook-f" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="twitter">
-                  Twitter{" "}
+                  Twitter{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-twitter" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="youtube">
-                  Youtube{" "}
+                  Youtube{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-youtube" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="instagram">
-                  Instagram{" "}
+                  Instagram{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-instagram" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="pinterest">
-                  Pinterest{" "}
+                  Pinterest{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-pinterest" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="linkedin">
-                  Linkedin{" "}
+                  Linkedin{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-linkedin-in" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="google-plus">
-                  Google +{" "}
+                  Google +{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-google-plus-g" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="google">
-                  Google{" "}
+                  Google{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-google" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="snapchat">
-                  Snapchat{" "}
+                  Snapchat{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-snapchat" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="whatsapp">
-                  Whatsapp{" "}
+                  Whatsapp{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-whatsapp" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="tumblr">
-                  Tumblr{" "}
+                  Tumblr{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-tumblr" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="reddit">
-                  Reddit{" "}
+                  Reddit{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-reddit" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="spotify">
-                  Spotify{" "}
+                  Spotify{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-spotify" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="yahoo">
-                  Yahoo{" "}
+                  Yahoo{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-yahoo" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="dribbble">
-                  Dribbble{" "}
+                  Dribbble{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-dribbble" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="skype">
-                  Skype{" "}
+                  Skype{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-skype" />
                   </span>
                 </Button>
                 <Button className="me-2" variant="quora">
-                  Quora{" "}
+                  Quora{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-quora" />
                   </span>
                 </Button>
                 <Button variant="vimeo">
-                  Vimeo{" "}
+                  Vimeo{' '}
                   <span className="btn-icon-end">
                     <i className="fab fa-vimeo-v" />
                   </span>

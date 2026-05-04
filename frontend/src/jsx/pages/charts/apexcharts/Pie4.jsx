@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 class ApexPie4 extends React.Component {
   constructor(props) {
@@ -11,15 +11,15 @@ class ApexPie4 extends React.Component {
       options: {
         chart: {
           // width: 300,
-          type: "polarArea",
+          type: 'polarArea',
           sparkline: {
             enabled: true,
           },
         },
-        labels: ["VIP", "Reguler", "Exclusive", "Economic"],
+        labels: ['VIP', 'Reguler', 'Exclusive', 'Economic'],
         fill: {
           opacity: 1,
-          colors: ["#709fba", "#e23428", "#44814e", "var(--primary)"],
+          colors: ['#709fba', '#e23428', '#44814e', 'var(--primary)'],
         },
         stroke: {
           width: 0,
@@ -29,7 +29,7 @@ class ApexPie4 extends React.Component {
           show: false,
         },
         legend: {
-          position: "bottom",
+          position: 'bottom',
         },
         plotOptions: {
           polarArea: {
@@ -41,7 +41,7 @@ class ApexPie4 extends React.Component {
         theme: {
           monochrome: {
             enabled: true,
-            shadeTo: "light",
+            shadeTo: 'light',
             shadeIntensity: 0.6,
           },
         },

@@ -1,28 +1,28 @@
 // Abstracts
-@import "./abstracts/abstracts";
+@import './abstracts/abstracts';
 
 //Importing the RTL-specific variables file//
 //@import "bs_rtl.scss";
 
 //bootstrap library scss files
-@import "./../vendor/bootstrap/scss/bootstrap.scss";                                    
+@import './../vendor/bootstrap/scss/bootstrap.scss';
 
 // Global
-@import "./base/base";
+@import './base/base';
 
-@import "./preloader";
-
-// Components
-@import "./layout/layout";
+@import './preloader';
 
 // Components
-@import "./components/components";
+@import './layout/layout';
+
+// Components
+@import './components/components';
 
 // All pages
-@import "./pages/pages";
+@import './pages/pages';
 
 // RTL
 //@import "./layout/rtl/rtl";
 
 // Version Color
-@import "./layout/version-dark/main";
+@import './layout/version-dark/main';

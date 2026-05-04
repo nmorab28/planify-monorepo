@@ -1,59 +1,56 @@
-import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 class PowerBar extends Component {
   render() {
     const data = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
       datasets: [
         {
-          label: "My First dataset",
+          label: 'My First dataset',
           data: [65, 59, 80, 81, 56, 55, 40],
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: "0",
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          hoverBackgroundColor: "rgba(255, 255, 255, .8)",
-		  barThickness : 40
+          borderColor: 'rgba(255, 255, 255, .8)',
+          borderWidth: '0',
+          backgroundColor: 'rgba(255, 255, 255, .8)',
+          hoverBackgroundColor: 'rgba(255, 255, 255, .8)',
+          barThickness: 40,
         },
       ],
     };
 
     const options = {
-      plugins:{
-		  legend: false,
-		responsive: true
-	  },
+      plugins: {
+        legend: false,
+        responsive: true,
+      },
       maintainAspectRatio: false,
       scales: {
-        y: 
-          {
+        y: {
+          display: false,
+          ticks: {
+            beginAtZero: true,
             display: false,
-            ticks: {
-              beginAtZero: true,
-              display: false,
-              max: 100,
-              min: 0,
-              stepSize: 10,
-            },
-            gridLines: {
-              display: false,
-              drawBorder: false,
-            },
+            max: 100,
+            min: 0,
+            stepSize: 10,
           },
-        
-        x: 
-          {
+          gridLines: {
             display: false,
-            barPercentage: 0.5,
-            gridLines: {
-              display: false,
-              drawBorder: false,
-            },
-            ticks: {
-              display: false,
-            },
+            drawBorder: false,
           },
-        
+        },
+
+        x: {
+          display: false,
+          barPercentage: 0.5,
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          },
+          ticks: {
+            display: false,
+          },
+        },
       },
     };
 

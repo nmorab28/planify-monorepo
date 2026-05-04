@@ -1,9 +1,9 @@
-import React from "react";
-import ChartistGraph from "react-chartist";
+import React from 'react';
+import ChartistGraph from 'react-chartist';
 
 function LineChart() {
   var data = {
-    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     series: [
       [12, 9, 7, 8, 5],
       [2, 1, 3.5, 7, 3],
@@ -22,7 +22,7 @@ function LineChart() {
     },
   };
 
-  var type = "Line";
+  var type = 'Line';
 
   return (
     <>

@@ -1,10 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const InboxMessage = () => {
-  const [data, setData] = useState(
-    document.querySelectorAll("#patientTable_basic_table tbody tr")
-  );
+  const [data, setData] = useState(document.querySelectorAll('#patientTable_basic_table tbody tr'));
   const sort = 5;
   const activePag = useRef(0);
   const [test, settest] = useState(0);
@@ -13,15 +11,15 @@ const InboxMessage = () => {
   const chageData = (frist, sec) => {
     for (var i = 0; i < data.length; ++i) {
       if (i >= frist && i < sec) {
-        data[i].classList.remove("d-none");
+        data[i].classList.remove('d-none');
       } else {
-        data[i].classList.add("d-none");
+        data[i].classList.add('d-none');
       }
     }
   };
   // use effect
   useEffect(() => {
-    setData(document.querySelectorAll("#patientTable_basic_table tbody tr"));
+    setData(document.querySelectorAll('#patientTable_basic_table tbody tr'));
     chackboxFun();
   }, [test]);
 
@@ -38,13 +36,13 @@ const InboxMessage = () => {
     chageData(activePag.current * sort, (activePag.current + 1) * sort);
     settest(i);
   };
-  const chackbox = document.querySelectorAll(".sorting_1 input");
-  const motherChackBox = document.querySelector(".sorting_asc input");
+  const chackbox = document.querySelectorAll('.sorting_1 input');
+  const motherChackBox = document.querySelector('.sorting_asc input');
   // console.log(document.querySelectorAll(".sorting_1 input")[0].checked);
   const chackboxFun = (type) => {
     for (let i = 0; i < chackbox.length; i++) {
       const element = chackbox[i];
-      if (type === "all") {
+      if (type === 'all') {
         if (motherChackBox.checked) {
           element.checked = true;
         } else {
@@ -68,11 +66,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox2"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox2" />
                 <label className="form-check-label" htmlFor="checkbox2" />
               </div>
             </div>
@@ -84,9 +78,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Ingredia Nutrisha, A collection of textile samples lay spread out
-              on the table - Samsa was a travelling salesman - and above it
-              there hung a picture
+              Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa
+              was a travelling salesman - and above it there hung a picture
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -97,11 +90,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox3"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox3" />
                 <label className="form-check-label" htmlFor="checkbox3" />
               </div>
             </div>
@@ -113,9 +102,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Almost unorthographic life One day however a small line of blind
-              text by the name of Lorem Ipsum decided to leave for the far World
-              of Grammar.
+              Almost unorthographic life One day however a small line of blind text by the name of
+              Lorem Ipsum decided to leave for the far World of Grammar.
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -126,11 +114,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox4"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox4" />
                 <label className="form-check-label" htmlFor="checkbox4" />
               </div>
             </div>
@@ -142,9 +126,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Pointing has no control about the blind texts it is an almost
-              unorthographic life One day however a small line of blind text by
-              the name of
+              Pointing has no control about the blind texts it is an almost unorthographic life One
+              day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -155,11 +138,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox5"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox5" />
                 <label className="form-check-label" htmlFor="checkbox5" />
               </div>
             </div>
@@ -171,9 +150,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Even the all-powerful Pointing has no control about the blind
-              texts it is an almost unorthographic life One day however a small
-              line of blind text by the name of
+              Even the all-powerful Pointing has no control about the blind texts it is an almost
+              unorthographic life One day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -184,11 +162,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox6"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox6" />
                 <label className="form-check-label" htmlFor="checkbox6" />
               </div>
             </div>
@@ -200,9 +174,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Ingredia Nutrisha, A collection of textile samples lay spread out
-              on the table - Samsa was a travelling salesman - and above it
-              there hung a picture
+              Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa
+              was a travelling salesman - and above it there hung a picture
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -213,11 +186,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox7"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox7" />
                 <label className="form-check-label" htmlFor="checkbox7" />
               </div>
             </div>
@@ -229,9 +198,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Almost unorthographic life One day however a small line of blind
-              text by the name of Lorem Ipsum decided to leave for the far World
-              of Grammar.
+              Almost unorthographic life One day however a small line of blind text by the name of
+              Lorem Ipsum decided to leave for the far World of Grammar.
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -242,11 +210,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox8"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox8" />
                 <label className="form-check-label" htmlFor="checkbox8" />
               </div>
             </div>
@@ -258,9 +222,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Pointing has no control about the blind texts it is an almost
-              unorthographic life One day however a small line of blind text by
-              the name of
+              Pointing has no control about the blind texts it is an almost unorthographic life One
+              day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -271,11 +234,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox9"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox9" />
                 <label className="form-check-label" htmlFor="checkbox9" />
               </div>
             </div>
@@ -287,9 +246,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Even the all-powerful Pointing has no control about the blind
-              texts it is an almost unorthographic life One day however a small
-              line of blind text by the name of
+              Even the all-powerful Pointing has no control about the blind texts it is an almost
+              unorthographic life One day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -300,11 +258,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox10"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox10" />
                 <label className="form-check-label" htmlFor="checkbox10" />
               </div>
             </div>
@@ -316,9 +270,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Ingredia Nutrisha, A collection of textile samples lay spread out
-              on the table - Samsa was a travelling salesman - and above it
-              there hung a picture
+              Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa
+              was a travelling salesman - and above it there hung a picture
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -329,11 +282,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox11"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox11" />
                 <label className="form-check-label" htmlFor="checkbox11" />
               </div>
             </div>
@@ -345,9 +294,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Almost unorthographic life One day however a small line of blind
-              text by the name of Lorem Ipsum decided to leave for the far World
-              of Grammar.
+              Almost unorthographic life One day however a small line of blind text by the name of
+              Lorem Ipsum decided to leave for the far World of Grammar.
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -358,11 +306,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox12"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox12" />
                 <label className="form-check-label" htmlFor="checkbox12" />
               </div>
             </div>
@@ -374,9 +318,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Pointing has no control about the blind texts it is an almost
-              unorthographic life One day however a small line of blind text by
-              the name of
+              Pointing has no control about the blind texts it is an almost unorthographic life One
+              day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -387,11 +330,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox13"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox13" />
                 <label className="form-check-label" htmlFor="checkbox13" />
               </div>
             </div>
@@ -403,9 +342,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Even the all-powerful Pointing has no control about the blind
-              texts it is an almost unorthographic life One day however a small
-              line of blind text by the name of
+              Even the all-powerful Pointing has no control about the blind texts it is an almost
+              unorthographic life One day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -416,11 +354,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox14"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox14" />
                 <label className="form-check-label" htmlFor="checkbox14" />
               </div>
             </div>
@@ -432,9 +366,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Ingredia Nutrisha, A collection of textile samples lay spread out
-              on the table - Samsa was a travelling salesman - and above it
-              there hung a picture
+              Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa
+              was a travelling salesman - and above it there hung a picture
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -445,11 +378,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox15"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox15" />
                 <label className="form-check-label" htmlFor="checkbox15" />
               </div>
             </div>
@@ -461,9 +390,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Almost unorthographic life One day however a small line of blind
-              text by the name of Lorem Ipsum decided to leave for the far World
-              of Grammar.
+              Almost unorthographic life One day however a small line of blind text by the name of
+              Lorem Ipsum decided to leave for the far World of Grammar.
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -474,11 +402,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox16"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox16" />
                 <label className="form-check-label" htmlFor="checkbox16" />
               </div>
             </div>
@@ -490,9 +414,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Pointing has no control about the blind texts it is an almost
-              unorthographic life One day however a small line of blind text by
-              the name of
+              Pointing has no control about the blind texts it is an almost unorthographic life One
+              day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -503,11 +426,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox17"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox17" />
                 <label className="form-check-label" htmlFor="checkbox17" />
               </div>
             </div>
@@ -519,9 +438,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Even the all-powerful Pointing has no control about the blind
-              texts it is an almost unorthographic life One day however a small
-              line of blind text by the name of
+              Even the all-powerful Pointing has no control about the blind texts it is an almost
+              unorthographic life One day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -532,11 +450,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox18"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox18" />
                 <label className="form-check-label" htmlFor="checkbox18" />
               </div>
             </div>
@@ -548,9 +462,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Ingredia Nutrisha, A collection of textile samples lay spread out
-              on the table - Samsa was a travelling salesman - and above it
-              there hung a picture
+              Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa
+              was a travelling salesman - and above it there hung a picture
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -561,11 +474,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox19"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox19" />
                 <label className="form-check-label" htmlFor="checkbox19" />
               </div>
             </div>
@@ -577,9 +486,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Almost unorthographic life One day however a small line of blind
-              text by the name of Lorem Ipsum decided to leave for the far World
-              of Grammar.
+              Almost unorthographic life One day however a small line of blind text by the name of
+              Lorem Ipsum decided to leave for the far World of Grammar.
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -590,11 +498,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox20"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox20" />
                 <label className="form-check-label" htmlFor="checkbox20" />
               </div>
             </div>
@@ -606,9 +510,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Pointing has no control about the blind texts it is an almost
-              unorthographic life One day however a small line of blind text by
-              the name of
+              Pointing has no control about the blind texts it is an almost unorthographic life One
+              day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>
@@ -619,11 +522,7 @@ const InboxMessage = () => {
           <div className="d-flex message-single">
             <div className="pl-1 align-self-center">
               <div className="form-check custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="checkbox21"
-                />
+                <input type="checkbox" className="form-check-input" id="checkbox21" />
                 <label className="form-check-label" htmlFor="checkbox21" />
               </div>
             </div>
@@ -635,9 +534,8 @@ const InboxMessage = () => {
           </div>
           <Link to="/email-read" className="col-mail col-mail-2">
             <div className="subject">
-              Even the all-powerful Pointing has no control about the blind
-              texts it is an almost unorthographic life One day however a small
-              line of blind text by the name of
+              Even the all-powerful Pointing has no control about the blind texts it is an almost
+              unorthographic life One day however a small line of blind text by the name of
             </div>
             <div className="date">11:49 am</div>
           </Link>

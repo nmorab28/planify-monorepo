@@ -1,10 +1,10 @@
 export const DAYS_OF_WEEK = [
-  { value: 1, label: "Lunes" },
-  { value: 2, label: "Martes" },
-  { value: 3, label: "Miércoles" },
-  { value: 4, label: "Jueves" },
-  { value: 5, label: "Viernes" },
-  { value: 6, label: "Sábado" },
+  { value: 1, label: 'Lunes' },
+  { value: 2, label: 'Martes' },
+  { value: 3, label: 'Miércoles' },
+  { value: 4, label: 'Jueves' },
+  { value: 5, label: 'Viernes' },
+  { value: 6, label: 'Sábado' },
 ];
 
 export const dayLabel = (dayOfWeek) => {
@@ -13,10 +13,10 @@ export const dayLabel = (dayOfWeek) => {
 };
 
 export const parseTime = (value) => {
-  if (typeof value !== "string") return NaN;
+  if (typeof value !== 'string') return NaN;
   const trimmed = value.trim();
   if (!/^\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?$/.test(trimmed)) return NaN;
-  const [hh, mm] = trimmed.split(":");
+  const [hh, mm] = trimmed.split(':');
   const hours = parseInt(hh, 10);
   const minutes = parseInt(mm, 10);
   if (isNaN(hours) || isNaN(minutes)) return NaN;
@@ -26,10 +26,10 @@ export const parseTime = (value) => {
 };
 
 export const formatTime = (value) => {
-  if (typeof value !== "string") return "";
-  const [hh = "", mm = ""] = value.split(":");
-  if (!hh || !mm) return "";
-  return `${hh.padStart(2, "0")}:${mm.padStart(2, "0")}`;
+  if (typeof value !== 'string') return '';
+  const [hh = '', mm = ''] = value.split(':');
+  if (!hh || !mm) return '';
+  return `${hh.padStart(2, '0')}:${mm.padStart(2, '0')}`;
 };
 
 export const validateRange = ({ dayOfWeek, startTime, endTime }) => {
@@ -37,37 +37,34 @@ export const validateRange = ({ dayOfWeek, startTime, endTime }) => {
 
   const day = Number(dayOfWeek);
   if (!Number.isInteger(day) || day < 1 || day > 6) {
-    errors.push("El día debe ser un valor entre 1 (Lunes) y 6 (Sábado).");
+    errors.push('El día debe ser un valor entre 1 (Lunes) y 6 (Sábado).');
   }
 
-  if (!startTime || typeof startTime !== "string") {
-    errors.push("La hora de inicio es obligatoria.");
+  if (!startTime || typeof startTime !== 'string') {
+    errors.push('La hora de inicio es obligatoria.');
   }
-  if (!endTime || typeof endTime !== "string") {
-    errors.push("La hora de fin es obligatoria.");
+  if (!endTime || typeof endTime !== 'string') {
+    errors.push('La hora de fin es obligatoria.');
   }
 
   const start = parseTime(startTime);
   const end = parseTime(endTime);
 
   if (startTime && Number.isNaN(start)) {
-    errors.push("La hora de inicio tiene un formato inválido (use HH:MM).");
+    errors.push('La hora de inicio tiene un formato inválido (use HH:MM).');
   }
   if (endTime && Number.isNaN(end)) {
-    errors.push("La hora de fin tiene un formato inválido (use HH:MM).");
+    errors.push('La hora de fin tiene un formato inválido (use HH:MM).');
   }
 
   if (!Number.isNaN(start) && !Number.isNaN(end) && end <= start) {
-    errors.push("La hora de fin debe ser mayor que la hora de inicio.");
+    errors.push('La hora de fin debe ser mayor que la hora de inicio.');
   }
 
   return errors;
 };
 
-export const findOverlap = (
-  { dayOfWeek, startTime, endTime, excludeDocumentId },
-  existingList
-) => {
+export const findOverlap = ({ dayOfWeek, startTime, endTime, excludeDocumentId }, existingList) => {
   if (!Array.isArray(existingList)) return null;
 
   const day = Number(dayOfWeek);

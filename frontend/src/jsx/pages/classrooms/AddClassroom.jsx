@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
-import Select from "react-select";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from 'react';
+import Select from 'react-select';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-import PageTitle from "../../layouts/PageTitle";
-import { createClassroom } from "../../../services/classroomService";
-import { getClassroomFeatures } from "../../../services/classroomFeatureService";
-import { validateClassroom } from "./classroomValidation";
-import FeatureModal from "./FeatureModal";
+import PageTitle from '../../layouts/PageTitle';
+import { createClassroom } from '../../../services/classroomService';
+import { getClassroomFeatures } from '../../../services/classroomFeatureService';
+import { validateClassroom } from './classroomValidation';
+import FeatureModal from './FeatureModal';
 
 const AddClassroom = () => {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ const AddClassroom = () => {
   const [showFeatureModal, setShowFeatureModal] = useState(false);
 
   const [formData, setFormData] = useState({
-    code: "",
-    name: "",
+    code: '',
+    name: '',
     capacity: 30,
     isActive: true,
     featureDocumentIds: [],
@@ -29,7 +29,7 @@ const AddClassroom = () => {
       const res = await getClassroomFeatures();
       setFeatures(res || []);
     } catch (err) {
-      console.error("Error fetching features", err);
+      console.error('Error fetching features', err);
     }
   };
 
@@ -47,10 +47,7 @@ const AddClassroom = () => {
   );
 
   const selectedFeatures = useMemo(
-    () =>
-      featureOptions.filter((opt) =>
-        formData.featureDocumentIds.includes(opt.value)
-      ),
+    () => featureOptions.filter((opt) => formData.featureDocumentIds.includes(opt.value)),
     [featureOptions, formData.featureDocumentIds]
   );
 
@@ -58,7 +55,7 @@ const AddClassroom = () => {
     const { id, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id]: type === "checkbox" ? checked : value,
+      [id]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -84,8 +81,8 @@ const AddClassroom = () => {
 
     if (errors.length > 0) {
       Swal.fire({
-        icon: "error",
-        title: "Datos inválidos",
+        icon: 'error',
+        title: 'Datos inválidos',
         text: errors[0],
       });
       return;
@@ -102,19 +99,19 @@ const AddClassroom = () => {
       });
 
       await Swal.fire({
-        icon: "success",
-        title: "Aula creada",
+        icon: 'success',
+        title: 'Aula creada',
         timer: 1500,
         showConfirmButton: false,
       });
 
-      navigate("/all-classrooms");
+      navigate('/all-classrooms');
     } catch (err) {
       console.error(err);
       Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message || "No se pudo crear el aula",
+        icon: 'error',
+        title: 'Error',
+        text: err.message || 'No se pudo crear el aula',
       });
     } finally {
       setSubmitting(false);
@@ -123,7 +120,7 @@ const AddClassroom = () => {
 
   return (
     <>
-      <PageTitle activeMenu={"Add Classroom"} motherMenu={"Classrooms"} />
+      <PageTitle activeMenu={'Add Classroom'} motherMenu={'Classrooms'} />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
@@ -206,10 +203,7 @@ const AddClassroom = () => {
                           checked={formData.isActive}
                           onChange={handleChange}
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="isActive"
-                        >
+                        <label className="form-check-label" htmlFor="isActive">
                           Activa
                         </label>
                       </div>
@@ -219,9 +213,7 @@ const AddClassroom = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <div className="d-flex justify-content-between align-items-center mb-1">
-                        <label className="form-label mb-0">
-                          Características
-                        </label>
+                        <label className="form-label mb-0">Características</label>
                         <button
                           type="button"
                           className="btn btn-sm btn-outline-primary"
@@ -238,32 +230,26 @@ const AddClassroom = () => {
                         onChange={(opts) =>
                           setFormData((prev) => ({
                             ...prev,
-                            featureDocumentIds: (opts || []).map(
-                              (o) => o.value
-                            ),
+                            featureDocumentIds: (opts || []).map((o) => o.value),
                           }))
                         }
                         placeholder="Selecciona una o varias características"
                         className="custom-react-select"
                         noOptionsMessage={() =>
-                          "No hay características registradas. Crea una nueva."
+                          'No hay características registradas. Crea una nueva.'
                         }
                       />
                     </div>
                   </div>
 
                   <div className="col-lg-12 col-md-12 col-sm-12">
-                    <button
-                      type="submit"
-                      className="btn btn-primary me-1"
-                      disabled={submitting}
-                    >
-                      {submitting ? "Guardando..." : "Submit"}
+                    <button type="submit" className="btn btn-primary me-1" disabled={submitting}>
+                      {submitting ? 'Guardando...' : 'Submit'}
                     </button>
                     <button
                       type="button"
                       className="btn btn-danger light"
-                      onClick={() => navigate("/all-classrooms")}
+                      onClick={() => navigate('/all-classrooms')}
                     >
                       Cancel
                     </button>

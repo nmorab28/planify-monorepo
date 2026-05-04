@@ -1,9 +1,8 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import { loginConfirmedAction, Logout } from "../store/actions/AuthActions";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { loginConfirmedAction, Logout } from '../store/actions/AuthActions';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:1337/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:1337/api';
 
 export async function login(email, password) {
   const authResponse = await axios.post(`${API_BASE_URL}/auth/local`, {
@@ -30,11 +29,11 @@ export function formatError(errorResponse) {
   const backendMessage =
     errorResponse?.response?.data?.error?.message ||
     errorResponse?.message ||
-    "Authentication failed";
+    'Authentication failed';
 
   Swal.fire({
-    icon: "error",
-    title: "Oops",
+    icon: 'error',
+    title: 'Oops',
     text: backendMessage,
   });
 
@@ -49,20 +48,20 @@ export function normalizeAuthData(authData) {
     idToken: jwt,
     jwt,
     user,
-    email: user?.email || "",
-    username: user?.username || "",
-    role: user?.role?.type || "",
-    roleName: user?.role?.name || "",
+    email: user?.email || '',
+    username: user?.username || '',
+    role: user?.role?.type || '',
+    roleName: user?.role?.name || '',
     loggedInAt: new Date().toISOString(),
   };
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
-  localStorage.setItem("userDetails", JSON.stringify(tokenDetails));
+  localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
 }
 
 export function checkAutoLogin(dispatch, navigate) {
-  const tokenDetailsString = localStorage.getItem("userDetails");
+  const tokenDetailsString = localStorage.getItem('userDetails');
 
   if (!tokenDetailsString) {
     dispatch(Logout(navigate));

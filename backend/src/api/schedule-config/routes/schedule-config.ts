@@ -1,3 +1,3 @@
-import { factories } from "@strapi/strapi";
+import { factories } from '@strapi/strapi';
 
-export default factories.createCoreRouter("api::schedule-config.schedule-config");
+export default factories.createCoreRouter('api::schedule-config.schedule-config');

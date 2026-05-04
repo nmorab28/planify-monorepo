@@ -1,45 +1,45 @@
-import React, { PureComponent } from "react";
-import { BarChart, Bar, ResponsiveContainer } from "recharts";
+import React, { PureComponent } from 'react';
+import { BarChart, Bar, ResponsiveContainer } from 'recharts';
 
 const data = [
   {
-    name: "Page A",
+    name: 'Page A',
     uv: 3000,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: "Page B",
+    name: 'Page B',
     uv: -3000,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: "Page C",
+    name: 'Page C',
     uv: -2000,
     pv: -2500,
     amt: 2290,
   },
   {
-    name: "Page D",
+    name: 'Page D',
     uv: 2780,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: "Page E",
+    name: 'Page E',
     uv: -1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: "Page F",
+    name: 'Page F',
     uv: 2390,
     pv: -2400,
     amt: 2500,
   },
   {
-    name: "Page G",
+    name: 'Page G',
     uv: 3490,
     pv: 4300,
     amt: 2100,
@@ -51,11 +51,11 @@ export default class TotalCourse extends PureComponent {
     return (
       <div
         style={{
-          height: "150px",
-          width: "100%",
+          height: '150px',
+          width: '100%',
         }}
       >
-        <ResponsiveContainer width={"100%"} height={"100%"}>
+        <ResponsiveContainer width={'100%'} height={'100%'}>
           <BarChart
             data={data}
             margin={{
