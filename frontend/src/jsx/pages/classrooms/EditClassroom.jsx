@@ -1,16 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
-import Select from "react-select";
-import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from 'react';
+import Select from 'react-select';
+import Swal from 'sweetalert2';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import PageTitle from "../../layouts/PageTitle";
-import {
-  getClassroomById,
-  updateClassroom,
-} from "../../../services/classroomService";
-import { getClassroomFeatures } from "../../../services/classroomFeatureService";
-import { validateClassroom } from "./classroomValidation";
-import FeatureModal from "./FeatureModal";
+import PageTitle from '../../layouts/PageTitle';
+import { getClassroomById, updateClassroom } from '../../../services/classroomService';
+import { getClassroomFeatures } from '../../../services/classroomFeatureService';
+import { validateClassroom } from './classroomValidation';
+import FeatureModal from './FeatureModal';
 
 const EditClassroom = () => {
   const navigate = useNavigate();
@@ -22,8 +19,8 @@ const EditClassroom = () => {
   const [showFeatureModal, setShowFeatureModal] = useState(false);
 
   const [formData, setFormData] = useState({
-    code: "",
-    name: "",
+    code: '',
+    name: '',
     capacity: 30,
     isActive: true,
     featureDocumentIds: [],
@@ -34,13 +31,13 @@ const EditClassroom = () => {
       const res = await getClassroomFeatures();
       setFeatures(res || []);
     } catch (err) {
-      console.error("Error fetching features", err);
+      console.error('Error fetching features', err);
     }
   };
 
   useEffect(() => {
     if (!documentId) {
-      navigate("/all-classrooms");
+      navigate('/all-classrooms');
       return;
     }
 
@@ -48,13 +45,13 @@ const EditClassroom = () => {
       try {
         const classroom = await getClassroomById(documentId);
         if (!classroom || !classroom.documentId) {
-          navigate("/all-classrooms");
+          navigate('/all-classrooms');
           return;
         }
 
         setFormData({
-          code: classroom.code || "",
-          name: classroom.name || "",
+          code: classroom.code || '',
+          name: classroom.name || '',
           capacity:
             classroom.capacity === undefined || classroom.capacity === null
               ? 30
@@ -63,7 +60,7 @@ const EditClassroom = () => {
           featureDocumentIds: Array.isArray(classroom.features)
             ? classroom.features
                 .map((f) => f.documentId)
-                .filter((v) => typeof v === "string" && v.length > 0)
+                .filter((v) => typeof v === 'string' && v.length > 0)
             : [],
         });
 
@@ -71,9 +68,9 @@ const EditClassroom = () => {
       } catch (err) {
         console.error(err);
         Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: err.message || "No se pudo cargar el aula",
+          icon: 'error',
+          title: 'Error',
+          text: err.message || 'No se pudo cargar el aula',
         });
       } finally {
         setLoading(false);
@@ -93,10 +90,7 @@ const EditClassroom = () => {
   );
 
   const selectedFeatures = useMemo(
-    () =>
-      featureOptions.filter((opt) =>
-        formData.featureDocumentIds.includes(opt.value)
-      ),
+    () => featureOptions.filter((opt) => formData.featureDocumentIds.includes(opt.value)),
     [featureOptions, formData.featureDocumentIds]
   );
 
@@ -104,7 +98,7 @@ const EditClassroom = () => {
     const { id, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id]: type === "checkbox" ? checked : value,
+      [id]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -130,8 +124,8 @@ const EditClassroom = () => {
 
     if (errors.length > 0) {
       Swal.fire({
-        icon: "error",
-        title: "Datos inválidos",
+        icon: 'error',
+        title: 'Datos inválidos',
         text: errors[0],
       });
       return;
@@ -148,19 +142,19 @@ const EditClassroom = () => {
       });
 
       await Swal.fire({
-        icon: "success",
-        title: "Aula actualizada",
+        icon: 'success',
+        title: 'Aula actualizada',
         timer: 1500,
         showConfirmButton: false,
       });
 
-      navigate("/all-classrooms");
+      navigate('/all-classrooms');
     } catch (err) {
       console.error(err);
       Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message || "No se pudo actualizar el aula",
+        icon: 'error',
+        title: 'Error',
+        text: err.message || 'No se pudo actualizar el aula',
       });
     } finally {
       setSubmitting(false);
@@ -171,7 +165,7 @@ const EditClassroom = () => {
 
   return (
     <>
-      <PageTitle activeMenu={"Edit Classroom"} motherMenu={"Classrooms"} />
+      <PageTitle activeMenu={'Edit Classroom'} motherMenu={'Classrooms'} />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
@@ -252,10 +246,7 @@ const EditClassroom = () => {
                           checked={formData.isActive}
                           onChange={handleChange}
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="isActive"
-                        >
+                        <label className="form-check-label" htmlFor="isActive">
                           Activa
                         </label>
                       </div>
@@ -265,9 +256,7 @@ const EditClassroom = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <div className="d-flex justify-content-between align-items-center mb-1">
-                        <label className="form-label mb-0">
-                          Características
-                        </label>
+                        <label className="form-label mb-0">Características</label>
                         <button
                           type="button"
                           className="btn btn-sm btn-outline-primary"
@@ -284,32 +273,26 @@ const EditClassroom = () => {
                         onChange={(opts) =>
                           setFormData((prev) => ({
                             ...prev,
-                            featureDocumentIds: (opts || []).map(
-                              (o) => o.value
-                            ),
+                            featureDocumentIds: (opts || []).map((o) => o.value),
                           }))
                         }
                         placeholder="Selecciona una o varias características"
                         className="custom-react-select"
                         noOptionsMessage={() =>
-                          "No hay características registradas. Crea una nueva."
+                          'No hay características registradas. Crea una nueva.'
                         }
                       />
                     </div>
                   </div>
 
                   <div className="col-lg-12 col-md-12 col-sm-12">
-                    <button
-                      type="submit"
-                      className="btn btn-primary me-1"
-                      disabled={submitting}
-                    >
-                      {submitting ? "Guardando..." : "Submit"}
+                    <button type="submit" className="btn btn-primary me-1" disabled={submitting}>
+                      {submitting ? 'Guardando...' : 'Submit'}
                     </button>
                     <button
                       type="button"
                       className="btn btn-danger light"
-                      onClick={() => navigate("/all-classrooms")}
+                      onClick={() => navigate('/all-classrooms')}
                     >
                       Cancel
                     </button>

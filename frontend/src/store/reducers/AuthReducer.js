@@ -5,24 +5,24 @@ import {
   LOGOUT_ACTION,
   SIGNUP_CONFIRMED_ACTION,
   SIGNUP_FAILED_ACTION,
-} from "../actions/AuthActions";
+} from '../actions/AuthActions';
 
 const initialState = {
   auth: {
-    email: "",
-    idToken: "",
-    jwt: "",
-    username: "",
-    role: "",
-    roleName: "",
+    email: '',
+    idToken: '',
+    jwt: '',
+    username: '',
+    role: '',
+    roleName: '',
     user: null,
 
-    localId: "",
-    expiresIn: "",
-    refreshToken: "",
+    localId: '',
+    expiresIn: '',
+    refreshToken: '',
   },
-  errorMessage: "",
-  successMessage: "",
+  errorMessage: '',
+  successMessage: '',
   showLoading: false,
 };
 
@@ -34,8 +34,8 @@ export function AuthReducer(state = initialState, action) {
         ...state.auth,
         ...action.payload,
       },
-      errorMessage: "",
-      successMessage: "Signup Successfully Completed",
+      errorMessage: '',
+      successMessage: 'Signup Successfully Completed',
       showLoading: false,
     };
   }
@@ -47,8 +47,8 @@ export function AuthReducer(state = initialState, action) {
         ...state.auth,
         ...action.payload,
       },
-      errorMessage: "",
-      successMessage: "Sesión iniciada correctamente",
+      errorMessage: '',
+      successMessage: 'Sesión iniciada correctamente',
       showLoading: false,
     };
   }
@@ -56,32 +56,29 @@ export function AuthReducer(state = initialState, action) {
   if (action.type === LOGOUT_ACTION) {
     return {
       ...state,
-      errorMessage: "",
-      successMessage: "",
+      errorMessage: '',
+      successMessage: '',
       showLoading: false,
       auth: {
-        email: "",
-        idToken: "",
-        jwt: "",
-        username: "",
-        role: "",
-        roleName: "",
+        email: '',
+        idToken: '',
+        jwt: '',
+        username: '',
+        role: '',
+        roleName: '',
         user: null,
-        localId: "",
-        expiresIn: "",
-        refreshToken: "",
+        localId: '',
+        expiresIn: '',
+        refreshToken: '',
       },
     };
   }
 
-  if (
-    action.type === SIGNUP_FAILED_ACTION ||
-    action.type === LOGIN_FAILED_ACTION
-  ) {
+  if (action.type === SIGNUP_FAILED_ACTION || action.type === LOGIN_FAILED_ACTION) {
     return {
       ...state,
       errorMessage: action.payload,
-      successMessage: "",
+      successMessage: '',
       showLoading: false,
     };
   }

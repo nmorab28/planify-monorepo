@@ -1,5 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
 class ApexRedialBar extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class ApexRedialBar extends React.Component {
       options: {
         chart: {
           height: 300,
-          type: "radialBar",
+          type: 'radialBar',
           offsetY: -10,
         },
         plotOptions: {
@@ -19,26 +19,26 @@ class ApexRedialBar extends React.Component {
             endAngle: 135,
             dataLabels: {
               name: {
-                fontSize: "16px",
+                fontSize: '16px',
                 color: undefined,
                 offsetY: 120,
               },
               value: {
                 offsetY: 0,
-                fontSize: "34px",
-                color: "var(--primary)",
+                fontSize: '34px',
+                color: 'var(--primary)',
                 formatter: function (val) {
-                  return val + "%";
+                  return val + '%';
                 },
               },
             },
           },
         },
         fill: {
-          type: "gradient",
-          colors: "var(--primary)",
+          type: 'gradient',
+          colors: 'var(--primary)',
           gradient: {
-            shade: "dark",
+            shade: 'dark',
             shadeIntensity: 0.15,
             inverseColors: false,
             opacityFrom: 1,
@@ -48,9 +48,9 @@ class ApexRedialBar extends React.Component {
         },
         stroke: {
           dashArray: 4,
-          colors: "var(--primary)",
+          colors: 'var(--primary)',
         },
-        labels: [""],
+        labels: [''],
       },
     };
   }

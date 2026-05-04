@@ -1,24 +1,23 @@
-import React, { Fragment } from "react";
-import Swal from "sweetalert2";
+import React, { Fragment } from 'react';
+import Swal from 'sweetalert2';
 
-import PageTitle from "../../layouts/PageTitle";
+import PageTitle from '../../layouts/PageTitle';
 
 const customImageAlert = () => {
   Swal.fire({
-    title:"Sweet !!",
+    title: 'Sweet !!',
     text: "Hey, Here's a custom image !!",
     imageUrl: require('./../../../assets/images/hand.png'),
-    imageHeight: 100, 
-    imageWidth: 100,  
+    imageHeight: 100,
+    imageWidth: 100,
   });
-}
+};
 
 const MainSweetAlert = () => {
   return (
     <Fragment>
-		
       <PageTitle activeMenu="Sweet Alert" motherMenu="Plugins" />
-	
+
       <div className="row">
         <div className="col-xl-3 col-xxl-4 col-lg-4 col-md-6">
           <div className="card">
@@ -27,11 +26,11 @@ const MainSweetAlert = () => {
               <div className="card-content">
                 <div className="sweetalert">
                   <button
-                    onClick={() =>                      
+                    onClick={() =>
                       Swal.fire({
                         icon: 'error',
                         title: 'Oops',
-                        text: 'Something went wrong!',                        
+                        text: 'Something went wrong!',
                       })
                     }
                     className="btn btn-danger btn sweet-wrong"
@@ -48,16 +47,13 @@ const MainSweetAlert = () => {
             <div className="card-body">
               <h4 className="card-title">Sweet Message</h4>
               <div className="card-content">
-                <div className="sweetalert">				
-				          <button
-                    onClick={() =>                      
-                      Swal.fire("Hey, Here's a message !!")
-                    }
+                <div className="sweetalert">
+                  <button
+                    onClick={() => Swal.fire("Hey, Here's a message !!")}
                     className="btn btn-info btn sweet-message"
                   >
                     Sweet Message
-                 </button>
-				
+                  </button>
                 </div>
               </div>
             </div>
@@ -68,15 +64,9 @@ const MainSweetAlert = () => {
             <div className="card-body">
               <h4 className="card-title">Sweet Text</h4>
               <div className="card-content">
-                <div className="sweetalert">    
-				          <button
-                    onClick={() =>
-                      
-                      Swal.fire(
-                        "Hey, Here's a message !!", 
-                        "It's pretty, isn't it?"
-                      )
-                    }
+                <div className="sweetalert">
+                  <button
+                    onClick={() => Swal.fire("Hey, Here's a message !!", "It's pretty, isn't it?")}
                     className="btn btn-primary btn sweet-text"
                   >
                     Sweet Text
@@ -92,12 +82,12 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet Success</h4>
               <div className="card-content">
                 <div className="sweetalert">
-                  <button                    
-                    onClick={() =>                      
+                  <button
+                    onClick={() =>
                       Swal.fire({
                         icon: 'success',
                         title: 'Good job!',
-                        text: "You clicked the button!",                        
+                        text: 'You clicked the button!',
                       })
                     }
                     className="btn btn-success btn sweet-success"
@@ -120,19 +110,15 @@ const MainSweetAlert = () => {
                     onClick={() =>
                       Swal.fire({
                         title: 'Are you sure for delete ?',
-                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                        text: 'Once deleted, you will not be able to recover this imaginary file!',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#dd6b55',
                         cancelButtonColor: '#aaa',
-                        confirmButtonText: 'Yes, delete it!'
+                        confirmButtonText: 'Yes, delete it!',
                       }).then((result) => {
                         if (result.isConfirmed) {
-                          Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                          )
+                          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
                         }
                       })
                     }
@@ -172,19 +158,15 @@ const MainSweetAlert = () => {
 
                       Swal.fire({
                         title: 'Are you sure to delete ?',
-                        text: "You will not be able to recover this imaginary file !!",
+                        text: 'You will not be able to recover this imaginary file !!',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#dd6b55',
                         cancelButtonColor: '#aaa',
-                        confirmButtonText: 'Yes, delete it!'
+                        confirmButtonText: 'Yes, delete it!',
                       }).then((result) => {
                         if (result.isConfirmed) {
-                          Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                          )
+                          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
                         }
                       })
                     }
@@ -203,13 +185,12 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet Image Message</h4>
               <div className="card-content">
                 <div className="sweetalert ">
-				          <button                   
+                  <button
                     onClick={customImageAlert}
-                    className="btn btn-info btn sweet-image-message" 
+                    className="btn btn-info btn sweet-image-message"
                   >
                     Sweet Image Message
                   </button>
-				
                 </div>
               </div>
             </div>
@@ -221,14 +202,10 @@ const MainSweetAlert = () => {
               <h4 className="card-title">Sweet Alert</h4>
               <div className="card-content">
                 <div className="sweetalert">
-			
-				          <button
+                  <button
                     onClick={() =>
                       // swal("Sweet !!", "true")
-                      Swal.fire(
-                        "Sweet !!", 
-                        "true"
-                      )
+                      Swal.fire('Sweet !!', 'true')
                     }
                     className="btn btn-primary btn sweet-html"
                   >
@@ -247,12 +224,12 @@ const MainSweetAlert = () => {
               <div className="card-content">
                 <div className="sweetalert">
                   <button
-                    onClick={() =>                      
-                      Swal.fire({                        
-                        title: "Sweet auto close alert !!",
-                        text: "Hey, i will close in 2 seconds !!",
-                        showConfirmButton: false,                  
-                        timer: 1500
+                    onClick={() =>
+                      Swal.fire({
+                        title: 'Sweet auto close alert !!',
+                        text: 'Hey, i will close in 2 seconds !!',
+                        showConfirmButton: false,
+                        timer: 1500,
                       })
                     }
                     className="btn btn-danger btn sweet-auto"
@@ -277,12 +254,12 @@ const MainSweetAlert = () => {
                       // })
                       Swal.fire({
                         title: 'Enter an input !!',
-                        text: "Write something interesting !!",
-                         icon: false,
+                        text: 'Write something interesting !!',
+                        icon: false,
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#aaa',
-                        confirmButtonText: 'Ok'
+                        confirmButtonText: 'Ok',
                       })
                     }
                     className="btn btn-success btn sweet-prompt"
@@ -301,37 +278,35 @@ const MainSweetAlert = () => {
               <div className="card-content"></div>
               <div className="sweetalert">
                 <button
-                  onClick={() =>                    
+                  onClick={() =>
                     Swal.fire({
                       title: 'Submit your Github username',
                       input: 'text',
                       inputAttributes: {
-                        autocapitalize: 'off'
+                        autocapitalize: 'off',
                       },
                       showCancelButton: true,
                       confirmButtonText: 'Look up',
                       showLoaderOnConfirm: true,
                       preConfirm: (login) => {
                         return fetch(`//api.github.com/users/${login}`)
-                          .then(response => {
+                          .then((response) => {
                             if (!response.ok) {
-                              throw new Error(response.statusText)
+                              throw new Error(response.statusText);
                             }
-                            return response.json()
+                            return response.json();
                           })
-                          .catch(error => {
-                            Swal.showValidationMessage(
-                              `Request failed: ${error}`
-                            )
-                          })
+                          .catch((error) => {
+                            Swal.showValidationMessage(`Request failed: ${error}`);
+                          });
                       },
-                      allowOutsideClick: () => !Swal.isLoading()
+                      allowOutsideClick: () => !Swal.isLoading(),
                     }).then((result) => {
                       if (result.isConfirmed) {
                         Swal.fire({
                           title: `${result.value.login}'s avatar`,
-                          imageUrl: result.value.avatar_url
-                        })
+                          imageUrl: result.value.avatar_url,
+                        });
                       }
                     })
                   }

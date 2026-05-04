@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import EventCalendar from "./EventCalendar";
+import EventCalendar from './EventCalendar';
 
-import PageTitle from "../../../layouts/PageTitle";
+import PageTitle from '../../../layouts/PageTitle';
 
 const Calendar = () => {
-   return (
-      <div className="h-80">
-         <PageTitle activeMenu="Calerdar" motherMenu="App" />
+  return (
+    <div className="h-80">
+      <PageTitle activeMenu="Calerdar" motherMenu="App" />
 
-         <EventCalendar />
-      </div>
-   );
+      <EventCalendar />
+    </div>
+  );
 };
 
 export default Calendar;

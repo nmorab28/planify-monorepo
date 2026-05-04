@@ -29,6 +29,16 @@ jobs:
           cd backend
           npm install
 
+      - name: Lint Frontend
+        run: |
+          cd frontend
+          npm run lint
+
+      - name: Lint Backend
+        run: |
+          cd backend
+          npm run lint
+
       - name: Run tests
         run: |
           cd frontend && npm run test --if-present

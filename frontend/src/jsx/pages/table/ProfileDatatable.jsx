@@ -1,8 +1,8 @@
-import React, { Fragment,  useRef } from "react";
+import React, { Fragment, useRef } from 'react';
 // import { Table, Pagination } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
-import data from "./tableData";
+import { Link } from 'react-router-dom';
+import data from './tableData';
 
 const ProfileDatatable = () => {
   const sort = 3;
@@ -12,10 +12,7 @@ const ProfileDatatable = () => {
 
   const activePag = useRef(0);
   const jobData = useRef(
-    data.profileTable.data.slice(
-      activePag.current * sort,
-      (activePag.current + 1) * sort
-    )
+    data.profileTable.data.slice(activePag.current * sort, (activePag.current + 1) * sort)
   );
   //const [demo, setdemo] = useState();
   const onClick = (i) => {
@@ -56,12 +53,7 @@ const ProfileDatatable = () => {
                         <Fragment key={i}>
                           <td className="sorting_1">
                             {i === 0 ? (
-                              <img
-                                className="rounded-circle"
-                                width="35"
-                                src={da}
-                                alt=""
-                              />
+                              <img className="rounded-circle" width="35" src={da} alt="" />
                             ) : (
                               <Fragment>
                                 {da}
@@ -73,10 +65,7 @@ const ProfileDatatable = () => {
                                     >
                                       <i className="fas fa-pencil-alt"></i>
                                     </Link>
-                                    <Link
-                                      to="#"
-                                      className="btn btn-danger shadow btn-xs sharp"
-                                    >
+                                    <Link to="#" className="btn btn-danger shadow btn-xs sharp">
                                       <i className="fa fa-trash"></i>
                                     </Link>
                                   </div>
@@ -89,15 +78,14 @@ const ProfileDatatable = () => {
                     </tr>
                   ))}
                 </tbody>
-                
               </table>
 
               <div className="d-sm-flex text-center justify-content-between align-items-center mt-3 mb-2">
                 <div className="dataTables_info">
-                  Showing {activePag.current * sort + 1} to{" "}
+                  Showing {activePag.current * sort + 1} to{' '}
                   {data.length > (activePag.current + 1) * sort
                     ? (activePag.current + 1) * sort
-                    : data.length}{" "}
+                    : data.length}{' '}
                   of {data.length} entries
                 </div>
                 <div
@@ -107,9 +95,7 @@ const ProfileDatatable = () => {
                   <Link
                     className="paginate_button previous disabled"
                     to="/table-datatable-basic"
-                    onClick={() =>
-                      activePag.current > 0 && onClick(activePag.current - 1)
-                    }
+                    onClick={() => activePag.current > 0 && onClick(activePag.current - 1)}
                   >
                     <i className="fa fa-angle-left" aria-hidden="true"></i>
                   </Link>
@@ -118,9 +104,7 @@ const ProfileDatatable = () => {
                       <Link
                         key={i}
                         to="/table-datatable-basic"
-                        className={`paginate_button  ${
-                          activePag.current === i ? "current" : ""
-                        } `}
+                        className={`paginate_button  ${activePag.current === i ? 'current' : ''} `}
                         onClick={() => onClick(i)}
                       >
                         {number}
@@ -131,8 +115,7 @@ const ProfileDatatable = () => {
                     className="paginate_button next"
                     to="/table-datatable-basic"
                     onClick={() =>
-                      activePag.current + 1 < paggination.length &&
-                      onClick(activePag.current + 1)
+                      activePag.current + 1 < paggination.length && onClick(activePag.current + 1)
                     }
                   >
                     <i className="fa fa-angle-right" aria-hidden="true"></i>

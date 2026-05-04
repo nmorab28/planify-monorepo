@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 
 class Widget1 extends Component {
   render() {
@@ -7,68 +7,64 @@ class Widget1 extends Component {
       labels: [7, 6, 8, 7, 3, 8, 3, 3, 0],
       datasets: [
         {
-          label: "My First dataset",
+          label: 'My First dataset',
           data: [0, 5, 4, 5, 4, 5, 4, 5, 4],
-          backgroundColor: "#7fd5f4",
-          borderColor: "#00acea",
+          backgroundColor: '#7fd5f4',
+          borderColor: '#00acea',
           borderWidth: 2,
-          strokeColor: "#00acea",
+          strokeColor: '#00acea',
           capBezierPoints: !0,
-          pointColor: "#fff",
-          pointBorderColor: "#00acea",
-          pointBackgroundColor: "#00acea",
+          pointColor: '#fff',
+          pointBorderColor: '#00acea',
+          pointBackgroundColor: '#00acea',
           pointBorderWidth: 2.5,
           pointRadius: 1.5,
-          pointHoverBackgroundColor: "#00acea",
-          pointHoverBorderColor: "#00acea",
+          pointHoverBackgroundColor: '#00acea',
+          pointHoverBorderColor: '#00acea',
           pointHoverRadius: 0,
-		      fill:true,
+          fill: true,
         },
       ],
     };
 
     const options = {
-     
       maintainAspectRatio: false,
-      plugins:{
-		  tooltips: {
-			enabled: false,
-		  },
-		  legend: {
-			display: false,
-			labels: {
-			  usePointStyle: false,
-			},
-		  },
-		   responsive: true,
-	  },
+      plugins: {
+        tooltips: {
+          enabled: false,
+        },
+        legend: {
+          display: false,
+          labels: {
+            usePointStyle: false,
+          },
+        },
+        responsive: true,
+      },
       scales: {
-        x: 
-          {
+        x: {
+          display: false,
+          gridLines: {
             display: false,
-            gridLines: {
-              display: false,
-              drawBorder: false,
-            },
-            scaleLabel: {
-              display: false,
-              labelString: "Month",
-            },
+            drawBorder: false,
           },
-       
-        y: 
-          {
+          scaleLabel: {
             display: false,
-            gridLines: {
-              display: false,
-              drawBorder: false,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Value",
-            },
+            labelString: 'Month',
           },
-        
+        },
+
+        y: {
+          display: false,
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Value',
+          },
+        },
       },
       elements: {
         line: {

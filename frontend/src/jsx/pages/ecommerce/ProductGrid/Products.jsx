@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Products = ({ product: { previewImg, title, rating, price } }) => {
   return (
@@ -16,7 +16,7 @@ const Products = ({ product: { previewImg, title, rating, price } }) => {
               </h5>
               {rating}
               <del className="discount">${price}</del>
-              <span className="price">${price-50}</span>
+              <span className="price">${price - 50}</span>
             </div>
           </div>
         </div>

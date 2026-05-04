@@ -1,40 +1,42 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 
-import PageTitle from "../../layouts/PageTitle";
-import { Row, Col, Card,  Tab, Nav } from "react-bootstrap";
+import PageTitle from '../../layouts/PageTitle';
+import { Row, Col, Card, Tab, Nav } from 'react-bootstrap';
 
 const tabData = [
   {
-    name: "Home",
-    icon: "home",    
-    content2:"Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. ",
+    name: 'Home',
+    icon: 'home',
+    content2:
+      "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. ",
     content:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.",
+      'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.',
   },
   {
-    name: "Profile",
-    icon: "user",
+    name: 'Profile',
+    icon: 'user',
     content:
       "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.      ",
   },
   {
-    name: "Contact",
-    icon: "phone",
-    content2:"Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. ",
+    name: 'Contact',
+    icon: 'phone',
+    content2:
+      "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. ",
     content:
-      "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.",
+      'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.',
   },
 
   {
-    name: "Message",
-    icon: "envelope",
-    content2:"Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. ",
+    name: 'Message',
+    icon: 'envelope',
+    content2:
+      "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. ",
     content:
       "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.      ",
   },
 ];
 const UiTab = () => {
-
   return (
     <Fragment>
       <PageTitle activeMenu="Tab" motherMenu="Bootstrap" pageContent="Tab" />
@@ -118,7 +120,7 @@ const UiTab = () => {
                       i !== tabData.length - 1 && (
                         <Nav.Item as="li" key={i}>
                           <Nav.Link eventKey={data.name.toLowerCase()}>
-                            Tab {i === 1 ? "Two" : i === 2 ? "Three" : "One"}
+                            Tab {i === 1 ? 'Two' : i === 2 ? 'Three' : 'One'}
                           </Nav.Link>
                         </Nav.Item>
                       )
@@ -152,7 +154,7 @@ const UiTab = () => {
                       i !== tabData.length - 1 && (
                         <Nav.Item as="li" key={i}>
                           <Nav.Link eventKey={data.name.toLowerCase()}>
-                            Tab {i === 1 ? "Two" : i === 2 ? "Three" : "One"}
+                            Tab {i === 1 ? 'Two' : i === 2 ? 'Three' : 'One'}
                           </Nav.Link>
                         </Nav.Item>
                       )
@@ -186,9 +188,7 @@ const UiTab = () => {
                     <Nav as="ul" className="flex-column nav-pills mb-3">
                       {tabData.map((data, i) => (
                         <Nav.Item as="li" key={i}>
-                          <Nav.Link eventKey={data.name.toLowerCase()}>
-                            {data.name}
-                          </Nav.Link>
+                          <Nav.Link eventKey={data.name.toLowerCase()}>{data.name}</Nav.Link>
                         </Nav.Item>
                       ))}
                     </Nav>
@@ -202,7 +202,7 @@ const UiTab = () => {
                           </p>
                         </Tab.Pane>
                       ))}
-                    </Tab.Content>{" "}
+                    </Tab.Content>{' '}
                   </Col>
                 </Tab.Container>
               </Row>
@@ -232,9 +232,7 @@ const UiTab = () => {
                     <Nav as="div" variant="pills" className="flex-column ms-2">
                       {tabData.map((data, i) => (
                         <Nav.Item as="a" key={i}>
-                          <Nav.Link eventKey={data.name.toLowerCase()}>
-                            {data.name}
-                          </Nav.Link>
+                          <Nav.Link eventKey={data.name.toLowerCase()}>{data.name}</Nav.Link>
                         </Nav.Item>
                       ))}
                     </Nav>
@@ -258,9 +256,7 @@ const UiTab = () => {
                       i !== tabData.length - 1 && (
                         <Nav.Item as="li" key={i}>
                           <Nav.Link eventKey={data.name.toLowerCase()}>
-                            <i
-                              className={`ti-${i === 2 ? "email" : data.icon}`}
-                            />
+                            <i className={`ti-${i === 2 ? 'email' : data.icon}`} />
                           </Nav.Link>
                         </Nav.Item>
                       )

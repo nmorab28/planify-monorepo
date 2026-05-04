@@ -1,5 +1,5 @@
-import React from 'react'
-import ChartistGraph from 'react-chartist'
+import React from 'react';
+import ChartistGraph from 'react-chartist';
 
 function PolarChart() {
   var data = {
@@ -10,7 +10,7 @@ function PolarChart() {
       [0, 0, 0, 1, 2, 2.5, 2, 1],
       [2.5, 2, 1, 0.5, 1, 0.5, -1, -2.5],
     ],
-  }
+  };
 
   var options = {
     high: 3,
@@ -23,15 +23,15 @@ function PolarChart() {
       showLabel: false,
       showGrid: false,
     },
-  }
+  };
 
-  var type = 'Line'
+  var type = 'Line';
 
   return (
     <>
       <ChartistGraph data={data} options={options} type={type} />
     </>
-  )
+  );
 }
 
-export default PolarChart
+export default PolarChart;

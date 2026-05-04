@@ -1,26 +1,18 @@
-import React, { Fragment , useState} from "react";
-import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Card,
-  Table,
-  Badge,
-  Dropdown,
-  ProgressBar,
-} from "react-bootstrap";
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Row, Col, Card, Table, Badge, Dropdown, ProgressBar } from 'react-bootstrap';
 
 /// imge
-import avatar1 from "../../../assets/images/avatar/1.jpg";
+import avatar1 from '../../../assets/images/avatar/1.jpg';
 // import avatar2 from "../../../assets/images/avatar/2.jpg";
 // import avatar3 from "../../../assets/images/avatar/3.jpg";
 
-import PageTitle from "../../layouts/PageTitle";
+import PageTitle from '../../layouts/PageTitle';
 
 const examTopper = [
-  {id:'111', color:'success', status:'Successful'},
-  {id:'112', color:'danger', status:'Canceled'},
-  {id:'113', color:'warning', status:'Pending'},
+  { id: '111', color: 'success', status: 'Successful' },
+  { id: '112', color: 'danger', status: 'Canceled' },
+  { id: '113', color: 'warning', status: 'Pending' },
 ];
 
 const svg1 = (
@@ -37,23 +29,22 @@ const svg1 = (
 const BootstrapTable = () => {
   const [checked, setChecked] = useState(examTopper);
   const [unchecked, setUnChecked] = useState(true);
-  const handleChecked = (id)=> {
-      let temp = checked.map((data) => {
-          if (id === data.id) {
-              return { ...data, inputchecked: !data.inputchecked };
-          }
-          return data;
-      });
-      setChecked(temp);
+  const handleChecked = (id) => {
+    let temp = checked.map((data) => {
+      if (id === data.id) {
+        return { ...data, inputchecked: !data.inputchecked };
+      }
+      return data;
+    });
+    setChecked(temp);
   };
-  const handleCheckedAll = (value)=> {
-      let temp = checked.map((data) => {          
-          return { ...data, inputchecked: value };   
-      });
-      setChecked(temp);
-      setUnChecked(!unchecked);
+  const handleCheckedAll = (value) => {
+    let temp = checked.map((data) => {
+      return { ...data, inputchecked: value };
+    });
+    setChecked(temp);
+    setUnChecked(!unchecked);
   };
-  
 
   return (
     <Fragment>
@@ -98,15 +89,14 @@ const BootstrapTable = () => {
                     <td>Dr. Jackson</td>
                     <td>01 August 2022</td>
                     <td>
-                      <Badge bg="" className="light badge-success">Successful</Badge>
+                      <Badge bg="" className="light badge-success">
+                        Successful
+                      </Badge>
                     </td>
                     <td>$21.56</td>
                     <td>
                       <Dropdown>
-                        <Dropdown.Toggle
-                          variant="success"
-                          className="light sharp i-false"
-                        >
+                        <Dropdown.Toggle variant="success" className="light sharp i-false">
                           {svg1}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -124,15 +114,14 @@ const BootstrapTable = () => {
                     <td>Dr. Jackson</td>
                     <td>01 August 2022</td>
                     <td>
-                      <Badge bg="" className="light badge-danger" >Canceled</Badge>
+                      <Badge bg="" className="light badge-danger">
+                        Canceled
+                      </Badge>
                     </td>
                     <td>$21.56</td>
                     <td>
                       <Dropdown>
-                        <Dropdown.Toggle
-                          variant="danger"
-                          className="light sharp i-false"
-                        >
+                        <Dropdown.Toggle variant="danger" className="light sharp i-false">
                           {svg1}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -150,15 +139,14 @@ const BootstrapTable = () => {
                     <td>Dr. Jackson</td>
                     <td>01 August 2022</td>
                     <td>
-                      <Badge  bg="" className="light badge-warning">Pending</Badge>
+                      <Badge bg="" className="light badge-warning">
+                        Pending
+                      </Badge>
                     </td>
                     <td>$21.56</td>
                     <td>
                       <Dropdown>
-                        <Dropdown.Toggle
-                          variant="warning"
-                          className="light sharp i-false"
-                        >
+                        <Dropdown.Toggle variant="warning" className="light sharp i-false">
                           {svg1}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -189,12 +177,9 @@ const BootstrapTable = () => {
                           className="form-check-input"
                           id="checkAll"
                           required=""
-                          onClick={()=>handleCheckedAll(unchecked)}  
+                          onClick={() => handleCheckedAll(unchecked)}
                         />
-                        <label
-                          className="form-check-label"
-                          htmlFor="checkAll"
-                        ></label>
+                        <label className="form-check-label" htmlFor="checkAll"></label>
                       </div>
                     </th>
                     <th>
@@ -216,63 +201,48 @@ const BootstrapTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {checked.map((item, index)=>(
-                      <tr key={index}>
-                        <td>
-                          <div className="form-check custom-checkbox checkbox-success check-lg me-3 bs_exam_topper">
-                            <input
-                              type="checkbox"
-                              className="form-check-input"
-                              id={`exam-${item.id}`}
-                              checked={item.inputchecked}
-                              onChange={()=>handleChecked(item.id)}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor={`exam-${item.id}`}
-                            ></label>
-                          </div>
-                        </td>
-                        <td>
-                          <strong>542</strong>
-                        </td>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <img
-                              src={avatar1}
-                              className="rounded-lg me-2"
-                              width="24"
-                              alt=""
-                            />{" "}
-                            <span className="w-space-no">Dr. Jackson</span>
-                          </div>
-                        </td>
-                        <td>example@example.com </td>
-                        <td>01 August 2022</td>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <i className={`fa fa-circle text-${item.color} me-1`}></i>{" "}
-                            {item.status}
-                          </div>
-                        </td>
-                        <td>
-                          <div className="d-flex">
-                            <Link
-                              to={"#"}
-                              className="btn btn-primary shadow btn-xs sharp me-1"
-                            >
-                              <i className="fas fa-pencil-alt"></i>
-                            </Link>
-                            <Link
-                              to={"#"}
-                              className="btn btn-danger shadow btn-xs sharp"
-                            >
-                              <i className="fa fa-trash"></i>
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}                  
+                  {checked.map((item, index) => (
+                    <tr key={index}>
+                      <td>
+                        <div className="form-check custom-checkbox checkbox-success check-lg me-3 bs_exam_topper">
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id={`exam-${item.id}`}
+                            checked={item.inputchecked}
+                            onChange={() => handleChecked(item.id)}
+                          />
+                          <label className="form-check-label" htmlFor={`exam-${item.id}`}></label>
+                        </div>
+                      </td>
+                      <td>
+                        <strong>542</strong>
+                      </td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <img src={avatar1} className="rounded-lg me-2" width="24" alt="" />{' '}
+                          <span className="w-space-no">Dr. Jackson</span>
+                        </div>
+                      </td>
+                      <td>example@example.com </td>
+                      <td>01 August 2022</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <i className={`fa fa-circle text-${item.color} me-1`}></i> {item.status}
+                        </div>
+                      </td>
+                      <td>
+                        <div className="d-flex">
+                          <Link to={'#'} className="btn btn-primary shadow btn-xs sharp me-1">
+                            <i className="fas fa-pencil-alt"></i>
+                          </Link>
+                          <Link to={'#'} className="btn btn-danger shadow btn-xs sharp">
+                            <i className="fa fa-trash"></i>
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </Card.Body>
@@ -299,7 +269,9 @@ const BootstrapTable = () => {
                     <th>1</th>
                     <td>Collar Tea Shirt For Man</td>
                     <td>
-                      <Badge bg="" className="badge-primary light">Sale</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        Sale
+                      </Badge>
                     </td>
                     <td>January 22</td>
                     <td className="color-primary">$21.56</td>
@@ -348,7 +320,9 @@ const BootstrapTable = () => {
                     <th>1</th>
                     <td>Color Tea Shirt For Man</td>
                     <td>
-                      <Badge bg="" className="badge-primary light">Sale</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        Sale
+                      </Badge>
                     </td>
                     <td>January 22</td>
                     <td className="color-primary">$21.56</td>
@@ -406,7 +380,7 @@ const BootstrapTable = () => {
                     <th>2</th>
                     <td>Collar Tea Shirt For Women</td>
                     <td>
-                      <Badge bg="success" >Tax</Badge>
+                      <Badge bg="success">Tax</Badge>
                     </td>
                     <td>January 30</td>
                     <td className="color-success">$55.32</td>
@@ -446,7 +420,9 @@ const BootstrapTable = () => {
                     <th>1</th>
                     <td>Collar Tea Shirt For Man</td>
                     <td>
-                      <Badge bg="" className="badge-primary light">Sale</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        Sale
+                      </Badge>
                     </td>
                     <td>January 22</td>
                     <td className="color-primary">$21.56</td>
@@ -464,7 +440,9 @@ const BootstrapTable = () => {
                     <th>3</th>
                     <td>Blue Backpack For Baby</td>
                     <td>
-                      <Badge bg="" className="badge-danger light">Extended</Badge>
+                      <Badge bg="" className="badge-danger light">
+                        Extended
+                      </Badge>
                     </td>
                     <td>January 25</td>
                     <td className="color-danger">$14.85</td>
@@ -487,7 +465,9 @@ const BootstrapTable = () => {
                     <th scope="col">#</th>
                     <th scope="col">Product</th>
                     <th scope="col">Popularity</th>
-                    <th scope="col" className="text-end">Sales</th>
+                    <th scope="col" className="text-end">
+                      Sales
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -498,7 +478,9 @@ const BootstrapTable = () => {
                       <ProgressBar now={70} variant="primary" />
                     </td>
                     <td className="text-end">
-                      <Badge bg="" className="badge-primary light">70%</Badge>
+                      <Badge bg="" className="badge-primary light">
+                        70%
+                      </Badge>
                     </td>
                   </tr>
                   <tr>
@@ -518,7 +500,9 @@ const BootstrapTable = () => {
                       <ProgressBar variant="dark" now="70" />
                     </td>
                     <td className="text-end">
-                      <Badge bg="" className="badge-dark light">70%</Badge>
+                      <Badge bg="" className="badge-dark light">
+                        70%
+                      </Badge>
                     </td>
                   </tr>
                   <tr>
@@ -579,9 +563,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -597,15 +585,19 @@ const BootstrapTable = () => {
                       <Badge variant="success">70%</Badge>
                     </td>
                     <td className="text-end">
-                    <span className="d-flex justify-content-end">
+                      <span className="d-flex justify-content-end">
                         <Link
                           to="/table-bootstrap-basic"
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -627,9 +619,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -651,9 +647,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -675,9 +675,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -715,15 +719,19 @@ const BootstrapTable = () => {
                       <Badge bg="primary light">70%</Badge>
                     </td>
                     <td>
-                       <span className="d-flex justify-content-end">
+                      <span className="d-flex justify-content-end">
                         <Link
                           to="/table-bootstrap-basic"
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -745,9 +753,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -769,9 +781,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -793,9 +809,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>
@@ -817,9 +837,13 @@ const BootstrapTable = () => {
                           className="me-2 btn btn-primary shadow btn-xs sharp"
                           title="Edit"
                         >
-                          <i className="fas fa-pencil-alt color-muted"></i>{" "}
+                          <i className="fas fa-pencil-alt color-muted"></i>{' '}
                         </Link>
-                        <Link to="/table-bootstrap-basic" title="Close" className="btn btn-danger shadow btn-xs sharp">
+                        <Link
+                          to="/table-bootstrap-basic"
+                          title="Close"
+                          className="btn btn-danger shadow btn-xs sharp"
+                        >
                           <i className="fa fa-close color-danger"></i>
                         </Link>
                       </span>

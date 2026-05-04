@@ -170,7 +170,6 @@
 }
 .ct-point {
   strokewidth: 10px;
-  
 }
 .ct-line {
   fill: none;
@@ -727,8 +726,6 @@
   top: 0;
   left: 0;
 }
-
-
 
 #universchart {
   line {

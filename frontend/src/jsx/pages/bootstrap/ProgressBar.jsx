@@ -1,32 +1,26 @@
-import React, { Fragment } from "react";
-import PageTitle from "../../layouts/PageTitle";
-import { Row, Col, Card, ProgressBar } from "react-bootstrap";
+import React, { Fragment } from 'react';
+import PageTitle from '../../layouts/PageTitle';
+import { Row, Col, Card, ProgressBar } from 'react-bootstrap';
 
 const UiProgressBar = () => {
   const progressBarData = [
-    { variant: "danger", value: "60" },
-    { variant: "info", value: "40" },
-    { variant: "success", value: "20" },
-    { variant: "primary", value: "30" },
-    { variant: "warning", value: "80" },
-    { variant: "inverse", value: "40" },
+    { variant: 'danger', value: '60' },
+    { variant: 'info', value: '40' },
+    { variant: 'success', value: '20' },
+    { variant: 'primary', value: '30' },
+    { variant: 'warning', value: '80' },
+    { variant: 'inverse', value: '40' },
   ];
   return (
     <Fragment>
-      <PageTitle
-        activeMenu="Progressbar"
-        motherMenu="Bootstrap"
-        pageContent="Progressbar"
-      />
+      <PageTitle activeMenu="Progressbar" motherMenu="Bootstrap" pageContent="Progressbar" />
       <Row className="ui">
         {/* <!-- column --> */}
         <Col xl={6} lg={6} md={6}>
           <Card>
             <Card.Header className=" d-block">
               <Card.Title>Default Progress bars</Card.Title>
-              <Card.Text className="mb-0 subtitle">
-                Default progress bar style
-              </Card.Text>
+              <Card.Text className="mb-0 subtitle">Default progress bar style</Card.Text>
             </Card.Header>
             <Card.Body>
               <ProgressBar now={60} variant="danger" />
@@ -56,18 +50,12 @@ const UiProgressBar = () => {
             <Card.Header className=" d-block">
               <Card.Title>Colored Progress bar</Card.Title>
               <Card.Text className="mb-0 subtitle">
-                add <code>bg-primary, .bg-danger, .bg-info</code> to change the
-                style
+                add <code>bg-primary, .bg-danger, .bg-info</code> to change the style
               </Card.Text>
             </Card.Header>
             <Card.Body>
               {progressBarData.map((data, i) => (
-                <ProgressBar
-                  now={data.value}
-                  variant={data.variant}
-                  key={i}
-                  className="mt-3"
-                />
+                <ProgressBar now={data.value} variant={data.variant} key={i} className="mt-3" />
               ))}
             </Card.Body>
           </Card>
@@ -78,8 +66,7 @@ const UiProgressBar = () => {
             <Card.Header className=" d-block">
               <Card.Title>Different bar sizes </Card.Title>
               <Card.Text className="mb-0 subtitle">
-                add <code>bg-primary, .bg-danger, .bg-info</code> to change the
-                style
+                add <code>bg-primary, .bg-danger, .bg-info</code> to change the style
               </Card.Text>
             </Card.Header>
             <Card.Body>
@@ -90,7 +77,7 @@ const UiProgressBar = () => {
                       now={data.value}
                       variant={data.variant}
                       key={i}
-                      style={{height: 6 + i }}
+                      style={{ height: 6 + i }}
                       className="mt-3"
                     />
                   )
@@ -104,8 +91,7 @@ const UiProgressBar = () => {
             <Card.Header className=" d-block">
               <Card.Title>Animated Striped bar </Card.Title>
               <Card.Text className="mb-0 subtitle">
-                add <code>bg-primary, .bg-danger, .bg-info</code> to change the
-                style
+                add <code>bg-primary, .bg-danger, .bg-info</code> to change the style
               </Card.Text>
             </Card.Header>
             <Card.Body>
@@ -138,15 +124,11 @@ const UiProgressBar = () => {
               {progressBarData.map(
                 (data, i) =>
                   i !== progressBarData.length - 1 && (
-                    <ProgressBar
-                      className=" progress-vertical"
-                      now={data.variant}
-                      key={i}
-                    >
+                    <ProgressBar className=" progress-vertical" now={data.variant} key={i}>
                       <ProgressBar
                         key={i}
                         style={{
-                          width: "4px",
+                          width: '4px',
                           height: `${data.value}%`,
                         }}
                         variant={data.variant}
@@ -171,15 +153,11 @@ const UiProgressBar = () => {
               {progressBarData.map(
                 (data, i) =>
                   i !== progressBarData.length - 1 && (
-                    <ProgressBar
-                      className=" progress-vertical-bottom"
-                      now={data.variant}
-                      key={i}
-                    >
+                    <ProgressBar className=" progress-vertical-bottom" now={data.variant} key={i}>
                       <ProgressBar
                         key={i}
                         style={{
-                          width: "4px",
+                          width: '4px',
                           height: `${data.value}%`,
                         }}
                         variant={data.variant}
@@ -204,11 +182,7 @@ const UiProgressBar = () => {
               {progressBarData.map(
                 (data, i) =>
                   i !== progressBarData.length - 1 && (
-                    <ProgressBar
-                      className=" progress-vertical"
-                      now={data.variant}
-                      key={i}
-                    >
+                    <ProgressBar className=" progress-vertical" now={data.variant} key={i}>
                       <ProgressBar
                         key={i}
                         style={{
@@ -236,17 +210,10 @@ const UiProgressBar = () => {
               {progressBarData.map(
                 (data, i) =>
                   i !== progressBarData.length - 1 && (
-                    <ProgressBar
-                      now={data.value}
-                      variant={data.variant}
-                      key={i}
-                      className="mt-3"
-                    />
+                    <ProgressBar now={data.value} variant={data.variant} key={i} className="mt-3" />
                   )
-              )}{" "}
-              
-              <ProgressBar now={40} variant="primary" className="mt-3"/>
-              
+              )}{' '}
+              <ProgressBar now={40} variant="primary" className="mt-3" />
             </Card.Body>
           </Card>
         </div>

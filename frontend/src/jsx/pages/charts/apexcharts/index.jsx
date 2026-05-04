@@ -1,20 +1,20 @@
-import React from "react";
-import loadable from "@loadable/component";
+import React from 'react';
+import loadable from '@loadable/component';
 // import { Link } from 'react-router-dom';
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card } from 'react-bootstrap';
 
-import pMinDelay from "p-min-delay";
+import pMinDelay from 'p-min-delay';
 
-import PageTitle from "../../../layouts/PageTitle";
+import PageTitle from '../../../layouts/PageTitle';
 
-const ApexBar2 = loadable(() => pMinDelay(import("./Bar2"), 1000));
-const ApexBar3 = loadable(() => pMinDelay(import("./Bar3"), 1000));
-const ApexRedialBar = loadable(() => pMinDelay(import("./RadialBar"), 1000));
-const ApexLine = loadable(() => pMinDelay(import("./Line5"), 1000));
-const ApexLine3 = loadable(() => pMinDelay(import("./Line3"), 1000));
-const ApexLine4 = loadable(() => pMinDelay(import("./Line4"), 1000));
-const ApexPie = loadable(() => pMinDelay(import("./Pie4"), 1000));
-const ApexPie5 = loadable(() => pMinDelay(import("./Pie5"), 1000));
+const ApexBar2 = loadable(() => pMinDelay(import('./Bar2'), 1000));
+const ApexBar3 = loadable(() => pMinDelay(import('./Bar3'), 1000));
+const ApexRedialBar = loadable(() => pMinDelay(import('./RadialBar'), 1000));
+const ApexLine = loadable(() => pMinDelay(import('./Line5'), 1000));
+const ApexLine3 = loadable(() => pMinDelay(import('./Line3'), 1000));
+const ApexLine4 = loadable(() => pMinDelay(import('./Line4'), 1000));
+const ApexPie = loadable(() => pMinDelay(import('./Pie4'), 1000));
+const ApexPie5 = loadable(() => pMinDelay(import('./Pie5'), 1000));
 
 function ApexChart() {
   return (
@@ -34,7 +34,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Bar Chart</h4>
+              <h4 className="card-title">Bar Chart</h4>
             </Card.Header>
             <Card.Body>
               <ApexBar3 />
@@ -45,7 +45,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Line</h4>
+              <h4 className="card-title">Line</h4>
             </Card.Header>
             <Card.Body>
               <ApexLine />
@@ -54,8 +54,8 @@ function ApexChart() {
         </Col>
         <Col xl={6} lg={6}>
           <Card>
-            <Card.Header> 
-               <h4 className="card-title">Line</h4>
+            <Card.Header>
+              <h4 className="card-title">Line</h4>
             </Card.Header>
             <Card.Body>
               <ApexLine3 />
@@ -65,7 +65,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Line</h4>
+              <h4 className="card-title">Line</h4>
             </Card.Header>
             <Card.Body>
               <ApexLine4 />
@@ -85,7 +85,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Pie</h4>
+              <h4 className="card-title">Pie</h4>
             </Card.Header>
             <Card.Body>
               <ApexPie5 />
@@ -95,7 +95,7 @@ function ApexChart() {
         <Col xl={6} lg={6}>
           <Card>
             <Card.Header>
-               <h4 className="card-title">Redial Bar</h4>
+              <h4 className="card-title">Redial Bar</h4>
             </Card.Header>
             <Card.Body>
               <ApexRedialBar />

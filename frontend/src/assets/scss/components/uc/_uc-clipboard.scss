@@ -1,10 +1,8 @@
-
-
 .clipboard-btn {
-    transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 
-    &:hover {
-        background-color: var(--primary);
-        color: $white;
-    }
+  &:hover {
+    background-color: var(--primary);
+    color: $white;
+  }
 }

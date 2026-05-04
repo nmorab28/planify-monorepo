@@ -13,12 +13,12 @@
 
   .img-preview {
     float: #{$dlab-pos-left};
-    margin-#{$dlab-pos-right}: .5rem;
-    margin-bottom: .5rem;
+    margin-#{$dlab-pos-right}: 0.5rem;
+    margin-bottom: 0.5rem;
     overflow: hidden;
     max-width: 100% !important;
 
-    &>img {
+    & > img {
       max-width: 100% !important;
     }
 

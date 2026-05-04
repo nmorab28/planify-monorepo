@@ -1,140 +1,105 @@
-import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 
 class TopProducts1 extends Component {
   render() {
     const data = {
       labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "January",
-        "February",
-        "March",
-        "April",
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'January',
+        'February',
+        'March',
+        'April',
       ],
       datasets: [
         {
-          label: "Sales Stats",
-          backgroundColor: "#bdeefd",
-          borderColor: "#01acea",
-          pointBackgroundColor: "#01acea",
-          pointBorderColor: "#01acea",
-          pointHoverBackgroundColor: "#01acea",
-          pointHoverBorderColor: "#01acea",
-		      fill:true,
+          label: 'Sales Stats',
+          backgroundColor: '#bdeefd',
+          borderColor: '#01acea',
+          pointBackgroundColor: '#01acea',
+          pointBorderColor: '#01acea',
+          pointHoverBackgroundColor: '#01acea',
+          pointHoverBorderColor: '#01acea',
+          fill: true,
           data: [
-            20,
-            10,
-            18,
-            15,
-            32,
-            18,
-            15,
-            22,
-            8,
-            6,
-            12,
-            13,
-            10,
-            18,
-            14,
-            24,
-            16,
-            12,
-            19,
-            21,
-            16,
-            14,
-            24,
-            21,
-            13,
-            15,
-            27,
-            29,
-            21,
-            11,
-            14,
-            19,
-            21,
-            17,
+            20, 10, 18, 15, 32, 18, 15, 22, 8, 6, 12, 13, 10, 18, 14, 24, 16, 12, 19, 21, 16, 14,
+            24, 21, 13, 15, 27, 29, 21, 11, 14, 19, 21, 17,
           ],
         },
       ],
     };
 
     const options = {
-      plugins:{
-		  title: {
-			display: !1,
-		  },
-		  tooltips: {
-			intersect: !1,
-			mode: "nearest",
-			xPadding: 10,
-			yPadding: 10,
-			caretPadding: 10,
-		  },
-		  legend: {
-			display: !1,
-		  }
-	  },
+      plugins: {
+        title: {
+          display: !1,
+        },
+        tooltips: {
+          intersect: !1,
+          mode: 'nearest',
+          xPadding: 10,
+          yPadding: 10,
+          caretPadding: 10,
+        },
+        legend: {
+          display: !1,
+        },
+      },
       responsive: !0,
       maintainAspectRatio: !1,
       hover: {
-        mode: "index",
+        mode: 'index',
       },
       scales: {
-        x: 
-          {
-            display: !1,
-            gridLines: !1,
-            scaleLabel: {
-              display: !0,
-              labelString: "Month",
-            },
+        x: {
+          display: !1,
+          gridLines: !1,
+          scaleLabel: {
+            display: !0,
+            labelString: 'Month',
           },
-       
-        y: 
-          {
-            display: !1,
-            gridLines: !1,
-            scaleLabel: {
-              display: !0,
-              labelString: "Value",
-            },
-            ticks: {
-              beginAtZero: !0,
-            },
+        },
+
+        y: {
+          display: !1,
+          gridLines: !1,
+          scaleLabel: {
+            display: !0,
+            labelString: 'Value',
           },
-        
+          ticks: {
+            beginAtZero: !0,
+          },
+        },
       },
       elements: {
         line: {

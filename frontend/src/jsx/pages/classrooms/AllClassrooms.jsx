@@ -1,21 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Dropdown, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import React, { useState, useRef, useEffect } from 'react';
+import { Dropdown, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-import PageTitle from "../../layouts/PageTitle";
-import {
-  getClassrooms,
-  deleteClassroom,
-} from "../../../services/classroomService";
+import PageTitle from '../../layouts/PageTitle';
+import { getClassrooms, deleteClassroom } from '../../../services/classroomService';
 
 const theadData = [
-  { heading: "Código", sortingVale: "code" },
-  { heading: "Nombre", sortingVale: "name" },
-  { heading: "Capacidad", sortingVale: "capacity" },
-  { heading: "Características", sortingVale: "features" },
-  { heading: "Estado", sortingVale: "isActive" },
-  { heading: "Acciones", sortingVale: "actions" },
+  { heading: 'Código', sortingVale: 'code' },
+  { heading: 'Nombre', sortingVale: 'name' },
+  { heading: 'Capacidad', sortingVale: 'capacity' },
+  { heading: 'Características', sortingVale: 'features' },
+  { heading: 'Estado', sortingVale: 'isActive' },
+  { heading: 'Acciones', sortingVale: 'actions' },
 ];
 
 const AllClassrooms = () => {
@@ -45,11 +42,11 @@ const AllClassrooms = () => {
       setFeeData(formatted);
       setOriginalData(formatted);
     } catch (err) {
-      console.error("Error fetching classrooms", err);
+      console.error('Error fetching classrooms', err);
       Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: err.message || "No se pudieron cargar las aulas",
+        icon: 'error',
+        title: 'Error',
+        text: err.message || 'No se pudieron cargar las aulas',
       });
     }
   };
@@ -59,18 +56,18 @@ const AllClassrooms = () => {
   }, []);
 
   const chageData = (frist, sec) => {
-    const table = document.querySelectorAll("#classroomList tbody tr");
+    const table = document.querySelectorAll('#classroomList tbody tr');
     for (let i = 0; i < table.length; ++i) {
       if (i >= frist && i < sec) {
-        table[i].classList.remove("d-none");
+        table[i].classList.remove('d-none');
       } else {
-        table[i].classList.add("d-none");
+        table[i].classList.add('d-none');
       }
     }
   };
 
   useEffect(() => {
-    setData(document.querySelectorAll("#classroomList tbody tr"));
+    setData(document.querySelectorAll('#classroomList tbody tr'));
   }, [test, feeData]);
 
   activePag.current === 0 && chageData(0, sort);
@@ -89,16 +86,14 @@ const AllClassrooms = () => {
     const sorted = [...feeData];
     const dir = iconData.complete ? 1 : -1;
 
-    if (name === "code") {
+    if (name === 'code') {
       sorted.sort((a, b) => dir * a.code.localeCompare(b.code));
-    } else if (name === "name") {
+    } else if (name === 'name') {
       sorted.sort((a, b) => dir * a.name.localeCompare(b.name));
-    } else if (name === "capacity") {
+    } else if (name === 'capacity') {
       sorted.sort((a, b) => dir * (a.capacity - b.capacity));
-    } else if (name === "isActive") {
-      sorted.sort(
-        (a, b) => dir * ((a.isActive ? 1 : 0) - (b.isActive ? 1 : 0))
-      );
+    } else if (name === 'isActive') {
+      sorted.sort((a, b) => dir * ((a.isActive ? 1 : 0) - (b.isActive ? 1 : 0)));
     }
 
     setFeeData(sorted);
@@ -107,9 +102,7 @@ const AllClassrooms = () => {
   const DataSearch = (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = originalData.filter((item) => {
-      const featuresText = item.features
-        .map((f) => `${f.code || ""} ${f.name || ""}`)
-        .join(" ");
+      const featuresText = item.features.map((f) => `${f.code || ''} ${f.name || ''}`).join(' ');
       return `${item.code} ${item.name} ${item.capacity} ${featuresText}`
         .toLowerCase()
         .includes(term);
@@ -119,14 +112,14 @@ const AllClassrooms = () => {
 
   const handleDelete = async (documentId, code) => {
     const result = await Swal.fire({
-      title: "¿Eliminar aula?",
+      title: '¿Eliminar aula?',
       text: `Vas a eliminar el aula ${code}. Esta acción no se puede deshacer.`,
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
     });
 
     if (!result.isConfirmed) return;
@@ -134,40 +127,35 @@ const AllClassrooms = () => {
     try {
       await deleteClassroom(documentId);
       await fetchClassrooms();
-      Swal.fire("Eliminada", "El aula fue eliminada.", "success");
+      Swal.fire('Eliminada', 'El aula fue eliminada.', 'success');
     } catch (err) {
       console.error(err);
-      const isLinkedSessions =
-        err.code === "CLASSROOM_HAS_SESSIONS" || err.status === 400;
+      const isLinkedSessions = err.code === 'CLASSROOM_HAS_SESSIONS' || err.status === 400;
       Swal.fire({
-        icon: "error",
-        title: isLinkedSessions ? "No se puede eliminar" : "Error",
+        icon: 'error',
+        title: isLinkedSessions ? 'No se puede eliminar' : 'Error',
         text:
-          err.message ||
-          "No se pudo eliminar el aula. Verifica que no tenga sesiones asignadas.",
+          err.message || 'No se pudo eliminar el aula. Verifica que no tenga sesiones asignadas.',
       });
     }
   };
 
   return (
     <>
-      <PageTitle activeMenu={"All Classrooms"} motherMenu={"Classrooms"} />
+      <PageTitle activeMenu={'All Classrooms'} motherMenu={'Classrooms'} />
       <Row>
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
               <h4 className="card-title">Aulas</h4>
-              <Link to={"/add-classroom"} className="btn btn-primary">
+              <Link to={'/add-classroom'} className="btn btn-primary">
                 + Add New
               </Link>
             </div>
 
             <div className="card-body">
               <div className="table-responsive">
-                <div
-                  id="classroomList"
-                  className="dataTables_wrapper no-footer"
-                >
+                <div id="classroomList" className="dataTables_wrapper no-footer">
                   <div className="justify-content-between d-sm-flex">
                     <div className="dataTables_length">
                       <label className="d-flex align-items-center">
@@ -175,15 +163,9 @@ const AllClassrooms = () => {
                         <Dropdown className="search-drop">
                           <Dropdown.Toggle as="div">{sort}</Dropdown.Toggle>
                           <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => setSort(10)}>
-                              10
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => setSort(20)}>
-                              20
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => setSort(30)}>
-                              30
-                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSort(10)}>10</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSort(20)}>20</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSort(30)}>30</Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
                         entries
@@ -242,11 +224,9 @@ const AllClassrooms = () => {
                           </td>
                           <td>
                             <span
-                              className={`badge ${
-                                row.isActive ? "bg-success" : "bg-secondary"
-                              }`}
+                              className={`badge ${row.isActive ? 'bg-success' : 'bg-secondary'}`}
                             >
-                              {row.isActive ? "Activa" : "Inactiva"}
+                              {row.isActive ? 'Activa' : 'Inactiva'}
                             </span>
                           </td>
                           <td>
@@ -258,9 +238,7 @@ const AllClassrooms = () => {
                             </Link>
                             <button
                               className="btn btn-xs sharp btn-danger"
-                              onClick={() =>
-                                handleDelete(row.documentId, row.code)
-                              }
+                              onClick={() => handleDelete(row.documentId, row.code)}
                             >
                               <i className="fa fa-trash" />
                             </button>
@@ -269,10 +247,7 @@ const AllClassrooms = () => {
                       ))}
                       {feeData.length === 0 && (
                         <tr>
-                          <td
-                            colSpan={theadData.length}
-                            className="text-center"
-                          >
+                          <td colSpan={theadData.length} className="text-center">
                             No hay aulas registradas.
                           </td>
                         </tr>
@@ -282,10 +257,10 @@ const AllClassrooms = () => {
 
                   <div className="d-sm-flex text-center justify-content-between align-items-center mt-3">
                     <div className="dataTables_info">
-                      Showing {activePag.current * sort + 1} to{" "}
+                      Showing {activePag.current * sort + 1} to{' '}
                       {data.length > (activePag.current + 1) * sort
                         ? (activePag.current + 1) * sort
-                        : data.length}{" "}
+                        : data.length}{' '}
                       of {data.length} entries
                     </div>
 
@@ -296,10 +271,7 @@ const AllClassrooms = () => {
                       <Link
                         className="paginate_button previous disabled"
                         to="#"
-                        onClick={() =>
-                          activePag.current > 0 &&
-                          onClick(activePag.current - 1)
-                        }
+                        onClick={() => activePag.current > 0 && onClick(activePag.current - 1)}
                       >
                         Previous
                       </Link>
@@ -310,7 +282,7 @@ const AllClassrooms = () => {
                             key={i}
                             to="#"
                             className={`paginate_button ${
-                              activePag.current === i ? "current" : ""
+                              activePag.current === i ? 'current' : ''
                             }`}
                             onClick={() => onClick(i)}
                           >

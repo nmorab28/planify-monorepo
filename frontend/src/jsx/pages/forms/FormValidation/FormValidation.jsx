@@ -1,31 +1,27 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
-import PageTitle from "../../../layouts/PageTitle";
+import PageTitle from '../../../layouts/PageTitle';
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
-    .min(3, "Your username must consist of at least 3 characters ")
-    .max(50, "Your username must consist of at least 3 characters ")
-    .required("Please enter a username"),
+    .min(3, 'Your username must consist of at least 3 characters ')
+    .max(50, 'Your username must consist of at least 3 characters ')
+    .required('Please enter a username'),
   password: Yup.string()
-    .min(5, "Your password must be at least 5 characters long")
-    .max(50, "Your password must be at least 5 characters long")
-    .required("Please provide a password"),
+    .min(5, 'Your password must be at least 5 characters long')
+    .max(50, 'Your password must be at least 5 characters long')
+    .required('Please provide a password'),
 });
 
 const FormValidation = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <Fragment>
-      <PageTitle
-        activeMenu="Validation"
-        motherMenu="Form"
-        pageContent="Validation"
-      />
+      <PageTitle activeMenu="Validation" motherMenu="Form" pageContent="Validation" />
 
       <div className="row">
         <div className="col-lg-12">
@@ -44,10 +40,7 @@ const FormValidation = () => {
                   <div className="row">
                     <div className="col-xl-6">
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-username"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-username">
                           Username
                           <span className="text-danger">*</span>
                         </label>
@@ -62,10 +55,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-email"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-email">
                           Email <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-6">
@@ -79,10 +69,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-password"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-password">
                           Password
                           <span className="text-danger">*</span>
                         </label>
@@ -97,12 +84,8 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-confirm-password"
-                        >
-                          Confirm Password{" "}
-                          <span className="text-danger">*</span>
+                        <label className="col-lg-4 col-form-label" htmlFor="val-confirm-password">
+                          Confirm Password <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-6">
                           <input
@@ -115,10 +98,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-suggestions"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-suggestions">
                           Suggestions <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-6">
@@ -134,15 +114,15 @@ const FormValidation = () => {
                     </div>
                     <div className="col-xl-6">
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-skill"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-skill">
                           Best Skill
                           <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-6">
-                          <Form.Select aria-label="Default select example" style={{height: "2.7rem", backgroundColor: 'transparent'}}>                           
+                          <Form.Select
+                            aria-label="Default select example"
+                            style={{ height: '2.7rem', backgroundColor: 'transparent' }}
+                          >
                             <option value="">Please select</option>
                             <option value="html">React</option>
                             <option value="css">CSS</option>
@@ -155,14 +135,11 @@ const FormValidation = () => {
                             <option value="asp">ASP.NET</option>
                             <option value="python">Python</option>
                             <option value="mysql">MySQL</option>
-                          </Form.Select>                          
+                          </Form.Select>
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-currency"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-currency">
                           Currency
                           <span className="text-danger">*</span>
                         </label>
@@ -177,10 +154,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-website"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-website">
                           Website
                           <span className="text-danger">*</span>
                         </label>
@@ -195,10 +169,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="form-group mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-phoneus"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-phoneus">
                           Phone (US)
                           <span className="text-danger">*</span>
                         </label>
@@ -213,10 +184,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-digits"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-digits">
                           Digits <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-6">
@@ -230,10 +198,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-number"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-number">
                           Number <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-6">
@@ -247,10 +212,7 @@ const FormValidation = () => {
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label
-                          className="col-lg-4 col-form-label"
-                          htmlFor="val-range"
-                        >
+                        <label className="col-lg-4 col-form-label" htmlFor="val-range">
                           Range [1, 5]
                           <span className="text-danger">*</span>
                         </label>
@@ -266,9 +228,7 @@ const FormValidation = () => {
                       </div>
                       <div className="mb-3 row">
                         <label className="col-lg-4 col-form-label">
-                          <Link to="form-validation">
-                            Terms &amp; Conditions
-                          </Link>{" "}
+                          <Link to="form-validation">Terms &amp; Conditions</Link>{' '}
                           <span className="text-danger">*</span>
                         </label>
                         <div className="col-lg-8">
@@ -283,7 +243,8 @@ const FormValidation = () => {
                               name="val-terms"
                               value="1"
                             />
-                            <span className="css-control-indicator"></span> Agree to terms and conditions
+                            <span className="css-control-indicator"></span> Agree to terms and
+                            conditions
                           </label>
                         </div>
                       </div>
@@ -309,7 +270,7 @@ const FormValidation = () => {
             <div className="card-body">
               <div className="basic-form">
                 <Formik
-                  initialValues={{ username: "", password: "" }}
+                  initialValues={{ username: '', password: '' }}
                   validationSchema={loginSchema}
                   onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
@@ -318,29 +279,18 @@ const FormValidation = () => {
                     }, 400);
                   }}
                 >
-                  {({
-                    values,
-                    errors,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-                  }) => (
+                  {({ values, errors, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
                     <form onSubmit={handleSubmit}>
                       <div
                         className={`form-group mb-3 ${
-                          values.username
-                            ? errors.username
-                              ? "is-invalid"
-                              : "is-valid"
-                            : ""
+                          values.username ? (errors.username ? 'is-invalid' : 'is-valid') : ''
                         }`}
                       >
                         <label className="text-label">Username</label>
                         <div className="input-group">
-                            <span className="input-group-text ">
-                              <i className="fa fa-user" />{" "}
-                            </span>
+                          <span className="input-group-text ">
+                            <i className="fa fa-user" />{' '}
+                          </span>
                           <input
                             type="text"
                             className="form-control"
@@ -354,7 +304,7 @@ const FormValidation = () => {
                           <div
                             id="val-username1-error"
                             className="invalid-feedback animated fadeInUp"
-                            style={{ display: "block" }}
+                            style={{ display: 'block' }}
                           >
                             {errors.username && errors.username}
                           </div>
@@ -362,28 +312,26 @@ const FormValidation = () => {
                           <div
                             id="val-username1-error"
                             className="invalid-feedback animated fadeInUp"
-                            style={{ display: "block" }}
+                            style={{ display: 'block' }}
                           />
                         </div>
                       </div>
                       <div
                         className={`form-group mb-3 ${
-                          values.password
-                            ? errors.password
-                              ? "is-invalid"
-                              : "is-valid"
-                            : ""
+                          values.password ? (errors.password ? 'is-invalid' : 'is-valid') : ''
                         }`}
                       >
-                        <label className="text-label">Password <span className="required">*</span></label>
-                        <div className="input-group transparent-append mb-2">                          
-                            <span className="input-group-text">
-                              {" "}
-                              <i className="fa fa-lock" />{" "}
-                            </span>
-                          
+                        <label className="text-label">
+                          Password <span className="required">*</span>
+                        </label>
+                        <div className="input-group transparent-append mb-2">
+                          <span className="input-group-text">
+                            {' '}
+                            <i className="fa fa-lock" />{' '}
+                          </span>
+
                           <input
-                            type={`${showPassword ? "text" : "password"}`}
+                            type={`${showPassword ? 'text' : 'password'}`}
                             className="form-control"
                             id="val-password1"
                             name="password"
@@ -397,15 +345,17 @@ const FormValidation = () => {
                             className="input-group-text show-validate"
                             onClick={() => setShowPassword(!showPassword)}
                           >
-
-                              {" "}
-                                {showPassword === false ? (<i className="fa fa-eye-slash" />) : (<i className="fa fa-eye" />)}
-                            
+                            {' '}
+                            {showPassword === false ? (
+                              <i className="fa fa-eye-slash" />
+                            ) : (
+                              <i className="fa fa-eye" />
+                            )}
                           </div>
                           <div
                             id="val-username1-error"
                             className="invalid-feedback animated fadeInUp"
-                            style={{ display: "block" }}
+                            style={{ display: 'block' }}
                           >
                             {errors.password && errors.password}
                           </div>
@@ -414,15 +364,8 @@ const FormValidation = () => {
 
                       <div className="form-group mb-3">
                         <div className="form-check">
-                          <input
-                            id="checkbox1"
-                            className="form-check-input"
-                            type="checkbox"
-                          />
-                          <label
-                            htmlFor="checkbox1"
-                            className="form-check-label"
-                          >
+                          <input id="checkbox1" className="form-check-input" type="checkbox" />
+                          <label htmlFor="checkbox1" className="form-check-label">
                             Check me out
                           </label>
                         </div>
@@ -435,9 +378,7 @@ const FormValidation = () => {
                       >
                         Submit
                       </button>
-                      <button  className="btn btn-danger light">
-                        Cancel
-                      </button>
+                      <button className="btn btn-danger light">Cancel</button>
                     </form>
                   )}
                 </Formik>

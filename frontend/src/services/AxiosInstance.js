@@ -1,8 +1,8 @@
-import axios from "axios";
-import { store } from "../store/store";
+import axios from 'axios';
+import { store } from '../store/store';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:1337/api",
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:1337/api',
 });
 
 axiosInstance.interceptors.request.use((config) => {

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { SketchPicker } from "react-color";
-import { GradientPickerPopover  } from "react-linear-gradient-picker";
+import React, { useState } from 'react';
+import { SketchPicker } from 'react-color';
+import { GradientPickerPopover } from 'react-linear-gradient-picker';
 import 'react-linear-gradient-picker/dist/index.css';
 
-const rgbToRgba = (rgb, a = 1) =>
-  rgb.replace("rgb(", "rgba(").replace(")", `, ${a})`);
+const rgbToRgba = (rgb, a = 1) => rgb.replace('rgb(', 'rgba(').replace(')', `, ${a})`);
 
 const WrappedSketchPicker = ({ onSelect, ...rest }) => {
   return (
@@ -20,8 +19,8 @@ const WrappedSketchPicker = ({ onSelect, ...rest }) => {
 };
 
 const initialPallet = [
-  { offset: "0.00", color: "rgb(238, 241, 11)" },
-  { offset: "1.00", color: "rgb(126, 32, 207)" },
+  { offset: '0.00', color: 'rgb(238, 241, 11)' },
+  { offset: '1.00', color: 'rgb(126, 32, 207)' },
 ];
 
 const Gradient = () => {
@@ -30,7 +29,7 @@ const Gradient = () => {
   const [palette, setPalette] = useState(initialPallet);
 
   return (
-    <GradientPickerPopover 
+    <GradientPickerPopover
       {...{
         open,
         setOpen,
@@ -45,11 +44,8 @@ const Gradient = () => {
       }}
     >
       <WrappedSketchPicker />
-    </GradientPickerPopover >
+    </GradientPickerPopover>
   );
 };
 
 export default Gradient;
-
-
-
