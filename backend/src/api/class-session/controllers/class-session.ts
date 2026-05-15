@@ -39,8 +39,16 @@ function buildConflictIssues(conflicts: SessionConflict[]) {
 }
 
 function buildTeacherAvailabilityIssues(messages: string[]) {
+  return buildMessageIssues(['teacherAvailability'], messages);
+}
+
+function buildClassroomCapacityIssues(messages: string[]) {
+  return buildMessageIssues(['classroomCapacity'], messages);
+}
+
+function buildMessageIssues(path: string[], messages: string[]) {
   return messages.map((message) => ({
-    path: ['teacherAvailability'],
+    path,
     message,
   }));
 }
@@ -80,6 +88,14 @@ export default factories.createCoreController('api::class-session.class-session'
       throw buildValidationError(buildTeacherAvailabilityIssues(availabilityIssues));
     }
 
+    const capacityIssues = await strapi
+      .service('api::class-session.class-session')
+      .findClassroomCapacityIssues({ data });
+
+    if (capacityIssues.length > 0) {
+      throw buildValidationError(buildClassroomCapacityIssues(capacityIssues));
+    }
+
     applyDefaultPopulate(ctx, defaultPopulate);
     return super.create(ctx);
   },
@@ -114,6 +130,17 @@ export default factories.createCoreController('api::class-session.class-session'
 
       if (availabilityIssues.length > 0) {
         throw buildValidationError(buildTeacherAvailabilityIssues(availabilityIssues));
+      }
+
+      const capacityIssues = await strapi
+        .service('api::class-session.class-session')
+        .findClassroomCapacityIssues({
+          data,
+          currentSessionDocumentId: ctx.params?.id,
+        });
+
+      if (capacityIssues.length > 0) {
+        throw buildValidationError(buildClassroomCapacityIssues(capacityIssues));
       }
     }
 
