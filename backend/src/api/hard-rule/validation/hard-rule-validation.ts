@@ -16,6 +16,8 @@ export type ValidationOptions = {
 
 const CODE_REGEX = /^[A-Z0-9_-]{2,80}$/;
 const MAX_NAME_LENGTH = 120;
+const CODE_FORMAT_MESSAGE =
+  'El codigo debe tener entre 2 y 80 caracteres y solo usar mayusculas, numeros, guion o guion bajo.';
 
 function isPresent(value: unknown): boolean {
   if (value === undefined || value === null) return false;
@@ -27,44 +29,60 @@ function isPlainObject(value: unknown): boolean {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+function validateRequiredString(
+  issues: ValidationIssue[],
+  value: unknown,
+  field: keyof HardRuleCandidate,
+  messages: { required: string; type: string },
+  opts: ValidationOptions & { regex?: RegExp; regexMessage?: string; maxLength?: number }
+) {
+  if (!isPresent(value)) {
+    if (!opts.partial) issues.push({ path: [field], message: messages.required });
+    return;
+  }
+
+  if (typeof value !== 'string') {
+    issues.push({ path: [field], message: messages.type });
+    return;
+  }
+
+  const trimmed = value.trim();
+  if (opts.regex && !opts.regex.test(trimmed)) {
+    issues.push({ path: [field], message: opts.regexMessage ?? 'Formato invalido.' });
+  } else if (trimmed.length < 2) {
+    issues.push({ path: [field], message: 'El nombre debe tener al menos 2 caracteres.' });
+  } else if (opts.maxLength && trimmed.length > opts.maxLength) {
+    issues.push({ path: [field], message: `El nombre no puede superar ${opts.maxLength} caracteres.` });
+  }
+}
+
 export function validateHardRuleCandidate(
   input: HardRuleCandidate,
   opts: ValidationOptions = {}
 ): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
-  const partial = !!opts.partial;
 
-  if (!isPresent(input.code)) {
-    if (!partial) {
-      issues.push({ path: ['code'], message: 'El codigo de la regla es obligatorio.' });
-    }
-  } else if (typeof input.code !== 'string') {
-    issues.push({ path: ['code'], message: 'El codigo de la regla debe ser texto.' });
-  } else if (!CODE_REGEX.test(input.code.trim())) {
-    issues.push({
-      path: ['code'],
-      message:
-        'El codigo debe tener entre 2 y 80 caracteres y solo usar mayusculas, numeros, guion o guion bajo.',
-    });
-  }
+  validateRequiredString(
+    issues,
+    input.code,
+    'code',
+    {
+      required: 'El codigo de la regla es obligatorio.',
+      type: 'El codigo de la regla debe ser texto.',
+    },
+    { ...opts, regex: CODE_REGEX, regexMessage: CODE_FORMAT_MESSAGE }
+  );
 
-  if (!isPresent(input.name)) {
-    if (!partial) {
-      issues.push({ path: ['name'], message: 'El nombre de la regla es obligatorio.' });
-    }
-  } else if (typeof input.name !== 'string') {
-    issues.push({ path: ['name'], message: 'El nombre de la regla debe ser texto.' });
-  } else {
-    const name = input.name.trim();
-    if (name.length < 2) {
-      issues.push({ path: ['name'], message: 'El nombre debe tener al menos 2 caracteres.' });
-    } else if (name.length > MAX_NAME_LENGTH) {
-      issues.push({
-        path: ['name'],
-        message: `El nombre no puede superar ${MAX_NAME_LENGTH} caracteres.`,
-      });
-    }
-  }
+  validateRequiredString(
+    issues,
+    input.name,
+    'name',
+    {
+      required: 'El nombre de la regla es obligatorio.',
+      type: 'El nombre de la regla debe ser texto.',
+    },
+    { ...opts, maxLength: MAX_NAME_LENGTH }
+  );
 
   if (input.isEnabled !== undefined && typeof input.isEnabled !== 'boolean') {
     issues.push({ path: ['isEnabled'], message: 'isEnabled debe ser booleano.' });

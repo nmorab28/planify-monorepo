@@ -1,4 +1,4 @@
-name: PR Build
+name: Build
 
 on:
   pull_request:
@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  frontend-build:
-    name: Frontend build
+  react:
+    name: React
     runs-on: ubuntu-latest
 
     defaults:
@@ -26,14 +26,14 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Build frontend
+      - name: Build React
         run: npm run build
         env:
           CI: false
           REACT_APP_API_URL: http://localhost:1337
 
-  backend-build:
-    name: Backend build
+  strapi:
+    name: Strapi
     runs-on: ubuntu-latest
 
     defaults:
@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Build backend
+      - name: Build Strapi
         run: npm run build
         env:
           HOST: 0.0.0.0
