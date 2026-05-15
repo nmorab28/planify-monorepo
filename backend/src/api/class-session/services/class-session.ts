@@ -27,6 +27,23 @@ export type ValidateSessionResult = {
   conflicts: SessionConflict[];
 };
 
+export type PersistedClassSession = {
+  documentId: string;
+  dayOfWeek?: number;
+  startTime?: string;
+  endTime?: string;
+  academicGroup?: {
+    documentId?: string;
+    teacher?: { documentId?: string } | null;
+  } | null;
+  classroom?: { documentId?: string } | null;
+};
+
+export type ScheduleConflictInput = {
+  data: Record<string, unknown>;
+  currentSessionDocumentId?: string;
+};
+
 const defaultPopulate = {
   academicGroup: {
     populate: {
@@ -37,6 +54,50 @@ const defaultPopulate = {
   },
   classroom: true,
 } as const;
+
+function readRelationDocumentId(value: unknown): string | null {
+  if (typeof value === 'string' && value.trim().length > 0) return value.trim();
+
+  if (typeof value !== 'object' || value === null) return null;
+
+  const relation = value as {
+    documentId?: unknown;
+    connect?: unknown[];
+    set?: unknown[];
+  };
+
+  if (typeof relation.documentId === 'string' && relation.documentId.trim().length > 0) {
+    return relation.documentId.trim();
+  }
+
+  const candidates = Array.isArray(relation.set) ? relation.set : relation.connect;
+  const firstCandidate = Array.isArray(candidates) ? candidates[0] : null;
+
+  if (typeof firstCandidate === 'string' && firstCandidate.trim().length > 0) {
+    return firstCandidate.trim();
+  }
+
+  if (typeof firstCandidate === 'object' && firstCandidate !== null) {
+    const documentId = (firstCandidate as { documentId?: unknown }).documentId;
+    if (typeof documentId === 'string' && documentId.trim().length > 0) {
+      return documentId.trim();
+    }
+  }
+
+  return null;
+}
+
+function mapExistingSession(session: PersistedClassSession): ExistingSession {
+  return {
+    documentId: session.documentId,
+    dayOfWeek: session.dayOfWeek as number,
+    startTime: session.startTime as string,
+    endTime: session.endTime as string,
+    teacherDocumentId: session.academicGroup?.teacher?.documentId ?? null,
+    classroomDocumentId: session.classroom?.documentId ?? null,
+    academicGroupDocumentId: session.academicGroup?.documentId ?? null,
+  };
+}
 
 export default factories.createCoreService('api::class-session.class-session', ({ strapi }) => ({
   async findByTeacher(teacherDocumentId: string, options: QueryOptions = {}) {
@@ -85,18 +146,9 @@ export default factories.createCoreService('api::class-session.class-session', (
       .documents('api::class-session.class-session')
       .findMany({ populate: defaultPopulate });
 
-    const existing: ExistingSession[] = rawSessions.map((s) => ({
-      documentId: s.documentId,
-      dayOfWeek: s.dayOfWeek as number,
-      startTime: s.startTime as string,
-      endTime: s.endTime as string,
-      teacherDocumentId:
-        (s.academicGroup as { teacher?: { documentId?: string } } | null)?.teacher?.documentId ??
-        null,
-      classroomDocumentId: (s.classroom as { documentId?: string } | null)?.documentId ?? null,
-      academicGroupDocumentId:
-        (s.academicGroup as { documentId?: string } | null)?.documentId ?? null,
-    }));
+    const existing: ExistingSession[] = (rawSessions as PersistedClassSession[]).map(
+      mapExistingSession
+    );
 
     const candidate: SessionCandidate = {
       dayOfWeek: input.dayOfWeek,
@@ -167,5 +219,48 @@ export default factories.createCoreService('api::class-session.class-session', (
     }
 
     return { valid: conflicts.length === 0, conflicts };
+  },
+
+  async findScheduleConflicts(input: ScheduleConflictInput): Promise<SessionConflict[]> {
+    const currentSession = input.currentSessionDocumentId
+      ? ((await strapi.documents('api::class-session.class-session').findOne({
+          documentId: input.currentSessionDocumentId,
+          populate: defaultPopulate,
+        })) as PersistedClassSession | null)
+      : null;
+
+    const academicGroupDocumentId =
+      readRelationDocumentId(input.data.academicGroup) ??
+      currentSession?.academicGroup?.documentId ??
+      null;
+    const classroomDocumentId =
+      readRelationDocumentId(input.data.classroom) ?? currentSession?.classroom?.documentId ?? null;
+
+    const academicGroup = academicGroupDocumentId
+      ? ((await strapi.documents('api::academic-group.academic-group').findOne({
+          documentId: academicGroupDocumentId,
+          populate: { teacher: true },
+        })) as { documentId: string; teacher?: { documentId?: string } | null } | null)
+      : null;
+
+    const rawSessions = (await strapi.documents('api::class-session.class-session').findMany({
+      populate: defaultPopulate,
+    })) as PersistedClassSession[];
+
+    return checkSessionConflicts(
+      {
+        dayOfWeek: Number(input.data.dayOfWeek ?? currentSession?.dayOfWeek),
+        startTime: String(input.data.startTime ?? currentSession?.startTime),
+        endTime: String(input.data.endTime ?? currentSession?.endTime),
+        teacherDocumentId:
+          academicGroup?.teacher?.documentId ??
+          currentSession?.academicGroup?.teacher?.documentId ??
+          null,
+        classroomDocumentId,
+        academicGroupDocumentId,
+        sessionDocumentId: input.currentSessionDocumentId,
+      },
+      rawSessions.map(mapExistingSession)
+    );
   },
 }));

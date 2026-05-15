@@ -5,6 +5,7 @@ import {
   buildValidationError,
   requireDataPayload,
 } from '../../../utils/controller-utils';
+import type { SessionConflict } from '../validation/session-validation';
 import { validateClassSessionCandidate } from '../validation/class-session-management-validation';
 
 const defaultPopulate = {
@@ -30,6 +31,13 @@ function pickQueryOptions(query: Record<string, unknown>) {
   };
 }
 
+function buildConflictIssues(conflicts: SessionConflict[]) {
+  return conflicts.map((conflict) => ({
+    path: ['scheduleConflict', conflict.type],
+    message: conflict.message,
+  }));
+}
+
 export default factories.createCoreController('api::class-session.class-session', ({ strapi }) => ({
   async find(ctx) {
     applyDefaultPopulate(ctx, defaultPopulate);
@@ -49,6 +57,14 @@ export default factories.createCoreController('api::class-session.class-session'
       throw buildValidationError(issues);
     }
 
+    const conflicts = await strapi
+      .service('api::class-session.class-session')
+      .findScheduleConflicts({ data });
+
+    if (conflicts.length > 0) {
+      throw buildValidationError(buildConflictIssues(conflicts));
+    }
+
     applyDefaultPopulate(ctx, defaultPopulate);
     return super.create(ctx);
   },
@@ -61,6 +77,17 @@ export default factories.createCoreController('api::class-session.class-session'
 
       if (issues.length > 0) {
         throw buildValidationError(issues);
+      }
+
+      const conflicts = await strapi
+        .service('api::class-session.class-session')
+        .findScheduleConflicts({
+          data,
+          currentSessionDocumentId: ctx.params?.id,
+        });
+
+      if (conflicts.length > 0) {
+        throw buildValidationError(buildConflictIssues(conflicts));
       }
     }
 
