@@ -1,0 +1,67 @@
+name: PR Build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  frontend-build:
+    name: Frontend build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build frontend
+        run: npm run build
+        env:
+          CI: false
+          REACT_APP_API_URL: http://localhost:1337
+
+  backend-build:
+    name: Backend build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build backend
+        run: npm run build
+        env:
+          HOST: 0.0.0.0
+          PORT: 1337
+          APP_KEYS: ci-app-key-1,ci-app-key-2,ci-app-key-3,ci-app-key-4
+          API_TOKEN_SALT: ci-api-token-salt
+          ADMIN_JWT_SECRET: ci-admin-jwt-secret
+          TRANSFER_TOKEN_SALT: ci-transfer-token-salt
+          JWT_SECRET: ci-jwt-secret
+          ENCRYPTION_KEY: ci-encryption-key-32-characters
+          DATABASE_CLIENT: sqlite
+          DATABASE_FILENAME: .tmp/ci-build.db
