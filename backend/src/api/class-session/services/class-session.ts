@@ -1,10 +1,13 @@
 import { factories } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
 import {
   checkSessionConflicts,
+  isSessionCoveredByAvailability,
   isWithinScheduleHours,
   type SessionCandidate,
   type ExistingSession,
   type SessionConflict,
+  type TeacherAvailability,
 } from '../validation/session-validation';
 
 type QueryOptions = {
@@ -43,6 +46,8 @@ export type ScheduleConflictInput = {
   data: Record<string, unknown>;
   currentSessionDocumentId?: string;
 };
+
+export type TeacherAvailabilityInput = ScheduleConflictInput;
 
 const defaultPopulate = {
   academicGroup: {
@@ -96,6 +101,45 @@ function mapExistingSession(session: PersistedClassSession): ExistingSession {
     teacherDocumentId: session.academicGroup?.teacher?.documentId ?? null,
     classroomDocumentId: session.classroom?.documentId ?? null,
     academicGroupDocumentId: session.academicGroup?.documentId ?? null,
+  };
+}
+
+async function resolveSessionContext(
+  strapi: Core.Strapi,
+  input: ScheduleConflictInput
+) {
+  const currentSession = input.currentSessionDocumentId
+    ? ((await strapi.documents('api::class-session.class-session').findOne({
+        documentId: input.currentSessionDocumentId,
+        populate: defaultPopulate,
+      })) as PersistedClassSession | null)
+    : null;
+
+  const academicGroupDocumentId =
+    readRelationDocumentId(input.data.academicGroup) ??
+    currentSession?.academicGroup?.documentId ??
+    null;
+  const classroomDocumentId =
+    readRelationDocumentId(input.data.classroom) ?? currentSession?.classroom?.documentId ?? null;
+
+  const academicGroup = academicGroupDocumentId
+    ? ((await strapi.documents('api::academic-group.academic-group').findOne({
+        documentId: academicGroupDocumentId,
+        populate: { teacher: true },
+      })) as { documentId: string; teacher?: { documentId?: string } | null } | null)
+    : null;
+
+  return {
+    currentSession,
+    academicGroupDocumentId,
+    classroomDocumentId,
+    teacherDocumentId:
+      academicGroup?.teacher?.documentId ??
+      currentSession?.academicGroup?.teacher?.documentId ??
+      null,
+    dayOfWeek: Number(input.data.dayOfWeek ?? currentSession?.dayOfWeek),
+    startTime: String(input.data.startTime ?? currentSession?.startTime),
+    endTime: String(input.data.endTime ?? currentSession?.endTime),
   };
 }
 
@@ -222,26 +266,7 @@ export default factories.createCoreService('api::class-session.class-session', (
   },
 
   async findScheduleConflicts(input: ScheduleConflictInput): Promise<SessionConflict[]> {
-    const currentSession = input.currentSessionDocumentId
-      ? ((await strapi.documents('api::class-session.class-session').findOne({
-          documentId: input.currentSessionDocumentId,
-          populate: defaultPopulate,
-        })) as PersistedClassSession | null)
-      : null;
-
-    const academicGroupDocumentId =
-      readRelationDocumentId(input.data.academicGroup) ??
-      currentSession?.academicGroup?.documentId ??
-      null;
-    const classroomDocumentId =
-      readRelationDocumentId(input.data.classroom) ?? currentSession?.classroom?.documentId ?? null;
-
-    const academicGroup = academicGroupDocumentId
-      ? ((await strapi.documents('api::academic-group.academic-group').findOne({
-          documentId: academicGroupDocumentId,
-          populate: { teacher: true },
-        })) as { documentId: string; teacher?: { documentId?: string } | null } | null)
-      : null;
+    const sessionContext = await resolveSessionContext(strapi, input);
 
     const rawSessions = (await strapi.documents('api::class-session.class-session').findMany({
       populate: defaultPopulate,
@@ -249,18 +274,49 @@ export default factories.createCoreService('api::class-session.class-session', (
 
     return checkSessionConflicts(
       {
-        dayOfWeek: Number(input.data.dayOfWeek ?? currentSession?.dayOfWeek),
-        startTime: String(input.data.startTime ?? currentSession?.startTime),
-        endTime: String(input.data.endTime ?? currentSession?.endTime),
-        teacherDocumentId:
-          academicGroup?.teacher?.documentId ??
-          currentSession?.academicGroup?.teacher?.documentId ??
-          null,
-        classroomDocumentId,
-        academicGroupDocumentId,
+        dayOfWeek: sessionContext.dayOfWeek,
+        startTime: sessionContext.startTime,
+        endTime: sessionContext.endTime,
+        teacherDocumentId: sessionContext.teacherDocumentId,
+        classroomDocumentId: sessionContext.classroomDocumentId,
+        academicGroupDocumentId: sessionContext.academicGroupDocumentId,
         sessionDocumentId: input.currentSessionDocumentId,
       },
       rawSessions.map(mapExistingSession)
     );
+  },
+
+  async findTeacherAvailabilityIssues(input: TeacherAvailabilityInput): Promise<string[]> {
+    const sessionContext = await resolveSessionContext(strapi, input);
+
+    if (!sessionContext.teacherDocumentId) {
+      return [];
+    }
+
+    const availabilitySlots = (await strapi.documents('api::availability.availability').findMany({
+      filters: {
+        dayOfWeek: { $eq: sessionContext.dayOfWeek },
+        isAvailable: { $eq: true },
+        teacher: {
+          documentId: { $eq: sessionContext.teacherDocumentId },
+        },
+      },
+      fields: ['dayOfWeek', 'startTime', 'endTime', 'isAvailable'],
+    } as never)) as TeacherAvailability[];
+
+    const isCovered = isSessionCoveredByAvailability(
+      {
+        dayOfWeek: sessionContext.dayOfWeek,
+        startTime: sessionContext.startTime,
+        endTime: sessionContext.endTime,
+      },
+      availabilitySlots
+    );
+
+    return isCovered
+      ? []
+      : [
+          `El docente no tiene disponibilidad para el dia ${sessionContext.dayOfWeek} entre ${sessionContext.startTime} y ${sessionContext.endTime}.`,
+        ];
   },
 }));
