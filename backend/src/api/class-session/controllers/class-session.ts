@@ -38,6 +38,13 @@ function buildConflictIssues(conflicts: SessionConflict[]) {
   }));
 }
 
+function buildTeacherAvailabilityIssues(messages: string[]) {
+  return messages.map((message) => ({
+    path: ['teacherAvailability'],
+    message,
+  }));
+}
+
 export default factories.createCoreController('api::class-session.class-session', ({ strapi }) => ({
   async find(ctx) {
     applyDefaultPopulate(ctx, defaultPopulate);
@@ -65,6 +72,14 @@ export default factories.createCoreController('api::class-session.class-session'
       throw buildValidationError(buildConflictIssues(conflicts));
     }
 
+    const availabilityIssues = await strapi
+      .service('api::class-session.class-session')
+      .findTeacherAvailabilityIssues({ data });
+
+    if (availabilityIssues.length > 0) {
+      throw buildValidationError(buildTeacherAvailabilityIssues(availabilityIssues));
+    }
+
     applyDefaultPopulate(ctx, defaultPopulate);
     return super.create(ctx);
   },
@@ -88,6 +103,17 @@ export default factories.createCoreController('api::class-session.class-session'
 
       if (conflicts.length > 0) {
         throw buildValidationError(buildConflictIssues(conflicts));
+      }
+
+      const availabilityIssues = await strapi
+        .service('api::class-session.class-session')
+        .findTeacherAvailabilityIssues({
+          data,
+          currentSessionDocumentId: ctx.params?.id,
+        });
+
+      if (availabilityIssues.length > 0) {
+        throw buildValidationError(buildTeacherAvailabilityIssues(availabilityIssues));
       }
     }
 

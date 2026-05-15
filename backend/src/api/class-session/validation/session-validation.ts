@@ -40,6 +40,13 @@ export type ScheduleConfig = {
   lunchEnd: string;
 };
 
+export type TeacherAvailability = {
+  dayOfWeek: number;
+  startTime: string;
+  endTime: string;
+  isAvailable?: boolean | null;
+};
+
 /**
  * Convierte "HH:MM" o "HH:MM:SS" a minutos desde medianoche.
  * Retorna NaN si el formato es inválido.
@@ -66,6 +73,27 @@ export function isTimeOverlap(startA: string, endA: string, startB: string, endB
   if (isNaN(sA) || isNaN(eA) || isNaN(sB) || isNaN(eB)) return false;
 
   return sA < eB && sB < eA;
+}
+
+export function isSessionCoveredByAvailability(
+  session: Pick<SessionCandidate, 'dayOfWeek' | 'startTime' | 'endTime'>,
+  availabilitySlots: TeacherAvailability[]
+): boolean {
+  const sessionStart = timeToMinutes(session.startTime);
+  const sessionEnd = timeToMinutes(session.endTime);
+
+  if (isNaN(sessionStart) || isNaN(sessionEnd)) return false;
+
+  return availabilitySlots.some((slot) => {
+    if (slot.dayOfWeek !== session.dayOfWeek || slot.isAvailable === false) return false;
+
+    const slotStart = timeToMinutes(slot.startTime);
+    const slotEnd = timeToMinutes(slot.endTime);
+
+    if (isNaN(slotStart) || isNaN(slotEnd)) return false;
+
+    return slotStart <= sessionStart && sessionEnd <= slotEnd;
+  });
 }
 
 /**

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   isTimeOverlap,
+  isSessionCoveredByAvailability,
   checkSessionConflicts,
   isWithinScheduleHours,
   timeToMinutes,
@@ -63,6 +64,38 @@ describe('isTimeOverlap', () => {
 
   it('retorna false si algún tiempo es inválido', () => {
     expect(isTimeOverlap('invalid', '10:00', '08:00', '09:00')).toBe(false);
+  });
+});
+
+describe('isSessionCoveredByAvailability', () => {
+  it('retorna true cuando una disponibilidad cubre toda la sesion', () => {
+    expect(
+      isSessionCoveredByAvailability(
+        { dayOfWeek: 1, startTime: '08:00', endTime: '10:00' },
+        [{ dayOfWeek: 1, startTime: '07:00', endTime: '12:00', isAvailable: true }]
+      )
+    ).toBe(true);
+  });
+
+  it('retorna false si la sesion queda parcialmente fuera de la disponibilidad', () => {
+    expect(
+      isSessionCoveredByAvailability(
+        { dayOfWeek: 1, startTime: '08:00', endTime: '10:00' },
+        [{ dayOfWeek: 1, startTime: '09:00', endTime: '12:00', isAvailable: true }]
+      )
+    ).toBe(false);
+  });
+
+  it('ignora disponibilidades de otro dia o marcadas como no disponibles', () => {
+    expect(
+      isSessionCoveredByAvailability(
+        { dayOfWeek: 1, startTime: '08:00', endTime: '10:00' },
+        [
+          { dayOfWeek: 2, startTime: '07:00', endTime: '12:00', isAvailable: true },
+          { dayOfWeek: 1, startTime: '07:00', endTime: '12:00', isAvailable: false },
+        ]
+      )
+    ).toBe(false);
   });
 });
 
