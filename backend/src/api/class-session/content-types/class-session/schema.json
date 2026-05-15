@@ -43,13 +43,15 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::academic-group.academic-group",
-      "inversedBy": "classSessions"
+      "inversedBy": "classSessions",
+      "required": true
     },
     "classroom": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::classroom.classroom",
-      "inversedBy": "classSessions"
+      "inversedBy": "classSessions",
+      "required": true
     }
   }
 }

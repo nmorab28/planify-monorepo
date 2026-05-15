@@ -1,5 +1,22 @@
 import { factories } from '@strapi/strapi';
 
+import {
+  applyDefaultPopulate,
+  buildValidationError,
+  requireDataPayload,
+} from '../../../utils/controller-utils';
+import { validateClassSessionCandidate } from '../validation/class-session-management-validation';
+
+const defaultPopulate = {
+  academicGroup: {
+    populate: {
+      course: true,
+      teacher: true,
+    },
+  },
+  classroom: true,
+} as const;
+
 function normalizeDocumentId(value: unknown): string | null {
   if (typeof value !== 'string') return null;
   const trimmed = value.trim();
@@ -14,6 +31,43 @@ function pickQueryOptions(query: Record<string, unknown>) {
 }
 
 export default factories.createCoreController('api::class-session.class-session', ({ strapi }) => ({
+  async find(ctx) {
+    applyDefaultPopulate(ctx, defaultPopulate);
+    return super.find(ctx);
+  },
+
+  async findOne(ctx) {
+    applyDefaultPopulate(ctx, defaultPopulate);
+    return super.findOne(ctx);
+  },
+
+  async create(ctx) {
+    const data = requireDataPayload(ctx);
+    const issues = validateClassSessionCandidate(data);
+
+    if (issues.length > 0) {
+      throw buildValidationError(issues);
+    }
+
+    applyDefaultPopulate(ctx, defaultPopulate);
+    return super.create(ctx);
+  },
+
+  async update(ctx) {
+    const data = ctx.request.body?.data as Record<string, unknown> | undefined;
+
+    if (data) {
+      const issues = validateClassSessionCandidate(data, { partial: true });
+
+      if (issues.length > 0) {
+        throw buildValidationError(issues);
+      }
+    }
+
+    applyDefaultPopulate(ctx, defaultPopulate);
+    return super.update(ctx);
+  },
+
   async findByTeacher(ctx) {
     const teacherDocumentId = normalizeDocumentId(ctx.params.teacherDocumentId);
     if (!teacherDocumentId) return ctx.badRequest('teacherDocumentId is required');
