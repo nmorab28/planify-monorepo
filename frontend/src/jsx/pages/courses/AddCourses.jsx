@@ -1,167 +1,181 @@
-import React from 'react';
-import { DatePicker } from 'rsuite';
+import React, { useState } from 'react';
 
 import PageTitle from '../../layouts/PageTitle';
 
+import { createCourse } from '../../../services/courseService';
+
 const AddCourses = () => {
+  const [formData, setFormData] = useState({
+    code: '',
+    name: '',
+    weeklySessions: 1,
+    sessionDurationMinutes: 60,
+    needsNonConsecutiveDays: false,
+    isActive: true,
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      setError('');
+      setMessage('');
+
+      await createCourse({
+        ...formData,
+        weeklySessions: Number(formData.weeklySessions),
+        sessionDurationMinutes: Number(formData.sessionDurationMinutes),
+      });
+
+      setMessage('Course created successfully');
+
+      setFormData({
+        code: '',
+        name: '',
+        weeklySessions: 1,
+        sessionDurationMinutes: 60,
+        needsNonConsecutiveDays: false,
+        isActive: true,
+      });
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Error creating course');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <PageTitle activeMenu={'Add Course'} motherMenu={'Courses'} />
+
       <div className="row">
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
               <h4 className="card-title">Courses Details</h4>
             </div>
+
             <div className="card-body">
-              <form action="#" method="post">
+              <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="Course_Name">
-                        Course Name
-                      </label>
+                      <label className="form-label">Course Name</label>
+
                       <input
-                        placeholder="Course Name"
-                        id="Course_Name"
                         type="text"
                         className="form-control"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         required
                       />
                     </div>
                   </div>
+
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="Course_Code">
-                        Course Code
-                      </label>
+                      <label className="form-label">Course Code</label>
+
                       <input
-                        placeholder="Course Code"
-                        id="Course_Code"
                         type="text"
                         className="form-control"
+                        name="code"
+                        value={formData.code}
+                        onChange={handleChange}
                         required
                       />
                     </div>
                   </div>
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="Course_Details">
-                        Course Details
-                      </label>
-                      <textarea
-                        placeholder="Course Details"
-                        id="Course_Details"
-                        className="form-control"
-                        rows="5"
-                        required
-                        defaultValue={'Course Details'}
-                      />
-                    </div>
-                  </div>
+
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="datepicker">
-                        Start Form
-                      </label>
-                      <div className="input-hasicon mb-xl-0 mb-3">
-                        <DatePicker placeholder="Start Form" className="picker-suit" />
-                        <div className="icon">
-                          <i className="far fa-calendar" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="Course_Duration">
-                        Course Duration
-                      </label>
+                      <label className="form-label">Weekly Sessions</label>
+
                       <input
-                        placeholder="Course Duration"
-                        id="Course_Duration"
-                        type="text"
-                        className="form-control"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="Course_Price">
-                        Course Price
-                      </label>
-                      <input
-                        placeholder="Course Price"
-                        id="Course_Price"
-                        type="text"
-                        className="form-control"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="Professor_Name">
-                        Professor Name
-                      </label>
-                      <input
-                        placeholder="Professor Name"
-                        id="Professor_Name"
-                        type="text"
-                        className="form-control"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="Maximum_Students">
-                        Maximum Students
-                      </label>
-                      <input
-                        placeholder="Maximum Students"
-                        id="Maximum_Students"
-                        type="text"
-                        className="form-control"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor="Contact_Number">
-                        Contact Number
-                      </label>
-                      <input
-                        placeholder="Contact Number"
-                        id="Contact_Number"
                         type="number"
                         className="form-control"
+                        name="weeklySessions"
+                        value={formData.weeklySessions}
+                        onChange={handleChange}
                         required
                       />
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-6">
-                    <div className="form-group fallback w-100">
-                      <label className="form-label d-block" htmlFor="Course_Photo">
-                        Course Photo
-                      </label>
+
+                  <div className="col-sm-6">
+                    <div className="form-group">
+                      <label className="form-label">Session Duration Minutes</label>
+
                       <input
-                        id="Course_Photo"
-                        type="file"
+                        type="number"
                         className="form-control"
-                        data-default-file=""
+                        name="sessionDurationMinutes"
+                        value={formData.sessionDurationMinutes}
+                        onChange={handleChange}
                         required
                       />
                     </div>
                   </div>
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <button type="submit" className="btn btn-primary me-1">
-                      Submit
-                    </button>
-                    <button type="submit" className="btn btn-danger light">
-                      Cancel
+
+                  <div className="col-sm-6">
+                    <div className="form-check mt-4">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="needsNonConsecutiveDays"
+                        checked={formData.needsNonConsecutiveDays}
+                        onChange={handleChange}
+                      />
+
+                      <label className="form-check-label">Needs Non Consecutive Days</label>
+                    </div>
+                  </div>
+
+                  <div className="col-sm-6">
+                    <div className="form-check mt-4">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="isActive"
+                        checked={formData.isActive}
+                        onChange={handleChange}
+                      />
+
+                      <label className="form-check-label">Active</label>
+                    </div>
+                  </div>
+
+                  {message && (
+                    <div className="col-12">
+                      <div className="alert alert-success">{message}</div>
+                    </div>
+                  )}
+
+                  {error && (
+                    <div className="col-12">
+                      <div className="alert alert-danger">{error}</div>
+                    </div>
+                  )}
+
+                  <div className="col-lg-12">
+                    <button type="submit" className="btn btn-primary me-1" disabled={loading}>
+                      {loading ? 'Saving...' : 'Submit'}
                     </button>
                   </div>
                 </div>
