@@ -1,4 +1,5 @@
 import { errors } from '@strapi/utils';
+import type { Core } from '@strapi/strapi';
 
 export function relationPresent(value: unknown): boolean {
   if (value === undefined || value === null) {
@@ -55,5 +56,57 @@ export function applyDefaultPopulate<
 >(ctx: T, populate: Record<string, unknown>) {
   if (ctx.query.populate === undefined) {
     ctx.query.populate = { ...populate };
+  }
+}
+
+export function requireDataPayload(ctx: {
+  request: { body?: { data?: Record<string, unknown> } };
+}): Record<string, unknown> {
+  const data = ctx.request.body?.data;
+
+  if (!data) {
+    throw new errors.ValidationError('data is required');
+  }
+
+  return data;
+}
+
+export function uppercaseField(data: Record<string, unknown>, field: string): string | null {
+  const value = data[field];
+
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = value.trim().toUpperCase();
+  if (normalized.length === 0) {
+    return null;
+  }
+
+  data[field] = normalized;
+  return normalized;
+}
+
+export async function ensureUniqueDocumentField(
+  strapi: Core.Strapi,
+  uid: Parameters<Core.Strapi['documents']>[0],
+  field: string,
+  value: string,
+  currentDocumentId: string | undefined,
+  message: string,
+  code: string
+): Promise<void> {
+  const existing = await strapi.documents(uid).findMany({
+    filters: { [field]: { $eq: value } },
+    fields: ['documentId', field],
+    limit: 1,
+  } as never);
+
+  const duplicated = Array.isArray(existing)
+    ? existing.find((item) => item.documentId !== currentDocumentId)
+    : null;
+
+  if (duplicated) {
+    throw new errors.ValidationError(message, { code });
   }
 }
