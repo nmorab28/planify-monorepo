@@ -48,6 +48,18 @@ export type ScheduleConflictInput = {
 };
 
 export type TeacherAvailabilityInput = ScheduleConflictInput;
+export type ClassroomCapacityInput = ScheduleConflictInput;
+
+type AcademicGroupDetails = {
+  documentId: string;
+  capacityTarget?: number | null;
+  teacher?: { documentId?: string } | null;
+};
+
+type ClassroomDetails = {
+  documentId: string;
+  capacity?: number | null;
+};
 
 const defaultPopulate = {
   academicGroup: {
@@ -126,7 +138,7 @@ async function resolveSessionContext(
     ? ((await strapi.documents('api::academic-group.academic-group').findOne({
         documentId: academicGroupDocumentId,
         populate: { teacher: true },
-      })) as { documentId: string; teacher?: { documentId?: string } | null } | null)
+      })) as AcademicGroupDetails | null)
     : null;
 
   return {
@@ -317,6 +329,38 @@ export default factories.createCoreService('api::class-session.class-session', (
       ? []
       : [
           `El docente no tiene disponibilidad para el dia ${sessionContext.dayOfWeek} entre ${sessionContext.startTime} y ${sessionContext.endTime}.`,
+        ];
+  },
+
+  async findClassroomCapacityIssues(input: ClassroomCapacityInput): Promise<string[]> {
+    const sessionContext = await resolveSessionContext(strapi, input);
+
+    if (!sessionContext.academicGroupDocumentId || !sessionContext.classroomDocumentId) {
+      return [];
+    }
+
+    const [academicGroup, classroom] = await Promise.all([
+      strapi.documents('api::academic-group.academic-group').findOne({
+        documentId: sessionContext.academicGroupDocumentId,
+        fields: ['capacityTarget'],
+      }) as Promise<AcademicGroupDetails | null>,
+      strapi.documents('api::classroom.classroom').findOne({
+        documentId: sessionContext.classroomDocumentId,
+        fields: ['capacity'],
+      }) as Promise<ClassroomDetails | null>,
+    ]);
+
+    const capacityTarget = academicGroup?.capacityTarget;
+    const classroomCapacity = classroom?.capacity;
+
+    if (typeof capacityTarget !== 'number' || typeof classroomCapacity !== 'number') {
+      return [];
+    }
+
+    return classroomCapacity >= capacityTarget
+      ? []
+      : [
+          `El aula seleccionada tiene capacidad ${classroomCapacity}, pero el grupo requiere ${capacityTarget} estudiantes.`,
         ];
   },
 }));
