@@ -1,34 +1,22 @@
 import { factories } from '@strapi/strapi';
 import { errors } from '@strapi/utils';
 
+import { buildValidationError, applyDefaultPopulate } from '../../../utils/controller-utils';
+
 import { validateClassroomCandidate } from '../validation/classroom-validation';
 
 const defaultListPopulate = {
   features: true,
 } as const;
 
-function buildValidationError(issues: { path: string[]; message: string }[]) {
-  return new errors.ValidationError('Validation failed', {
-    errors: issues.map((i) => ({
-      path: i.path,
-      message: i.message,
-      name: 'ValidationError',
-    })),
-  });
-}
-
 export default factories.createCoreController('api::classroom.classroom', ({ strapi }) => ({
   async find(ctx) {
-    if (ctx.query.populate === undefined) {
-      ctx.query.populate = { ...defaultListPopulate };
-    }
+    applyDefaultPopulate(ctx, defaultListPopulate);
     return super.find(ctx);
   },
 
   async findOne(ctx) {
-    if (ctx.query.populate === undefined) {
-      ctx.query.populate = { ...defaultListPopulate };
-    }
+    applyDefaultPopulate(ctx, defaultListPopulate);
     return super.findOne(ctx);
   },
 
@@ -40,6 +28,7 @@ export default factories.createCoreController('api::classroom.classroom', ({ str
     }
 
     const issues = validateClassroomCandidate(data);
+
     if (issues.length > 0) {
       throw buildValidationError(issues);
     }
@@ -51,7 +40,10 @@ export default factories.createCoreController('api::classroom.classroom', ({ str
     const data = ctx.request.body?.data as Record<string, unknown> | undefined;
 
     if (data) {
-      const issues = validateClassroomCandidate(data, { partial: true });
+      const issues = validateClassroomCandidate(data, {
+        partial: true,
+      });
+
       if (issues.length > 0) {
         throw buildValidationError(issues);
       }
