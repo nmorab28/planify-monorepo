@@ -6,7 +6,10 @@ import {
   requireDataPayload,
 } from '../../../utils/controller-utils';
 import type { SessionConflict } from '../validation/session-validation';
-import { validateClassSessionCandidate } from '../validation/class-session-management-validation';
+import {
+  validateClassSessionCandidate,
+  validateLockedSessionUpdate,
+} from '../validation/class-session-management-validation';
 
 const defaultPopulate = {
   academicGroup: {
@@ -116,6 +119,20 @@ export default factories.createCoreController('api::class-session.class-session'
     const data = ctx.request.body?.data as Record<string, unknown> | undefined;
 
     if (data) {
+      const currentSession = await strapi.documents('api::class-session.class-session').findOne({
+        documentId: ctx.params?.id,
+        fields: ['isLocked'],
+      });
+
+      const lockedIssues = validateLockedSessionUpdate(
+        data,
+        !!(currentSession as { isLocked?: boolean } | null)?.isLocked
+      );
+
+      if (lockedIssues.length > 0) {
+        throw buildValidationError(lockedIssues);
+      }
+
       const issues = validateClassSessionCandidate(data, { partial: true });
 
       if (issues.length > 0) {

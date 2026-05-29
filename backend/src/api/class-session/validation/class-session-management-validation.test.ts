@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { validateClassSessionCandidate } from './class-session-management-validation';
+import {
+  validateClassSessionCandidate,
+  validateLockedSessionUpdate,
+} from './class-session-management-validation';
 
 describe('validateClassSessionCandidate', () => {
   it('acepta una sesion de clase valida', () => {
@@ -73,5 +76,21 @@ describe('validateClassSessionCandidate', () => {
         expect.objectContaining({ path: ['isLocked'] }),
       ])
     );
+  });
+});
+
+describe('validateLockedSessionUpdate', () => {
+  it('permite actualizar sesiones no bloqueadas', () => {
+    expect(validateLockedSessionUpdate({ status: 'planned' }, false)).toHaveLength(0);
+  });
+
+  it('permite desbloquear una sesion bloqueada', () => {
+    expect(validateLockedSessionUpdate({ isLocked: false }, true)).toHaveLength(0);
+  });
+
+  it('rechaza cambios distintos al desbloqueo cuando la sesion esta bloqueada', () => {
+    const issues = validateLockedSessionUpdate({ status: 'published' }, true);
+    expect(issues).toHaveLength(1);
+    expect(issues[0].path).toEqual(['isLocked']);
   });
 });
