@@ -46,6 +46,10 @@ function buildClassroomCapacityIssues(messages: string[]) {
   return buildMessageIssues(['classroomCapacity'], messages);
 }
 
+function buildClassroomFeatureIssues(messages: string[]) {
+  return buildMessageIssues(['classroomFeatures'], messages);
+}
+
 function buildMessageIssues(path: string[], messages: string[]) {
   return messages.map((message) => ({
     path,
@@ -96,6 +100,14 @@ export default factories.createCoreController('api::class-session.class-session'
       throw buildValidationError(buildClassroomCapacityIssues(capacityIssues));
     }
 
+    const featureIssues = await strapi
+      .service('api::class-session.class-session')
+      .findClassroomFeatureIssues({ data });
+
+    if (featureIssues.length > 0) {
+      throw buildValidationError(buildClassroomFeatureIssues(featureIssues));
+    }
+
     applyDefaultPopulate(ctx, defaultPopulate);
     return super.create(ctx);
   },
@@ -141,6 +153,17 @@ export default factories.createCoreController('api::class-session.class-session'
 
       if (capacityIssues.length > 0) {
         throw buildValidationError(buildClassroomCapacityIssues(capacityIssues));
+      }
+
+      const featureIssues = await strapi
+        .service('api::class-session.class-session')
+        .findClassroomFeatureIssues({
+          data,
+          currentSessionDocumentId: ctx.params?.id,
+        });
+
+      if (featureIssues.length > 0) {
+        throw buildValidationError(buildClassroomFeatureIssues(featureIssues));
       }
     }
 
