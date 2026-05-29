@@ -2,6 +2,7 @@ import { factories } from '@strapi/strapi';
 import type { Core } from '@strapi/strapi';
 import {
   checkSessionConflicts,
+  checkNonConsecutiveDayConflicts,
   isSessionCoveredByAvailability,
   isWithinScheduleHours,
   type SessionCandidate,
@@ -37,6 +38,7 @@ export type PersistedClassSession = {
   endTime?: string;
   academicGroup?: {
     documentId?: string;
+    course?: { needsNonConsecutiveDays?: boolean | null } | null;
     teacher?: { documentId?: string } | null;
   } | null;
   classroom?: { documentId?: string } | null;
@@ -53,6 +55,7 @@ export type ClassroomCapacityInput = ScheduleConflictInput;
 type AcademicGroupDetails = {
   documentId: string;
   capacityTarget?: number | null;
+  course?: { needsNonConsecutiveDays?: boolean | null } | null;
   teacher?: { documentId?: string } | null;
 };
 
@@ -137,7 +140,7 @@ async function resolveSessionContext(
   const academicGroup = academicGroupDocumentId
     ? ((await strapi.documents('api::academic-group.academic-group').findOne({
         documentId: academicGroupDocumentId,
-        populate: { teacher: true },
+        populate: { course: true, teacher: true },
       })) as AcademicGroupDetails | null)
     : null;
 
@@ -149,6 +152,10 @@ async function resolveSessionContext(
       academicGroup?.teacher?.documentId ??
       currentSession?.academicGroup?.teacher?.documentId ??
       null,
+    courseNeedsNonConsecutiveDays:
+      academicGroup?.course?.needsNonConsecutiveDays ??
+      currentSession?.academicGroup?.course?.needsNonConsecutiveDays ??
+      false,
     dayOfWeek: Number(input.data.dayOfWeek ?? currentSession?.dayOfWeek),
     startTime: String(input.data.startTime ?? currentSession?.startTime),
     endTime: String(input.data.endTime ?? currentSession?.endTime),
@@ -284,18 +291,25 @@ export default factories.createCoreService('api::class-session.class-session', (
       populate: defaultPopulate,
     })) as PersistedClassSession[];
 
-    return checkSessionConflicts(
-      {
-        dayOfWeek: sessionContext.dayOfWeek,
-        startTime: sessionContext.startTime,
-        endTime: sessionContext.endTime,
-        teacherDocumentId: sessionContext.teacherDocumentId,
-        classroomDocumentId: sessionContext.classroomDocumentId,
-        academicGroupDocumentId: sessionContext.academicGroupDocumentId,
-        sessionDocumentId: input.currentSessionDocumentId,
-      },
-      rawSessions.map(mapExistingSession)
-    );
+    const existing = rawSessions.map(mapExistingSession);
+    const candidate = {
+      dayOfWeek: sessionContext.dayOfWeek,
+      startTime: sessionContext.startTime,
+      endTime: sessionContext.endTime,
+      teacherDocumentId: sessionContext.teacherDocumentId,
+      classroomDocumentId: sessionContext.classroomDocumentId,
+      academicGroupDocumentId: sessionContext.academicGroupDocumentId,
+      sessionDocumentId: input.currentSessionDocumentId,
+    };
+
+    return [
+      ...checkSessionConflicts(candidate, existing),
+      ...checkNonConsecutiveDayConflicts(
+        candidate,
+        existing,
+        !!sessionContext.courseNeedsNonConsecutiveDays
+      ),
+    ];
   },
 
   async findTeacherAvailabilityIssues(input: TeacherAvailabilityInput): Promise<string[]> {

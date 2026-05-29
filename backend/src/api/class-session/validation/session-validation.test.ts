@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   isTimeOverlap,
   isSessionCoveredByAvailability,
+  checkNonConsecutiveDayConflicts,
   checkSessionConflicts,
   isWithinScheduleHours,
   timeToMinutes,
@@ -233,6 +234,55 @@ describe('checkSessionConflicts', () => {
       academicGroupDocumentId: 'group-999',
     };
     expect(checkSessionConflicts(candidate, [existing])).toHaveLength(0);
+  });
+});
+
+describe('checkNonConsecutiveDayConflicts', () => {
+  it('retorna vacio cuando el curso no requiere dias no consecutivos', () => {
+    const candidate: SessionCandidate = {
+      dayOfWeek: 2,
+      startTime: '08:00',
+      endTime: '10:00',
+      academicGroupDocumentId: 'group-001',
+    };
+
+    expect(checkNonConsecutiveDayConflicts(candidate, [BASE_SESSION], false)).toHaveLength(0);
+  });
+
+  it('detecta sesion del mismo grupo en dia anterior', () => {
+    const candidate: SessionCandidate = {
+      dayOfWeek: 2,
+      startTime: '08:00',
+      endTime: '10:00',
+      academicGroupDocumentId: 'group-001',
+    };
+
+    const conflicts = checkNonConsecutiveDayConflicts(candidate, [BASE_SESSION], true);
+    expect(conflicts).toHaveLength(1);
+    expect(conflicts[0].type).toBe('nonConsecutiveDays');
+  });
+
+  it('permite sesiones separadas por al menos un dia', () => {
+    const candidate: SessionCandidate = {
+      dayOfWeek: 3,
+      startTime: '08:00',
+      endTime: '10:00',
+      academicGroupDocumentId: 'group-001',
+    };
+
+    expect(checkNonConsecutiveDayConflicts(candidate, [BASE_SESSION], true)).toHaveLength(0);
+  });
+
+  it('ignora la propia sesion durante actualizaciones', () => {
+    const candidate: SessionCandidate = {
+      dayOfWeek: 2,
+      startTime: '08:00',
+      endTime: '10:00',
+      academicGroupDocumentId: 'group-001',
+      sessionDocumentId: 'session-001',
+    };
+
+    expect(checkNonConsecutiveDayConflicts(candidate, [BASE_SESSION], true)).toHaveLength(0);
   });
 });
 
