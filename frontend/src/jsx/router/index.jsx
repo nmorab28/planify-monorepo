@@ -46,6 +46,7 @@ import EditClassroom from './../pages/classrooms/EditClassroom';
 import AllClassSessions from './../pages/class-sessions/AllClassSessions';
 import AddClassSession from './../pages/class-sessions/AddClassSession';
 import EditClassSession from './../pages/class-sessions/EditClassSession';
+import ScheduleCalendar from './../pages/schedule-calendar/ScheduleCalendar';
 
 //Student
 import AllStudent from './../pages/students/AllStudent';
@@ -205,6 +206,7 @@ const Markup = () => {
     { url: 'all-class-sessions', component: <AllClassSessions /> },
     { url: 'add-class-session', component: <AddClassSession /> },
     { url: 'edit-class-session/:documentId', component: <EditClassSession /> },
+    { url: 'schedule-calendar', component: <ScheduleCalendar /> },
 
     //Student
     { url: 'all-students', component: <AllStudent /> },
