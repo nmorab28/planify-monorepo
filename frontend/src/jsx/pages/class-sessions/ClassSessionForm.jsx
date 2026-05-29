@@ -57,7 +57,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
         setGroups(groupsRes || []);
         setClassrooms((classroomsRes || []).filter((classroom) => classroom.isActive !== false));
       } catch (err) {
-        Swal.fire('Error', err.message || 'No se pudieron cargar los catalogos', 'error');
+        Swal.fire('Error', err.message || 'No se pudieron cargar los catálogos', 'error');
       }
     };
 
@@ -82,7 +82,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
           classroomDocumentId: session.classroom?.documentId || '',
         });
       } catch (err) {
-        Swal.fire('Error', err.message || 'No se pudo cargar la sesion', 'error');
+        Swal.fire('Error', err.message || 'No se pudo cargar la sesión', 'error');
       } finally {
         setLoading(false);
       }
@@ -119,7 +119,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
 
     const errors = validateClassSession(formData);
     if (errors.length > 0) {
-      Swal.fire('Datos invalidos', errors[0], 'error');
+      Swal.fire('Datos inválidos', errors[0], 'error');
       return;
     }
 
@@ -133,7 +133,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
 
       await Swal.fire({
         icon: 'success',
-        title: isEdit ? 'Sesion actualizada' : 'Sesion creada',
+        title: isEdit ? 'Sesión actualizada' : 'Sesión creada',
         timer: 1300,
         showConfirmButton: false,
       });
@@ -148,8 +148,8 @@ const ClassSessionForm = ({ mode = 'create' }) => {
   if (loading) {
     return (
       <>
-        <PageTitle activeMenu="Cargando sesion" motherMenu="Sesiones" />
-        <p>Cargando informacion...</p>
+        <PageTitle activeMenu="Cargando sesión" motherMenu="Sesiones" />
+        <p>Cargando información...</p>
       </>
     );
   }
@@ -157,21 +157,21 @@ const ClassSessionForm = ({ mode = 'create' }) => {
   return (
     <>
       <PageTitle
-        activeMenu={isEdit ? 'Editar sesion' : 'Crear sesion'}
+        activeMenu={isEdit ? 'Editar sesión' : 'Crear sesión'}
         motherMenu="Sesiones de clase"
       />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title">{isEdit ? 'Editar sesion' : 'Nueva sesion'}</h5>
+              <h5 className="card-title">{isEdit ? 'Editar sesión' : 'Nueva sesión'}</h5>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="form-group">
-                      <label className="form-label">Grupo academico</label>
+                      <label className="form-label">Grupo académico</label>
                       <Select
                         options={groupOptions}
                         value={selectedGroup}
@@ -182,7 +182,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
                           }))
                         }
                         placeholder="Selecciona curso, grupo y docente"
-                        noOptionsMessage={() => 'No hay grupos academicos disponibles'}
+                        noOptionsMessage={() => 'No hay grupos académicos disponibles'}
                       />
                     </div>
                   </div>
@@ -190,7 +190,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="dayOfWeek">
-                        Dia
+                        Día
                       </label>
                       <select
                         id="dayOfWeek"
@@ -303,7 +303,7 @@ const ClassSessionForm = ({ mode = 'create' }) => {
                         onChange={handleChange}
                       />
                       <label className="form-check-label" htmlFor="isLocked">
-                        Bloquear esta sesion para evitar cambios accidentales
+                        Bloquear esta sesión para evitar cambios accidentales
                       </label>
                     </div>
                   </div>

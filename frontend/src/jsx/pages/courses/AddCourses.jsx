@@ -90,7 +90,7 @@ const AddCourses = () => {
 
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Codigo del curso</label>
+                      <label className="form-label">Código del curso</label>
 
                       <input
                         type="text"
@@ -120,7 +120,7 @@ const AddCourses = () => {
 
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Duracion de la sesion en minutos</label>
+                      <label className="form-label">Duración de la sesión en minutos</label>
 
                       <input
                         type="number"
@@ -143,7 +143,7 @@ const AddCourses = () => {
                         onChange={handleChange}
                       />
 
-                      <label className="form-check-label">Requiere dias no consecutivos</label>
+                      <label className="form-check-label">Requiere días no consecutivos</label>
                     </div>
                   </div>
 

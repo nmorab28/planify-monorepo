@@ -14,6 +14,7 @@ const ROLE_LABELS = {
 const Header = () => {
   const { background, changeBackground } = useContext(ThemeContext);
   const auth = useSelector((state) => state.auth.auth);
+  const roleLabel = ROLE_LABELS[auth.role] || auth.roleName || 'Rol no identificado';
 
   const handleThemeMode = () => {
     changeBackground(
@@ -59,14 +60,14 @@ const Header = () => {
                     </div>
                     <div className="d-none d-md-block text-start">
                       <div className="fw-semibold">{auth.username || auth.email || 'Usuario'}</div>
-                      <small className="text-muted">{ROLE_LABELS[auth.role] || auth.roleName || 'Sin rol'}</small>
+                      <small className="text-muted">{roleLabel}</small>
                     </div>
                   </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu align="end" className="mt-3 dropdown-menu dropdown-menu-right">
                   <div className="dropdown-item-text">
                     <strong>{auth.email}</strong>
-                    <div className="text-muted">{ROLE_LABELS[auth.role] || auth.roleName || 'Sin rol'}</div>
+                    <div className="text-muted">{roleLabel}</div>
                   </div>
                   <Dropdown.Divider />
                   <Logout />
