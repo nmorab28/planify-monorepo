@@ -7,108 +7,104 @@ export const MenuList = [
   },
   //Academic Group
   {
-    title: 'Academic Group',
+    title: 'Grupos academicos',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-th-list" />,
     content: [
       {
-        title: 'All Academic Groups',
+        title: 'Todos los grupos',
         to: 'all-library',
       },
       {
-        title: 'Add Academic Groups',
+        title: 'Crear grupo',
         to: 'add-library',
       },
       {
-        title: 'Edit Academic Groups',
+        title: 'Editar grupo',
         to: 'edit-library',
       },
     ],
   },
   //Availability
   {
-    title: 'Availability',
+    title: 'Disponibilidad',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-calendar" />,
     content: [
       {
-        title: 'All Availabilities',
+        title: 'Disponibilidades',
         to: 'all-availability',
       },
       {
-        title: 'Add Availability',
+        title: 'Crear disponibilidad',
         to: 'add-availability',
       },
     ],
   },
   //Class Session
   {
-    title: 'Class Session',
+    title: 'Sesiones de clase',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-book" />,
     content: [
       {
-        title: 'All Class Sessions',
-        to: 'all-departments',
+        title: 'Todas las sesiones',
+        to: 'all-class-sessions',
       },
       {
-        title: 'Add Class Sessions',
-        to: 'add-departments',
-      },
-      {
-        title: 'Edit Class Sessions',
-        to: 'edit-departments',
+        title: 'Crear sesion',
+        to: 'add-class-session',
       },
     ],
   },
   //Classrooms
   {
-    title: 'Classrooms',
+    title: 'Aulas',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-building" />,
     content: [
       {
-        title: 'All Classrooms',
+        title: 'Todas las aulas',
         to: 'all-classrooms',
       },
       {
-        title: 'Add Classroom',
+        title: 'Crear aula',
         to: 'add-classroom',
       },
     ],
   },
   //Courses
   {
-    title: 'Courses',
+    title: 'Cursos',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-graduation-cap" />,
     content: [
       {
-        title: 'All Courses',
+        title: 'Todos los cursos',
         to: 'all-courses',
       },
       {
-        title: 'Add Courses',
+        title: 'Crear curso',
         to: 'add-courses',
       },
       {
-        title: 'Edit Courses',
+        title: 'Editar curso',
         to: 'edit-courses',
       },
       {
-        title: 'About Courses',
+        title: 'Detalle del curso',
         to: 'about-courses',
       },
     ],
   },
   //Dashboard
   {
-    title: 'Dashboard',
+    title: 'Inicio',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-home" />,
     content: [
       {
-        title: 'Dashboard',
+        title: 'Panel principal',
         to: 'dashboard',
       },
       // {
@@ -124,27 +120,27 @@ export const MenuList = [
 
   //Management
   {
-    title: 'Event Management',
+    title: 'Calendario',
     to: 'event-management',
     iconStyle: <i className="la la-calendar" />,
   },
 
   //Professors
   {
-    title: 'Professors',
+    title: 'Docentes',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-user" />,
     content: [
       {
-        title: 'All Professor',
+        title: 'Todos los docentes',
         to: 'all-professors',
       },
       {
-        title: 'Add Professor',
+        title: 'Crear docente',
         to: 'add-professor',
       },
       {
-        title: 'Edit Professor',
+        title: 'Editar docente',
         to: 'edit-professor',
       },
       // {
@@ -155,20 +151,20 @@ export const MenuList = [
   },
   //Student
   {
-    title: 'Students',
+    title: 'Estudiantes',
     classsChange: 'mm-collapse',
     iconStyle: <i className="la la-users" />,
     content: [
       {
-        title: 'All Students',
+        title: 'Todos los estudiantes',
         to: 'all-students',
       },
       {
-        title: 'Add Students',
+        title: 'Crear estudiante',
         to: 'add-student',
       },
       {
-        title: 'Edit Students',
+        title: 'Editar estudiante',
         to: 'edit-student',
       },
       // {

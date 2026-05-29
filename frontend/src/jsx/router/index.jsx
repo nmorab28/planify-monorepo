@@ -42,6 +42,11 @@ import AllClassrooms from './../pages/classrooms/AllClassrooms';
 import AddClassroom from './../pages/classrooms/AddClassroom';
 import EditClassroom from './../pages/classrooms/EditClassroom';
 
+//Class sessions
+import AllClassSessions from './../pages/class-sessions/AllClassSessions';
+import AddClassSession from './../pages/class-sessions/AddClassSession';
+import EditClassSession from './../pages/class-sessions/EditClassSession';
+
 //Student
 import AllStudent from './../pages/students/AllStudent';
 import AddStudent from './../pages/students/AddStudent';
@@ -195,6 +200,11 @@ const Markup = () => {
     { url: 'all-classrooms', component: <AllClassrooms /> },
     { url: 'add-classroom', component: <AddClassroom /> },
     { url: 'edit-classroom/:documentId', component: <EditClassroom /> },
+
+    //Class sessions
+    { url: 'all-class-sessions', component: <AllClassSessions /> },
+    { url: 'add-class-session', component: <AddClassSession /> },
+    { url: 'edit-class-session/:documentId', component: <EditClassSession /> },
 
     //Student
     { url: 'all-students', component: <AllStudent /> },
