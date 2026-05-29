@@ -36,6 +36,7 @@ import EditAvailability from './../pages/availabilities/EditAvailability';
 
 //Schedule config
 import ScheduleConfig from './../pages/schedule-config/ScheduleConfig';
+import Rules from './../pages/rules/Rules';
 
 //Classrooms
 import AllClassrooms from './../pages/classrooms/AllClassrooms';
@@ -196,6 +197,7 @@ const Markup = () => {
 
     //Schedule config
     { url: 'schedule-config', component: <ScheduleConfig /> },
+    { url: 'rules', component: <Rules /> },
 
     //Classrooms
     { url: 'all-classrooms', component: <AllClassrooms /> },
