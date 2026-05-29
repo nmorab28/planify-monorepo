@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import PageTitle from '../../layouts/PageTitle';
-import { deleteClassSession, getClassSessions } from '../../../services/classSessionService';
+import {
+  deleteClassSession,
+  getClassSessions,
+  patchClassSession,
+} from '../../../services/classSessionService';
 import { dayLabel, formatTime, statusLabel } from './classSessionValidation';
 
 const sortSessions = (sessions) =>
@@ -68,6 +72,11 @@ const AllClassSessions = () => {
   }, [search, sessions]);
 
   const handleDelete = async (session) => {
+    if (session.isLocked) {
+      Swal.fire('Sesion bloqueada', 'Desbloquea la sesion antes de eliminarla.', 'info');
+      return;
+    }
+
     const result = await Swal.fire({
       title: 'Eliminar sesion',
       text: `Se eliminara la sesion de ${getCourseName(session)} del ${dayLabel(session.dayOfWeek)}.`,
@@ -86,6 +95,21 @@ const AllClassSessions = () => {
       Swal.fire('Eliminada', 'La sesion fue eliminada.', 'success');
     } catch (err) {
       Swal.fire('Error', err.message || 'No se pudo eliminar la sesion', 'error');
+    }
+  };
+
+  const toggleLock = async (session) => {
+    try {
+      await patchClassSession(session.documentId, { isLocked: !session.isLocked });
+      await loadSessions();
+      Swal.fire({
+        icon: 'success',
+        title: session.isLocked ? 'Sesion desbloqueada' : 'Sesion bloqueada',
+        timer: 1200,
+        showConfirmButton: false,
+      });
+    } catch (err) {
+      Swal.fire('Error', err.message || 'No se pudo cambiar el bloqueo', 'error');
     }
   };
 
@@ -166,6 +190,14 @@ const AllClassSessions = () => {
                             >
                               <i className="fa fa-pencil" />
                             </Link>
+                            <button
+                              type="button"
+                              className="btn btn-xs sharp btn-warning me-1"
+                              title={session.isLocked ? 'Desbloquear' : 'Bloquear'}
+                              onClick={() => toggleLock(session)}
+                            >
+                              <i className={session.isLocked ? 'fa fa-unlock' : 'fa fa-lock'} />
+                            </button>
                             <button
                               type="button"
                               className="btn btn-xs sharp btn-danger"
