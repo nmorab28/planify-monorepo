@@ -122,6 +122,23 @@ export const MenuList = [
     ],
   },
 
+  //Planning
+  {
+    title: 'Planificacion',
+    classsChange: 'mm-collapse',
+    iconStyle: <i className="la la-cogs" />,
+    content: [
+      {
+        title: 'Parametros del semestre',
+        to: 'schedule-config',
+      },
+      {
+        title: 'Reglas de horario',
+        to: 'rules',
+      },
+    ],
+  },
+
   //Management
   {
     title: 'Calendario',
