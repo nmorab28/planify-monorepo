@@ -106,6 +106,16 @@ export const updateClassSession = async (documentId, payload) => {
   return handleResponse(res);
 };
 
+export const patchClassSession = async (documentId, data) => {
+  const res = await fetch(`${API_URL}/api/class-sessions/${documentId}`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ data }),
+  });
+
+  return handleResponse(res);
+};
+
 export const deleteClassSession = async (documentId) => {
   const res = await fetch(`${API_URL}/api/class-sessions/${documentId}`, {
     method: 'DELETE',
