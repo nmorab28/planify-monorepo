@@ -93,6 +93,18 @@ const ACADEMIC_COORDINATOR_ACTIONS = [
   'api::schedule-config.schedule-config.delete',
   'api::schedule-config.schedule-config.getProcessedRules',
   'api::schedule-config.schedule-config.validateSchedule',
+
+  'api::hard-rule.hard-rule.find',
+  'api::hard-rule.hard-rule.findOne',
+  'api::hard-rule.hard-rule.create',
+  'api::hard-rule.hard-rule.update',
+  'api::hard-rule.hard-rule.delete',
+
+  'api::soft-rule.soft-rule.find',
+  'api::soft-rule.soft-rule.findOne',
+  'api::soft-rule.soft-rule.create',
+  'api::soft-rule.soft-rule.update',
+  'api::soft-rule.soft-rule.delete',
 ] as const;
 
 const TEACHER_ACTIONS = [
