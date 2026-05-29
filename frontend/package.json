@@ -56,6 +56,7 @@
     "test": "react-scripts test",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
+    "verify:demo": "cd .. && node scripts/verify-demo.mjs",
     "eject": "react-scripts eject",
     "sass": "node-sass --watch src/assets/scss/main.scss src/assets/css/style.css --source-map src/assets/css/style.css.map",
     "lint": "eslint .",
