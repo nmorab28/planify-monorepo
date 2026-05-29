@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 
 import PageTitle from '../../layouts/PageTitle';
 import { getClassSessions } from '../../../services/classSessionService';
+import { getActiveScheduleConfig, toInputTime } from '../../../services/scheduleConfigService';
 import { dayLabel, formatTime, statusLabel } from '../class-sessions/classSessionValidation';
 
 const BASE_WEEK_START = '2026-01-05';
@@ -17,6 +18,15 @@ const statusClassName = {
   published: 'bg-success',
   blocked: 'bg-warning',
   cancelled: 'bg-danger',
+};
+
+const DEFAULT_CONFIG = {
+  weekdayStart: '07:00',
+  weekdayEnd: '22:00',
+  saturdayStart: '07:00',
+  saturdayEnd: '13:00',
+  lunchStart: '12:00',
+  lunchEnd: '13:00',
 };
 
 const addDays = (dateString, days) => {
@@ -36,13 +46,27 @@ const sessionTitle = (session) => {
 const ScheduleCalendar = () => {
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
+  const [scheduleConfig, setScheduleConfig] = useState(DEFAULT_CONFIG);
   const [loading, setLoading] = useState(true);
 
   const loadSessions = async () => {
     try {
       setLoading(true);
-      const res = await getClassSessions();
+      const [res, activeConfig] = await Promise.all([
+        getClassSessions(),
+        getActiveScheduleConfig().catch(() => null),
+      ]);
       setSessions(res || []);
+      if (activeConfig) {
+        setScheduleConfig({
+          weekdayStart: toInputTime(activeConfig.weekdayStart) || DEFAULT_CONFIG.weekdayStart,
+          weekdayEnd: toInputTime(activeConfig.weekdayEnd) || DEFAULT_CONFIG.weekdayEnd,
+          saturdayStart: toInputTime(activeConfig.saturdayStart) || DEFAULT_CONFIG.saturdayStart,
+          saturdayEnd: toInputTime(activeConfig.saturdayEnd) || DEFAULT_CONFIG.saturdayEnd,
+          lunchStart: toInputTime(activeConfig.lunchStart) || DEFAULT_CONFIG.lunchStart,
+          lunchEnd: toInputTime(activeConfig.lunchEnd) || DEFAULT_CONFIG.lunchEnd,
+        });
+      }
     } catch (err) {
       Swal.fire('Error', err.message || 'No se pudieron cargar las sesiones', 'error');
     } finally {
@@ -72,6 +96,50 @@ const ScheduleCalendar = () => {
         };
       }),
     [sessions]
+  );
+
+  const lunchEvents = useMemo(
+    () =>
+      [1, 2, 3, 4, 5, 6].map((day) => {
+        const date = addDays(BASE_WEEK_START, day - 1);
+        return {
+          id: `lunch-${day}`,
+          start: `${date}T${scheduleConfig.lunchStart}:00`,
+          end: `${date}T${scheduleConfig.lunchEnd}:00`,
+          display: 'background',
+          color: '#fff3cd',
+        };
+      }),
+    [scheduleConfig.lunchEnd, scheduleConfig.lunchStart]
+  );
+
+  const businessHours = useMemo(
+    () => [
+      {
+        daysOfWeek: [1, 2, 3, 4, 5],
+        startTime: scheduleConfig.weekdayStart,
+        endTime: scheduleConfig.weekdayEnd,
+      },
+      {
+        daysOfWeek: [6],
+        startTime: scheduleConfig.saturdayStart,
+        endTime: scheduleConfig.saturdayEnd,
+      },
+    ],
+    [
+      scheduleConfig.saturdayEnd,
+      scheduleConfig.saturdayStart,
+      scheduleConfig.weekdayEnd,
+      scheduleConfig.weekdayStart,
+    ]
+  );
+
+  const eventContent = (eventInfo) => (
+    <div>
+      <strong>{eventInfo.timeText}</strong>
+      <div>{eventInfo.event.title}</div>
+      {eventInfo.event.extendedProps.locked && <small>Bloqueada</small>}
+    </div>
   );
 
   const handleEventClick = (info) => {
@@ -106,6 +174,12 @@ const ScheduleCalendar = () => {
                     <span className="badge bg-success">Publicada</span>
                     <span className="badge bg-warning">Bloqueada</span>
                     <span className="badge bg-danger">Cancelada</span>
+                    <span className="badge bg-light text-dark">Almuerzo</span>
+                  </div>
+                  <div className="mb-3 text-muted">
+                    Lunes a viernes {scheduleConfig.weekdayStart} - {scheduleConfig.weekdayEnd}.
+                    Sabado {scheduleConfig.saturdayStart} - {scheduleConfig.saturdayEnd}.
+                    Almuerzo {scheduleConfig.lunchStart} - {scheduleConfig.lunchEnd}.
                   </div>
                   <div className="demo-app-calendar" id="scheduleCalendar">
                     <FullCalendar
@@ -119,16 +193,18 @@ const ScheduleCalendar = () => {
                       }}
                       dayHeaderFormat={{ weekday: 'long' }}
                       allDaySlot={false}
-                      slotMinTime="07:00:00"
-                      slotMaxTime="22:00:00"
+                      slotMinTime={`${scheduleConfig.weekdayStart}:00`}
+                      slotMaxTime={`${scheduleConfig.weekdayEnd}:00`}
                       slotDuration="00:30:00"
                       hiddenDays={[0]}
                       firstDay={1}
                       locale="es"
                       height="auto"
                       nowIndicator={false}
-                      events={calendarEvents}
+                      businessHours={businessHours}
+                      events={[...lunchEvents, ...calendarEvents]}
                       eventClick={handleEventClick}
+                      eventContent={eventContent}
                     />
                   </div>
                 </>
