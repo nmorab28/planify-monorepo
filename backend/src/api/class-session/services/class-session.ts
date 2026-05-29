@@ -3,12 +3,14 @@ import type { Core } from '@strapi/strapi';
 import {
   checkSessionConflicts,
   checkNonConsecutiveDayConflicts,
+  findMissingClassroomFeatures,
   isSessionCoveredByAvailability,
   isWithinScheduleHours,
   type SessionCandidate,
   type ExistingSession,
   type SessionConflict,
   type TeacherAvailability,
+  type ClassroomFeatureRef,
 } from '../validation/session-validation';
 
 type QueryOptions = {
@@ -51,17 +53,22 @@ export type ScheduleConflictInput = {
 
 export type TeacherAvailabilityInput = ScheduleConflictInput;
 export type ClassroomCapacityInput = ScheduleConflictInput;
+export type ClassroomFeatureInput = ScheduleConflictInput;
 
 type AcademicGroupDetails = {
   documentId: string;
   capacityTarget?: number | null;
-  course?: { needsNonConsecutiveDays?: boolean | null } | null;
+  course?: {
+    needsNonConsecutiveDays?: boolean | null;
+    requiredFeatures?: ClassroomFeatureRef[] | null;
+  } | null;
   teacher?: { documentId?: string } | null;
 };
 
 type ClassroomDetails = {
   documentId: string;
   capacity?: number | null;
+  features?: ClassroomFeatureRef[] | null;
 };
 
 const defaultPopulate = {
@@ -140,7 +147,14 @@ async function resolveSessionContext(
   const academicGroup = academicGroupDocumentId
     ? ((await strapi.documents('api::academic-group.academic-group').findOne({
         documentId: academicGroupDocumentId,
-        populate: { course: true, teacher: true },
+        populate: {
+          course: {
+            populate: {
+              requiredFeatures: true,
+            },
+          },
+          teacher: true,
+        },
       })) as AcademicGroupDetails | null)
     : null;
 
@@ -376,5 +390,46 @@ export default factories.createCoreService('api::class-session.class-session', (
       : [
           `El aula seleccionada tiene capacidad ${classroomCapacity}, pero el grupo requiere ${capacityTarget} estudiantes.`,
         ];
+  },
+
+  async findClassroomFeatureIssues(input: ClassroomFeatureInput): Promise<string[]> {
+    const sessionContext = await resolveSessionContext(strapi, input);
+
+    if (!sessionContext.academicGroupDocumentId || !sessionContext.classroomDocumentId) {
+      return [];
+    }
+
+    const [academicGroup, classroom] = await Promise.all([
+      strapi.documents('api::academic-group.academic-group').findOne({
+        documentId: sessionContext.academicGroupDocumentId,
+        populate: {
+          course: {
+            populate: {
+              requiredFeatures: true,
+            },
+          },
+        },
+      }) as Promise<AcademicGroupDetails | null>,
+      strapi.documents('api::classroom.classroom').findOne({
+        documentId: sessionContext.classroomDocumentId,
+        populate: { features: true },
+      }) as Promise<ClassroomDetails | null>,
+    ]);
+
+    const requiredFeatures = academicGroup?.course?.requiredFeatures || [];
+    if (requiredFeatures.length === 0) return [];
+
+    const missingFeatures = findMissingClassroomFeatures(
+      requiredFeatures,
+      classroom?.features || []
+    );
+
+    if (missingFeatures.length === 0) return [];
+
+    const missingNames = missingFeatures
+      .map((feature) => feature.name || feature.code || feature.documentId)
+      .join(', ');
+
+    return [`El aula seleccionada no cumple las caracteristicas requeridas: ${missingNames}.`];
   },
 }));
