@@ -111,3 +111,22 @@ export function validateClassSessionCandidate(
 
   return issues;
 }
+
+export function validateLockedSessionUpdate(
+  input: ClassSessionCandidate,
+  isCurrentlyLocked: boolean
+): ValidationIssue[] {
+  if (!isCurrentlyLocked) return [];
+
+  const keys = Object.keys(input);
+  const onlyUnlock = keys.length === 1 && input.isLocked === false;
+
+  return onlyUnlock
+    ? []
+    : [
+        {
+          path: ['isLocked'],
+          message: 'La sesion esta bloqueada. Desbloqueala antes de modificarla.',
+        },
+      ];
+}
