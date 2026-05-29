@@ -7,6 +7,7 @@ import {
   deleteClassSession,
   getClassSessions,
   patchClassSession,
+  publishClassSessions,
 } from '../../../services/classSessionService';
 import { dayLabel, formatTime, statusLabel } from './classSessionValidation';
 
@@ -113,6 +114,40 @@ const AllClassSessions = () => {
     }
   };
 
+  const publishSchedule = async () => {
+    const publishableCount = sessions.filter(
+      (session) => !session.isLocked && ['draft', 'planned'].includes(session.status)
+    ).length;
+
+    if (publishableCount === 0) {
+      Swal.fire('Sin sesiones pendientes', 'No hay sesiones desbloqueadas para publicar.', 'info');
+      return;
+    }
+
+    const result = await Swal.fire({
+      title: 'Publicar horario',
+      text: `Se publicaran ${publishableCount} sesiones en borrador o planeadas.`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Publicar',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      const summary = await publishClassSessions(sessions);
+      await loadSessions();
+      Swal.fire(
+        'Horario publicado',
+        `${summary.published} sesiones publicadas. ${summary.failed} fallaron.`,
+        summary.failed > 0 ? 'warning' : 'success'
+      );
+    } catch (err) {
+      Swal.fire('Error', err.message || 'No se pudo publicar el horario', 'error');
+    }
+  };
+
   return (
     <>
       <PageTitle activeMenu="Sesiones de clase" motherMenu="Horarios" />
@@ -121,9 +156,14 @@ const AllClassSessions = () => {
           <div className="card">
             <div className="card-header">
               <h4 className="card-title">Sesiones de clase</h4>
-              <Link to="/add-class-session" className="btn btn-primary">
-                + Nueva sesion
-              </Link>
+              <div>
+                <button type="button" className="btn btn-outline-success me-2" onClick={publishSchedule}>
+                  Publicar horario
+                </button>
+                <Link to="/add-class-session" className="btn btn-primary">
+                  + Nueva sesion
+                </Link>
+              </div>
             </div>
             <div className="card-body">
               <div className="d-sm-flex justify-content-between mb-3">
