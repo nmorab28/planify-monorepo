@@ -47,6 +47,12 @@ export type TeacherAvailability = {
   isAvailable?: boolean | null;
 };
 
+export type ClassroomFeatureRef = {
+  documentId?: string | null;
+  code?: string | null;
+  name?: string | null;
+};
+
 /**
  * Convierte "HH:MM" o "HH:MM:SS" a minutos desde medianoche.
  * Retorna NaN si el formato es inválido.
@@ -205,6 +211,22 @@ export function checkNonConsecutiveDayConflicts(
         endTime: session.endTime,
       },
     }));
+}
+
+export function findMissingClassroomFeatures(
+  requiredFeatures: ClassroomFeatureRef[],
+  classroomFeatures: ClassroomFeatureRef[]
+): ClassroomFeatureRef[] {
+  const classroomFeatureIds = new Set(
+    classroomFeatures
+      .map((feature) => feature.documentId)
+      .filter((documentId): documentId is string => typeof documentId === 'string')
+  );
+
+  return requiredFeatures.filter((feature) => {
+    if (!feature.documentId) return false;
+    return !classroomFeatureIds.has(feature.documentId);
+  });
 }
 
 /**
