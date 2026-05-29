@@ -43,10 +43,32 @@ const sessionTitle = (session) => {
   return `${group} - ${course} - ${classroom}`;
 };
 
+const teacherName = (session) => {
+  const teacher = session.academicGroup?.teacher;
+  if (!teacher) return 'Sin docente';
+  return `${teacher.firstName || ''} ${teacher.lastName || ''}`.trim() || teacher.email;
+};
+
+const uniqueOptions = (sessions, getOption) => {
+  const map = new Map();
+  sessions.forEach((session) => {
+    const option = getOption(session);
+    if (option?.value && !map.has(option.value)) {
+      map.set(option.value, option);
+    }
+  });
+  return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label));
+};
+
 const ScheduleCalendar = () => {
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
   const [scheduleConfig, setScheduleConfig] = useState(DEFAULT_CONFIG);
+  const [filters, setFilters] = useState({
+    teacherDocumentId: '',
+    classroomDocumentId: '',
+    academicGroupDocumentId: '',
+  });
   const [loading, setLoading] = useState(true);
 
   const loadSessions = async () => {
@@ -78,9 +100,58 @@ const ScheduleCalendar = () => {
     loadSessions();
   }, []);
 
+  const filterOptions = useMemo(
+    () => ({
+      teachers: uniqueOptions(sessions, (session) => ({
+        value: session.academicGroup?.teacher?.documentId,
+        label: teacherName(session),
+      })),
+      classrooms: uniqueOptions(sessions, (session) => ({
+        value: session.classroom?.documentId,
+        label: session.classroom
+          ? `${session.classroom.code} - ${session.classroom.name}`
+          : 'Sin aula',
+      })),
+      groups: uniqueOptions(sessions, (session) => ({
+        value: session.academicGroup?.documentId,
+        label: session.academicGroup?.code || 'Sin grupo',
+      })),
+    }),
+    [sessions]
+  );
+
+  const visibleSessions = useMemo(
+    () =>
+      sessions.filter((session) => {
+        if (
+          filters.teacherDocumentId &&
+          session.academicGroup?.teacher?.documentId !== filters.teacherDocumentId
+        ) {
+          return false;
+        }
+
+        if (
+          filters.classroomDocumentId &&
+          session.classroom?.documentId !== filters.classroomDocumentId
+        ) {
+          return false;
+        }
+
+        if (
+          filters.academicGroupDocumentId &&
+          session.academicGroup?.documentId !== filters.academicGroupDocumentId
+        ) {
+          return false;
+        }
+
+        return true;
+      }),
+    [filters, sessions]
+  );
+
   const calendarEvents = useMemo(
     () =>
-      sessions.map((session) => {
+      visibleSessions.map((session) => {
         const date = addDays(BASE_WEEK_START, Number(session.dayOfWeek || 1) - 1);
         return {
           id: session.documentId,
@@ -95,7 +166,7 @@ const ScheduleCalendar = () => {
           },
         };
       }),
-    [sessions]
+    [visibleSessions]
   );
 
   const lunchEvents = useMemo(
@@ -146,6 +217,19 @@ const ScheduleCalendar = () => {
     navigate(`/edit-class-session/${info.event.id}`);
   };
 
+  const handleFilterChange = (event) => {
+    const { id, value } = event.target;
+    setFilters((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      teacherDocumentId: '',
+      classroomDocumentId: '',
+      academicGroupDocumentId: '',
+    });
+  };
+
   return (
     <>
       <PageTitle activeMenu="Calendario semanal" motherMenu="Horarios" />
@@ -168,6 +252,71 @@ const ScheduleCalendar = () => {
                 <p>Cargando calendario...</p>
               ) : (
                 <>
+                  <div className="row mb-3">
+                    <div className="col-md-4">
+                      <label className="form-label" htmlFor="teacherDocumentId">
+                        Docente
+                      </label>
+                      <select
+                        id="teacherDocumentId"
+                        className="form-control"
+                        value={filters.teacherDocumentId}
+                        onChange={handleFilterChange}
+                      >
+                        <option value="">Todos los docentes</option>
+                        {filterOptions.teachers.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-4">
+                      <label className="form-label" htmlFor="classroomDocumentId">
+                        Aula
+                      </label>
+                      <select
+                        id="classroomDocumentId"
+                        className="form-control"
+                        value={filters.classroomDocumentId}
+                        onChange={handleFilterChange}
+                      >
+                        <option value="">Todas las aulas</option>
+                        {filterOptions.classrooms.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-4">
+                      <label className="form-label" htmlFor="academicGroupDocumentId">
+                        Grupo
+                      </label>
+                      <select
+                        id="academicGroupDocumentId"
+                        className="form-control"
+                        value={filters.academicGroupDocumentId}
+                        onChange={handleFilterChange}
+                      >
+                        <option value="">Todos los grupos</option>
+                        {filterOptions.groups.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="mb-3 d-flex justify-content-between align-items-center flex-wrap">
+                    <span>
+                      Mostrando <strong>{visibleSessions.length}</strong> de{' '}
+                      <strong>{sessions.length}</strong> sesiones
+                    </span>
+                    <button type="button" className="btn btn-outline-secondary" onClick={clearFilters}>
+                      Limpiar filtros
+                    </button>
+                  </div>
                   <div className="mb-3 d-flex flex-wrap gap-2">
                     <span className="badge bg-secondary">Borrador</span>
                     <span className="badge bg-primary">Planeada</span>
