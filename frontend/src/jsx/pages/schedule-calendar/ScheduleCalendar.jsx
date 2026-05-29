@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 
 import PageTitle from '../../layouts/PageTitle';
 import { getClassSessions } from '../../../services/classSessionService';
+import { publishClassSessions } from '../../../services/classSessionService';
 import { getActiveScheduleConfig, toInputTime } from '../../../services/scheduleConfigService';
 import { dayLabel, formatTime, statusLabel } from '../class-sessions/classSessionValidation';
 
@@ -230,6 +231,40 @@ const ScheduleCalendar = () => {
     });
   };
 
+  const publishVisibleSchedule = async () => {
+    const publishableCount = visibleSessions.filter(
+      (session) => !session.isLocked && ['draft', 'planned'].includes(session.status)
+    ).length;
+
+    if (publishableCount === 0) {
+      Swal.fire('Sin sesiones pendientes', 'No hay sesiones visibles para publicar.', 'info');
+      return;
+    }
+
+    const result = await Swal.fire({
+      title: 'Publicar sesiones visibles',
+      text: `Se publicaran ${publishableCount} sesiones del filtro actual.`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Publicar',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      const summary = await publishClassSessions(visibleSessions);
+      await loadSessions();
+      Swal.fire(
+        'Horario publicado',
+        `${summary.published} sesiones publicadas. ${summary.failed} fallaron.`,
+        summary.failed > 0 ? 'warning' : 'success'
+      );
+    } catch (err) {
+      Swal.fire('Error', err.message || 'No se pudo publicar el horario', 'error');
+    }
+  };
+
   return (
     <>
       <PageTitle activeMenu="Calendario semanal" motherMenu="Horarios" />
@@ -242,6 +277,9 @@ const ScheduleCalendar = () => {
                 <Link to="/all-class-sessions" className="btn btn-outline-primary me-2">
                   Ver sesiones
                 </Link>
+                <button type="button" className="btn btn-outline-success me-2" onClick={publishVisibleSchedule}>
+                  Publicar visibles
+                </button>
                 <Link to="/add-class-session" className="btn btn-primary">
                   + Nueva sesion
                 </Link>
