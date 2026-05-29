@@ -54,6 +54,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
     "eject": "react-scripts eject",
     "sass": "node-sass --watch src/assets/scss/main.scss src/assets/css/style.css --source-map src/assets/css/style.css.map",
     "lint": "eslint .",
