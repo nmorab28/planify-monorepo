@@ -116,6 +116,24 @@ export const patchClassSession = async (documentId, data) => {
   return handleResponse(res);
 };
 
+export const publishClassSessions = async (sessions) => {
+  const publishable = (sessions || []).filter(
+    (session) => !session.isLocked && ['draft', 'planned'].includes(session.status)
+  );
+
+  const results = await Promise.allSettled(
+    publishable.map((session) => patchClassSession(session.documentId, { status: 'published' }))
+  );
+
+  const failed = results.filter((result) => result.status === 'rejected');
+
+  return {
+    attempted: publishable.length,
+    published: publishable.length - failed.length,
+    failed: failed.length,
+  };
+};
+
 export const deleteClassSession = async (documentId) => {
   const res = await fetch(`${API_URL}/api/class-sessions/${documentId}`, {
     method: 'DELETE',
