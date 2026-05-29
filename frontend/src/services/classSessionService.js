@@ -41,11 +41,28 @@ const relation = (documentId) => ({
   connect: [{ documentId }],
 });
 
+const normalizeTime = (value) => {
+  if (typeof value !== 'string') return undefined;
+  const trimmed = value.trim();
+  if (trimmed === '') return undefined;
+
+  const re = /^(\d{1,2}):(\d{2})(?::(\d{2}))?(?:\.(\d{1,3}))?$/;
+  const match = re.exec(trimmed);
+  if (!match) return trimmed;
+
+  const hh = match[1].padStart(2, '0');
+  const mm = match[2];
+  const ss = (match[3] || '00').padStart(2, '0');
+  const ms = (match[4] || '000').padEnd(3, '0').slice(0, 3);
+
+  return `${hh}:${mm}:${ss}.${ms}`;
+};
+
 const normalizePayload = (payload) => {
   const data = {
     dayOfWeek: Number(payload.dayOfWeek),
-    startTime: payload.startTime,
-    endTime: payload.endTime,
+    startTime: normalizeTime(payload.startTime),
+    endTime: normalizeTime(payload.endTime),
     sessionOrder: Number(payload.sessionOrder || 1),
     status: payload.status || 'draft',
     isLocked: !!payload.isLocked,
