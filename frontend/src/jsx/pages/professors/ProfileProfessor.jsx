@@ -2,13 +2,13 @@ import React from 'react';
 import PageTitle from '../../layouts/PageTitle';
 import { StaffProfile } from '../staff/ProfileStaff';
 
-const ProfileProfessor = () => {
+const ProfileDocente = () => {
   return (
     <>
-      <PageTitle activeMenu={'Professor Profile'} motherMenu={'Professors'} />
+      <PageTitle activeMenu={'Docente Profile'} motherMenu={'Docentes'} />
       <StaffProfile />
     </>
   );
 };
 
-export default ProfileProfessor;
+export default ProfileDocente;

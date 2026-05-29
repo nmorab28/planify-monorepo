@@ -35,7 +35,7 @@ export function AuthReducer(state = initialState, action) {
         ...action.payload,
       },
       errorMessage: '',
-      successMessage: 'Signup Successfully Completed',
+      successMessage: 'Registro completado correctamente',
       showLoading: false,
     };
   }

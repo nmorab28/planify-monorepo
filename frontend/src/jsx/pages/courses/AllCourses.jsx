@@ -20,7 +20,7 @@ const AllCourses = () => {
       setCourses(res);
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Error loading courses');
+      setError(err.message || 'No se pudieron cargar los cursos');
     } finally {
       setLoading(false);
     }
@@ -32,13 +32,13 @@ const AllCourses = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'All Courses'} motherMenu={'Courses'} />
+      <PageTitle activeMenu={'Cursos'} motherMenu={'Gestion academica'} />
 
-      {loading && <p>Loading courses...</p>}
+      {loading && <p>Cargando cursos...</p>}
 
       {error && <p className="text-danger">{error}</p>}
 
-      {!loading && courses.length === 0 && <p>No courses found.</p>}
+      {!loading && courses.length === 0 && <p>No hay cursos registrados.</p>}
 
       <Row>
         {courses.map((course) => (
@@ -49,33 +49,33 @@ const AllCourses = () => {
 
                 <ul className="list-group mb-3 list-group-flush">
                   <li className="list-group-item px-0 d-flex justify-content-between">
-                    <span>Code:</span>
+                    <span>Codigo:</span>
                     <strong>{course.code}</strong>
                   </li>
 
                   <li className="list-group-item px-0 d-flex justify-content-between">
-                    <span>Weekly Sessions:</span>
+                    <span>Sesiones semanales:</span>
                     <strong>{course.weeklySessions}</strong>
                   </li>
 
                   <li className="list-group-item px-0 d-flex justify-content-between">
-                    <span>Duration:</span>
+                    <span>Duracion:</span>
                     <strong>{course.sessionDurationMinutes} min</strong>
                   </li>
 
                   <li className="list-group-item px-0 d-flex justify-content-between">
-                    <span>Non Consecutive:</span>
-                    <strong>{course.needsNonConsecutiveDays ? 'Yes' : 'No'}</strong>
+                    <span>Dias no consecutivos:</span>
+                    <strong>{course.needsNonConsecutiveDays ? 'Si' : 'No'}</strong>
                   </li>
 
                   <li className="list-group-item px-0 d-flex justify-content-between">
-                    <span>Status:</span>
-                    <strong>{course.isActive ? 'Active' : 'Inactive'}</strong>
+                    <span>Estado:</span>
+                    <strong>{course.isActive ? 'Activo' : 'Inactivo'}</strong>
                   </li>
                 </ul>
 
                 <Link to={'#'} className="btn btn-primary">
-                  View Course
+                  Ver curso
                 </Link>
               </div>
             </Card>

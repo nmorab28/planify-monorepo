@@ -267,5 +267,13 @@ export function isWithinScheduleHours(
     return `La sesión termina después del horario permitido (${allowedEnd})`;
   }
 
+  if (
+    config.lunchStart &&
+    config.lunchEnd &&
+    isTimeOverlap(session.startTime, session.endTime, config.lunchStart, config.lunchEnd)
+  ) {
+    return `La sesión se cruza con la franja de almuerzo (${config.lunchStart} - ${config.lunchEnd})`;
+  }
+
   return null;
 }

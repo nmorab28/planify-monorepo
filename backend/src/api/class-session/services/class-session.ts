@@ -9,6 +9,7 @@ import {
   type SessionCandidate,
   type ExistingSession,
   type SessionConflict,
+  type ScheduleConfig,
   type TeacherAvailability,
   type ClassroomFeatureRef,
 } from '../validation/session-validation';
@@ -63,6 +64,7 @@ type AcademicGroupDetails = {
     requiredFeatures?: ClassroomFeatureRef[] | null;
   } | null;
   teacher?: { documentId?: string } | null;
+  scheduleConfig?: ScheduleConfig | null;
 };
 
 type ClassroomDetails = {
@@ -154,6 +156,7 @@ async function resolveSessionContext(
             },
           },
           teacher: true,
+          scheduleConfig: true,
         },
       })) as AcademicGroupDetails | null)
     : null;
@@ -170,6 +173,7 @@ async function resolveSessionContext(
       academicGroup?.course?.needsNonConsecutiveDays ??
       currentSession?.academicGroup?.course?.needsNonConsecutiveDays ??
       false,
+    scheduleConfig: academicGroup?.scheduleConfig ?? null,
     dayOfWeek: Number(input.data.dayOfWeek ?? currentSession?.dayOfWeek),
     startTime: String(input.data.startTime ?? currentSession?.startTime),
     endTime: String(input.data.endTime ?? currentSession?.endTime),
@@ -316,6 +320,32 @@ export default factories.createCoreService('api::class-session.class-session', (
       sessionDocumentId: input.currentSessionDocumentId,
     };
 
+    const scheduleError = sessionContext.scheduleConfig
+      ? isWithinScheduleHours(
+          {
+            dayOfWeek: sessionContext.dayOfWeek,
+            startTime: sessionContext.startTime,
+            endTime: sessionContext.endTime,
+          },
+          sessionContext.scheduleConfig
+        )
+      : null;
+
+    const scheduleConflicts: SessionConflict[] = scheduleError
+      ? [
+          {
+            type: 'teacher',
+            message: scheduleError,
+            conflictingSession: {
+              documentId: '',
+              dayOfWeek: sessionContext.dayOfWeek,
+              startTime: sessionContext.startTime,
+              endTime: sessionContext.endTime,
+            },
+          },
+        ]
+      : [];
+
     return [
       ...checkSessionConflicts(candidate, existing),
       ...checkNonConsecutiveDayConflicts(
@@ -323,6 +353,7 @@ export default factories.createCoreService('api::class-session.class-session', (
         existing,
         !!sessionContext.courseNeedsNonConsecutiveDays
       ),
+      ...scheduleConflicts,
     ];
   },
 

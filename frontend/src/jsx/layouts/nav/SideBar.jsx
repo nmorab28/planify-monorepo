@@ -1,8 +1,9 @@
-import React, { useReducer, useContext, useEffect, useState } from 'react';
+import React, { useReducer, useContext, useEffect, useMemo, useState } from 'react';
 import { Collapse } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 /// Link
 import { Link } from 'react-router-dom';
-import { MenuList } from './Menu';
+import { getMenuListByRole } from './Menu';
 
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { ThemeContext } from '../../../context/ThemeContext';
@@ -24,6 +25,8 @@ const SideBar = () => {
   let dat = new Date();
   const { iconHover, sidebarposition, headerposition, sidebarLayout, ChangeIconSidebar } =
     useContext(ThemeContext);
+  const role = useSelector((state) => state.auth.auth.role);
+  const menuList = useMemo(() => getMenuListByRole(role), [role]);
 
   const [state, setState] = useReducer(reducer, initialState);
 
@@ -55,7 +58,7 @@ const SideBar = () => {
   path = path[path.length - 1];
 
   useEffect(() => {
-    MenuList.forEach((data) => {
+    menuList.forEach((data) => {
       data.content?.forEach((item) => {
         if (path === item.to) {
           setState({ active: data.title });
@@ -67,7 +70,7 @@ const SideBar = () => {
         });
       });
     });
-  }, [path]);
+  }, [menuList, path]);
 
   return (
     <div
@@ -85,7 +88,7 @@ const SideBar = () => {
     >
       <div className="dlabnav-scroll">
         <ul className="metismenu" id="menu">
-          {MenuList.map((data, index) => {
+          {menuList.map((data, index) => {
             let menuClass = data.classsChange;
             if (menuClass === 'menu-title') {
               return (
@@ -180,7 +183,7 @@ const SideBar = () => {
           })}
         </ul>
         <div className="copyright">
-          <p>Planify Saas Admin © {dat.getFullYear()} All Rights Reserved</p>
+          <p>Planify © {dat.getFullYear()} Todos los derechos reservados</p>
         </div>
       </div>
     </div>

@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 import PageTitle from '../../layouts/PageTitle';
 import { IMAGES } from '../../constant/theme';
-import { gridDataBlog } from '../staff/GridData';
 
 import { getTeachers, deleteTeacher } from '../../../services/teacherService';
 
 const theadData = [
-  { heading: 'Profile', sortingVale: 'profile' },
-  { heading: 'Code', sortingVale: 'code' },
-  { heading: 'Name', sortingVale: 'name' },
-  { heading: 'Department', sortingVale: 'department' },
-  { heading: 'Gender', sortingVale: 'gender' },
-  { heading: 'Mobile', sortingVale: 'mobile' },
-  { heading: 'Email', sortingVale: 'email' },
-  { heading: 'Status', sortingVale: 'isActive' },
-  { heading: 'Join Date', sortingVale: 'join' },
+  { heading: 'Perfil', sortingVale: 'profile' },
+  { heading: 'Código', sortingVale: 'code' },
+  { heading: 'Nombre', sortingVale: 'name' },
+  { heading: 'Departamento', sortingVale: 'department' },
+  { heading: 'Género', sortingVale: 'gender' },
+  { heading: 'Teléfono', sortingVale: 'mobile' },
+  { heading: 'Correo', sortingVale: 'email' },
+  { heading: 'Estado', sortingVale: 'isActive' },
+  { heading: 'Fecha de creación', sortingVale: 'join' },
+  { heading: 'Acciones', sortingVale: 'actions' },
 ];
 
 const AllProfessor = () => {
@@ -42,11 +42,11 @@ const AllProfessor = () => {
         code: t.code,
         name: `${t.firstName} ${t.lastName}`,
         email: t.email,
-        department: 'Technology',
-        gender: 'Male',
+        department: 'Académico',
+        gender: 'No especificado',
         mobile: '+57 312 3456789',
         join: new Date(t.createdAt).toLocaleDateString(),
-        isActive: t.isActive ? 'Active' : 'Inactive',
+        isActive: t.isActive ? 'Activo' : 'Inactivo',
         profile: IMAGES.smallpic1,
       }));
 
@@ -126,18 +126,18 @@ const AllProfessor = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'All Professors'} motherMenu={'Professors'} />
+      <PageTitle activeMenu={'Docentes'} motherMenu={'Docentes'} />
       <Row>
         <Tab.Container defaultActiveKey={'List'}>
           <div className="col-lg-12">
             <Nav as="ul" className="nav nav-pills mb-3">
               <Nav.Item as="li">
                 <Nav.Link eventKey="List" className="me-1">
-                  List View
+                  Vista lista
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="Grid">Grid View</Nav.Link>
+                <Nav.Link eventKey="Grid">Vista tarjetas</Nav.Link>
               </Nav.Item>
             </Nav>
           </div>
@@ -148,9 +148,9 @@ const AllProfessor = () => {
               <Tab.Pane eventKey="List" className="col-lg-12">
                 <div className="card">
                   <div className="card-header">
-                    <h4 className="card-title">All Professors</h4>
+                    <h4 className="card-title">Docentes</h4>
                     <Link to={'/add-professor'} className="btn btn-primary">
-                      + Add New
+                      + Nuevo docente
                     </Link>
                   </div>
 
@@ -161,7 +161,7 @@ const AllProfessor = () => {
                         <div className="justify-content-between d-sm-flex">
                           <div className="dataTables_length">
                             <label className="d-flex align-items-center">
-                              Show
+                              Mostrar
                               <Dropdown className="search-drop">
                                 <Dropdown.Toggle as="div">{sort}</Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -170,13 +170,13 @@ const AllProfessor = () => {
                                   <Dropdown.Item onClick={() => setSortata(30)}>30</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
-                              entries
+                              registros
                             </label>
                           </div>
 
                           <div className="dataTables_filter">
                             <label>
-                              Search:
+                              Buscar:
                               <input type="search" onChange={DataSearch} />
                             </label>
                           </div>
@@ -240,11 +240,11 @@ const AllProfessor = () => {
                         {/* PAGINACIÓN */}
                         <div className="d-sm-flex text-center justify-content-between align-items-center mt-3">
                           <div className="dataTables_info">
-                            Showing {activePag.current * sort + 1} to{' '}
+                            Mostrando {activePag.current * sort + 1} a{' '}
                             {data.length > (activePag.current + 1) * sort
                               ? (activePag.current + 1) * sort
                               : data.length}{' '}
-                            of {data.length} entries
+                            de {data.length} registros
                           </div>
 
                           <div
@@ -258,7 +258,7 @@ const AllProfessor = () => {
                                 activePag.current > 0 && onClick(activePag.current - 1)
                               }
                             >
-                              Previous
+                              Anterior
                             </Link>
 
                             <span>
@@ -282,7 +282,7 @@ const AllProfessor = () => {
                                 onClick(activePag.current + 1)
                               }
                             >
-                              Next
+                              Siguiente
                             </Link>
                           </div>
                         </div>
@@ -308,14 +308,14 @@ const AllProfessor = () => {
                                 to={`/edit-professor/${data.documentId}`}
                                 className="dropdown-item"
                               >
-                                Edit
+                                Editar
                               </Link>
                               <Link
                                 to="#"
                                 onClick={() => handleDelete(data.documentId)}
                                 className="dropdown-item text-danger"
                               >
-                                Delete
+                                Eliminar
                               </Link>
                             </Dropdown.Menu>
                           </Dropdown>
