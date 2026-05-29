@@ -48,6 +48,10 @@ export const MenuList = [
     iconStyle: <i className="la la-book" />,
     content: [
       {
+        title: 'Calendario semanal',
+        to: 'schedule-calendar',
+      },
+      {
         title: 'Todas las sesiones',
         to: 'all-class-sessions',
       },
