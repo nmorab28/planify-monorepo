@@ -4,6 +4,7 @@ import {
   isSessionCoveredByAvailability,
   checkNonConsecutiveDayConflicts,
   checkSessionConflicts,
+  findMissingClassroomFeatures,
   isWithinScheduleHours,
   timeToMinutes,
   type ExistingSession,
@@ -283,6 +284,41 @@ describe('checkNonConsecutiveDayConflicts', () => {
     };
 
     expect(checkNonConsecutiveDayConflicts(candidate, [BASE_SESSION], true)).toHaveLength(0);
+  });
+});
+
+describe('findMissingClassroomFeatures', () => {
+  it('retorna vacio cuando el aula tiene todas las caracteristicas requeridas', () => {
+    expect(
+      findMissingClassroomFeatures(
+        [
+          { documentId: 'feature-1', name: 'Computadores' },
+          { documentId: 'feature-2', name: 'Sillas moviles' },
+        ],
+        [
+          { documentId: 'feature-1', name: 'Computadores' },
+          { documentId: 'feature-2', name: 'Sillas moviles' },
+          { documentId: 'feature-3', name: 'Proyector' },
+        ]
+      )
+    ).toHaveLength(0);
+  });
+
+  it('retorna las caracteristicas que el aula no cumple', () => {
+    const missing = findMissingClassroomFeatures(
+      [
+        { documentId: 'feature-1', name: 'Computadores' },
+        { documentId: 'feature-2', name: 'Sillas moviles' },
+      ],
+      [{ documentId: 'feature-1', name: 'Computadores' }]
+    );
+
+    expect(missing).toHaveLength(1);
+    expect(missing[0].documentId).toBe('feature-2');
+  });
+
+  it('ignora requerimientos sin documentId para evitar falsos positivos', () => {
+    expect(findMissingClassroomFeatures([{ name: 'Sin id' }], [])).toHaveLength(0);
   });
 });
 
