@@ -23,7 +23,7 @@ export type ExistingSession = {
   academicGroupDocumentId?: string | null;
 };
 
-export type ConflictType = 'teacher' | 'classroom' | 'academicGroup';
+export type ConflictType = 'teacher' | 'classroom' | 'academicGroup' | 'nonConsecutiveDays';
 
 export type SessionConflict = {
   type: ConflictType;
@@ -175,6 +175,36 @@ export function checkSessionConflicts(
   }
 
   return conflicts;
+}
+
+export function checkNonConsecutiveDayConflicts(
+  candidate: Pick<SessionCandidate, 'dayOfWeek' | 'academicGroupDocumentId' | 'sessionDocumentId'>,
+  existing: Pick<ExistingSession, 'documentId' | 'dayOfWeek' | 'startTime' | 'endTime' | 'academicGroupDocumentId'>[],
+  needsNonConsecutiveDays: boolean
+): SessionConflict[] {
+  if (!needsNonConsecutiveDays || !candidate.academicGroupDocumentId) return [];
+
+  return existing
+    .filter((session) => {
+      if (candidate.sessionDocumentId && session.documentId === candidate.sessionDocumentId) {
+        return false;
+      }
+
+      return (
+        session.academicGroupDocumentId === candidate.academicGroupDocumentId &&
+        Math.abs(Number(session.dayOfWeek) - Number(candidate.dayOfWeek)) === 1
+      );
+    })
+    .map((session) => ({
+      type: 'nonConsecutiveDays' as const,
+      message: `El curso requiere sesiones en dias no consecutivos y ya tiene una sesion el dia ${session.dayOfWeek}.`,
+      conflictingSession: {
+        documentId: session.documentId,
+        dayOfWeek: session.dayOfWeek,
+        startTime: session.startTime,
+        endTime: session.endTime,
+      },
+    }));
 }
 
 /**
