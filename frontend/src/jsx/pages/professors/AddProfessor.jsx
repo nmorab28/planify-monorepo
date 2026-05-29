@@ -7,30 +7,27 @@ import { createTeacher } from '../../../services/teacherService';
 import PageTitle from '../../layouts/PageTitle';
 
 const options = [
-  { value: '1', label: 'Gender' },
-  { value: '2', label: 'Male' },
-  { value: '3', label: 'Female' },
+  { value: '1', label: 'Género' },
+  { value: '2', label: 'Masculino' },
+  { value: '3', label: 'Femenino' },
 ];
 
 const options1 = [
-  { value: '1', label: 'Department' },
-  { value: '2', label: 'Medicine' },
-  { value: '3', label: 'Dentistry' },
-  { value: '4', label: 'Nursing' },
-  { value: '4', label: 'Psychology' },
-  { value: '4', label: 'Engineering' },
-  { value: '4', label: 'Economic and Administrative Sciences' },
-  { value: '4', label: 'Legal and Political Sciences' },
-  { value: '4', label: 'Creation and Communication' },
-  { value: '4', label: 'Education' },
-  { value: '4', label: 'Sciences' },
+  { value: '1', label: 'Departamento' },
+  { value: '2', label: 'Medicina' },
+  { value: '3', label: 'Odontología' },
+  { value: '4', label: 'Enfermería' },
+  { value: '5', label: 'Psicología' },
+  { value: '6', label: 'Ingeniería' },
+  { value: '7', label: 'Ciencias económicas y administrativas' },
+  { value: '8', label: 'Ciencias jurídicas y políticas' },
+  { value: '9', label: 'Creación y comunicación' },
+  { value: '10', label: 'Educación' },
+  { value: '11', label: 'Ciencias' },
 ];
 
 const AddProfessor = () => {
   const navigate = useNavigate();
-
-  const [changeText, setChangeText] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     code: '',
@@ -101,12 +98,12 @@ const AddProfessor = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'Add Professor'} motherMenu={'Professors'} />
+      <PageTitle activeMenu={'Crear docente'} motherMenu={'Docentes'} />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h5 className="card-title">Basic Info</h5>
+              <h5 className="card-title">Información básica</h5>
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit} id="addStaffForm">
@@ -114,10 +111,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="first_name">
-                        First Name
+                        Nombres
                       </label>
                       <input
-                        placeholder="Enter First Name"
+                        placeholder="Nombres"
                         id="first_name"
                         type="text"
                         className="form-control"
@@ -130,10 +127,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="last_name">
-                        Last Name
+                        Apellidos
                       </label>
                       <input
-                        placeholder="Enter Last Name"
+                        placeholder="Apellidos"
                         id="last_name"
                         type="text"
                         className="form-control"
@@ -146,10 +143,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="email_here">
-                        Email Here
+                        Correo electrónico
                       </label>
                       <input
-                        placeholder="Email Here"
+                        placeholder="correo@planify.edu"
                         id="email_here"
                         type="email"
                         className="form-control"
@@ -162,10 +159,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="datepicker">
-                        Joining Date
+                        Fecha de ingreso
                       </label>
                       <div className="input-hasicon mb-xl-0 mb-3">
-                        <DatePicker placeholder="Joining Date" className="picker-suit" />
+                        <DatePicker placeholder="Fecha de ingreso" className="picker-suit" />
                         <div className="icon">
                           <i className="far fa-calendar" />
                         </div>
@@ -181,7 +178,7 @@ const AddProfessor = () => {
                                                     className="form-control pass-input" required 
                                                  />                                              
                                                 <span className={`input-group-text pass-handle ${showPassword ? "active" : ""}`}
-                                                    onClick={()=>setShowPassword(!showPassword)}
+                                                    onClick={()=>setMostrarPassword(!showPassword)}
                                                 > 
                                                     <i className="fa fa-eye-slash" />
                                                     <i className="fa fa-eye" />
@@ -210,10 +207,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="mobile_number">
-                        Mobile Number
+                        Teléfono
                       </label>
                       <input
-                        placeholder="Mobile Number"
+                        placeholder="Teléfono"
                         id="mobile_number"
                         type="number"
                         maxLength="10"
@@ -224,7 +221,7 @@ const AddProfessor = () => {
                   </div>
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Gender</label>
+                      <label className="form-label">Género</label>
                       <Select
                         isSearchable={false}
                         defaultValue={options[0]}
@@ -236,10 +233,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="designation">
-                        Designation
+                        Cargo
                       </label>
                       <input
-                        placeholder="Designation"
+                        placeholder="Cargo"
                         id="designation"
                         type="text"
                         className="form-control"
@@ -248,7 +245,7 @@ const AddProfessor = () => {
                   </div>
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Department</label>
+                      <label className="form-label">Departamento</label>
                       <Select
                         isSearchable={false}
                         defaultValue={options1[0]}
@@ -260,10 +257,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="datepicker1">
-                        Date of Birth
+                        Fecha de nacimiento
                       </label>
                       <div className="input-hasicon mb-xl-0 mb-3">
-                        <DatePicker placeholder="Date of Birth" className="picker-suit" />
+                        <DatePicker placeholder="Fecha de nacimiento" className="picker-suit" />
                         <div className="icon">
                           <i className="far fa-calendar" />
                         </div>
@@ -273,10 +270,10 @@ const AddProfessor = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label className="form-label" htmlFor="teacher_code">
-                        Teacher Code
+                        Código docente
                       </label>
                       <input
-                        placeholder="Teacher Code"
+                        placeholder="Código docente"
                         id="teacher_code"
                         type="number"
                         maxLength="4"
@@ -295,10 +292,10 @@ const AddProfessor = () => {
                                     </div> */}
                   <div className="col-lg-12 col-md-12 col-sm-12">
                     <button type="submit" className="btn btn-primary me-1">
-                      Submit
+                      Guardar
                     </button>
                     <button type="button" className="btn btn-danger light">
-                      Cancel
+                      Cancelar
                     </button>
                   </div>
                 </div>

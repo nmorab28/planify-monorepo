@@ -40,6 +40,8 @@ type UserRecord = {
 };
 
 const ACADEMIC_COORDINATOR_ACTIONS = [
+  'plugin::users-permissions.user.me',
+
   'api::teacher.teacher.find',
   'api::teacher.teacher.findOne',
   'api::teacher.teacher.create',
@@ -108,6 +110,8 @@ const ACADEMIC_COORDINATOR_ACTIONS = [
 ] as const;
 
 const TEACHER_ACTIONS = [
+  'plugin::users-permissions.user.me',
+
   'api::teacher.teacher.find',
   'api::teacher.teacher.findOne',
   'api::course.course.find',
@@ -116,6 +120,9 @@ const TEACHER_ACTIONS = [
   'api::academic-group.academic-group.findOne',
   'api::availability.availability.find',
   'api::availability.availability.findOne',
+  'api::availability.availability.create',
+  'api::availability.availability.update',
+  'api::availability.availability.delete',
 
   'api::class-session.class-session.findByTeacher',
   'api::class-session.class-session.findByClassroom',
@@ -126,6 +133,8 @@ const TEACHER_ACTIONS = [
 ] as const;
 
 const STUDENT_ACTIONS = [
+  'plugin::users-permissions.user.me',
+
   'api::course.course.find',
   'api::course.course.findOne',
   'api::academic-group.academic-group.find',

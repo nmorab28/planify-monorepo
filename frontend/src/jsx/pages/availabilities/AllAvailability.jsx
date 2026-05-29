@@ -355,18 +355,18 @@ const AllAvailability = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'All Availabilities'} motherMenu={'Availability'} />
+      <PageTitle activeMenu={'Disponibilidades'} motherMenu={'Disponibilidad'} />
       <Row>
         <Tab.Container defaultActiveKey={'List'}>
           <div className="col-lg-12">
             <Nav as="ul" className="nav nav-pills mb-3">
               <Nav.Item as="li">
                 <Nav.Link eventKey="List" className="me-1">
-                  List View
+                  Vista lista
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li">
-                <Nav.Link eventKey="Calendar">Calendar View</Nav.Link>
+                <Nav.Link eventKey="Calendar">Vista calendario</Nav.Link>
               </Nav.Item>
             </Nav>
           </div>
@@ -406,7 +406,7 @@ const AllAvailability = () => {
                   <div className="card-header">
                     <h4 className="card-title">Rangos de disponibilidad</h4>
                     <Link to={buildAddUrl()} className="btn btn-primary">
-                      + Add New
+                      + Nuevo
                     </Link>
                   </div>
 
@@ -416,7 +416,7 @@ const AllAvailability = () => {
                         <div className="justify-content-between d-sm-flex">
                           <div className="dataTables_length">
                             <label className="d-flex align-items-center">
-                              Show
+                              Mostrar
                               <Dropdown className="search-drop">
                                 <Dropdown.Toggle as="div">{sort}</Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -425,13 +425,13 @@ const AllAvailability = () => {
                                   <Dropdown.Item onClick={() => setSort(30)}>30</Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
-                              entries
+                              registros
                             </label>
                           </div>
 
                           <div className="dataTables_filter">
                             <label>
-                              Search:
+                              Buscar:
                               <input type="search" onChange={DataSearch} />
                             </label>
                           </div>
@@ -500,11 +500,11 @@ const AllAvailability = () => {
 
                         <div className="d-sm-flex text-center justify-content-between align-items-center mt-3">
                           <div className="dataTables_info">
-                            Showing {activePag.current * sort + 1} to{' '}
+                            Mostrando {activePag.current * sort + 1} a{' '}
                             {data.length > (activePag.current + 1) * sort
                               ? (activePag.current + 1) * sort
                               : data.length}{' '}
-                            of {data.length} entries
+                            de {data.length} registros
                           </div>
 
                           <div
@@ -518,7 +518,7 @@ const AllAvailability = () => {
                                 activePag.current > 0 && onClick(activePag.current - 1)
                               }
                             >
-                              Previous
+                              Anterior
                             </Link>
 
                             <span>
@@ -544,7 +544,7 @@ const AllAvailability = () => {
                                 onClick(activePag.current + 1)
                               }
                             >
-                              Next
+                              Siguiente
                             </Link>
                           </div>
                         </div>
@@ -562,7 +562,7 @@ const AllAvailability = () => {
                       <div className="card-header">
                         <h4 className="card-title">Calendario semanal</h4>
                         <Link to={buildAddUrl()} className="btn btn-primary">
-                          + Add New
+                          + Nuevo
                         </Link>
                       </div>
                       <Card.Body>

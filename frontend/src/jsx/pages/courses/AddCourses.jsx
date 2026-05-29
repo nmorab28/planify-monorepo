@@ -41,7 +41,7 @@ const AddCourses = () => {
         sessionDurationMinutes: Number(formData.sessionDurationMinutes),
       });
 
-      setMessage('Course created successfully');
+      setMessage('Curso creado correctamente');
 
       setFormData({
         code: '',
@@ -53,7 +53,7 @@ const AddCourses = () => {
       });
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Error creating course');
+      setError(err.message || 'No se pudo crear el curso');
     } finally {
       setLoading(false);
     }
@@ -61,13 +61,13 @@ const AddCourses = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'Add Course'} motherMenu={'Courses'} />
+      <PageTitle activeMenu={'Crear curso'} motherMenu={'Cursos'} />
 
       <div className="row">
         <div className="col-lg-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Courses Details</h4>
+              <h4 className="card-title">Datos del curso</h4>
             </div>
 
             <div className="card-body">
@@ -75,7 +75,7 @@ const AddCourses = () => {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Course Name</label>
+                      <label className="form-label">Nombre del curso</label>
 
                       <input
                         type="text"
@@ -90,7 +90,7 @@ const AddCourses = () => {
 
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Course Code</label>
+                      <label className="form-label">Codigo del curso</label>
 
                       <input
                         type="text"
@@ -105,7 +105,7 @@ const AddCourses = () => {
 
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Weekly Sessions</label>
+                      <label className="form-label">Sesiones semanales</label>
 
                       <input
                         type="number"
@@ -120,7 +120,7 @@ const AddCourses = () => {
 
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <label className="form-label">Session Duration Minutes</label>
+                      <label className="form-label">Duracion de la sesion en minutos</label>
 
                       <input
                         type="number"
@@ -143,7 +143,7 @@ const AddCourses = () => {
                         onChange={handleChange}
                       />
 
-                      <label className="form-check-label">Needs Non Consecutive Days</label>
+                      <label className="form-check-label">Requiere dias no consecutivos</label>
                     </div>
                   </div>
 
@@ -157,7 +157,7 @@ const AddCourses = () => {
                         onChange={handleChange}
                       />
 
-                      <label className="form-check-label">Active</label>
+                      <label className="form-check-label">Activo</label>
                     </div>
                   </div>
 
@@ -175,7 +175,7 @@ const AddCourses = () => {
 
                   <div className="col-lg-12">
                     <button type="submit" className="btn btn-primary me-1" disabled={loading}>
-                      {loading ? 'Saving...' : 'Submit'}
+                      {loading ? 'Guardando...' : 'Guardar'}
                     </button>
                   </div>
                 </div>

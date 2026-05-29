@@ -86,7 +86,7 @@ function Login(props) {
                       type="password"
                       className="form-control"
                       value={password}
-                      placeholder="Estriba su contraseña"
+                      placeholder="Escriba su contraseña"
                       onChange={(e) => setPassword(e.target.value)}
                     />
                     {errors.password && <div className="text-danger fs-12">{errors.password}</div>}

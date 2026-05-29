@@ -120,7 +120,7 @@ const AddClassroom = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'Add Classroom'} motherMenu={'Classrooms'} />
+      <PageTitle activeMenu={'Crear aula'} motherMenu={'Aulas'} />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
@@ -244,14 +244,14 @@ const AddClassroom = () => {
 
                   <div className="col-lg-12 col-md-12 col-sm-12">
                     <button type="submit" className="btn btn-primary me-1" disabled={submitting}>
-                      {submitting ? 'Guardando...' : 'Submit'}
+                      {submitting ? 'Guardando...' : 'Guardar'}
                     </button>
                     <button
                       type="button"
                       className="btn btn-danger light"
                       onClick={() => navigate('/all-classrooms')}
                     >
-                      Cancel
+                      Cancelar
                     </button>
                   </div>
                 </div>

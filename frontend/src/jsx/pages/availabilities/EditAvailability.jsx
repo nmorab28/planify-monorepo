@@ -290,7 +290,7 @@ const EditAvailability = () => {
 
   return (
     <>
-      <PageTitle activeMenu={'Edit Availability'} motherMenu={'Availability'} />
+      <PageTitle activeMenu={'Editar disponibilidad'} motherMenu={'Disponibilidad'} />
       <div className="row">
         <div className="col-xl-12 col-xxl-12 col-sm-12">
           <div className="card">
@@ -406,14 +406,14 @@ const EditAvailability = () => {
 
                   <div className="col-lg-12 col-md-12 col-sm-12">
                     <button type="submit" className="btn btn-primary me-1" disabled={submitting}>
-                      {submitting ? 'Guardando...' : 'Submit'}
+                      {submitting ? 'Guardando...' : 'Guardar'}
                     </button>
                     <button
                       type="button"
                       className="btn btn-danger light"
                       onClick={() => navigate('/all-availability')}
                     >
-                      Cancel
+                      Cancelar
                     </button>
                   </div>
                 </div>

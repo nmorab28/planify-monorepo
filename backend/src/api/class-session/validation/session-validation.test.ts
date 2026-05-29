@@ -360,9 +360,27 @@ describe('isWithinScheduleHours', () => {
     expect(result).toMatch(/después del horario/);
   });
 
-  it('acepta sesiones en los bordes exactos del horario', () => {
+  it('acepta sesiones dentro del horario institucional sin cruzar almuerzo', () => {
     expect(
-      isWithinScheduleHours({ dayOfWeek: 1, startTime: '07:00', endTime: '21:00' }, BASE_CONFIG)
+      isWithinScheduleHours({ dayOfWeek: 1, startTime: '07:00', endTime: '12:00' }, BASE_CONFIG)
+    ).toBeNull();
+  });
+
+  it('retorna error cuando la sesión cruza la franja de almuerzo', () => {
+    const result = isWithinScheduleHours(
+      { dayOfWeek: 1, startTime: '11:30', endTime: '12:30' },
+      BASE_CONFIG
+    );
+    expect(result).not.toBeNull();
+    expect(result).toMatch(/almuerzo/);
+  });
+
+  it('acepta sesiones en los bordes exactos del almuerzo', () => {
+    expect(
+      isWithinScheduleHours({ dayOfWeek: 1, startTime: '10:00', endTime: '12:00' }, BASE_CONFIG)
+    ).toBeNull();
+    expect(
+      isWithinScheduleHours({ dayOfWeek: 1, startTime: '14:00', endTime: '16:00' }, BASE_CONFIG)
     ).toBeNull();
   });
 
