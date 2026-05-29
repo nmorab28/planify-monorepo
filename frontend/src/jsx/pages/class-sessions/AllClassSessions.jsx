@@ -9,6 +9,7 @@ import {
   patchClassSession,
   publishClassSessions,
 } from '../../../services/classSessionService';
+import { exportClassSessionsCsv } from './classSessionExport';
 import { dayLabel, formatTime, statusLabel } from './classSessionValidation';
 
 const sortSessions = (sessions) =>
@@ -148,6 +149,10 @@ const AllClassSessions = () => {
     }
   };
 
+  const exportVisibleSessions = () => {
+    exportClassSessionsCsv(filteredSessions, 'sesiones-planify.csv');
+  };
+
   return (
     <>
       <PageTitle activeMenu="Sesiones de clase" motherMenu="Horarios" />
@@ -157,6 +162,9 @@ const AllClassSessions = () => {
             <div className="card-header">
               <h4 className="card-title">Sesiones de clase</h4>
               <div>
+                <button type="button" className="btn btn-outline-secondary me-2" onClick={exportVisibleSessions}>
+                  Exportar CSV
+                </button>
                 <button type="button" className="btn btn-outline-success me-2" onClick={publishSchedule}>
                   Publicar horario
                 </button>
