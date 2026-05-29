@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import PageTitle from '../../layouts/PageTitle';
 import { getClassSessions, patchClassSession, publishClassSessions } from '../../../services/classSessionService';
 import { getActiveScheduleConfig, toInputTime } from '../../../services/scheduleConfigService';
+import { exportClassSessionsCsv } from '../class-sessions/classSessionExport';
 import { dayLabel, formatTime, statusLabel } from '../class-sessions/classSessionValidation';
 
 const BASE_WEEK_START = '2026-01-05';
@@ -314,6 +315,10 @@ const ScheduleCalendar = () => {
     }
   };
 
+  const exportVisibleSchedule = () => {
+    exportClassSessionsCsv(visibleSessions, 'calendario-planify.csv');
+  };
+
   return (
     <>
       <PageTitle activeMenu="Calendario semanal" motherMenu="Horarios" />
@@ -326,6 +331,9 @@ const ScheduleCalendar = () => {
                 <Link to="/all-class-sessions" className="btn btn-outline-primary me-2">
                   Ver sesiones
                 </Link>
+                <button type="button" className="btn btn-outline-secondary me-2" onClick={exportVisibleSchedule}>
+                  Exportar CSV
+                </button>
                 <button type="button" className="btn btn-outline-success me-2" onClick={publishVisibleSchedule}>
                   Publicar visibles
                 </button>
