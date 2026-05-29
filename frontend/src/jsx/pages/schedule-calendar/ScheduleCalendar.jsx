@@ -6,8 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import PageTitle from '../../layouts/PageTitle';
-import { getClassSessions } from '../../../services/classSessionService';
-import { publishClassSessions } from '../../../services/classSessionService';
+import { getClassSessions, patchClassSession, publishClassSessions } from '../../../services/classSessionService';
 import { getActiveScheduleConfig, toInputTime } from '../../../services/scheduleConfigService';
 import { dayLabel, formatTime, statusLabel } from '../class-sessions/classSessionValidation';
 
@@ -34,6 +33,14 @@ const addDays = (dateString, days) => {
   const date = new Date(`${dateString}T00:00:00`);
   date.setDate(date.getDate() + days);
   return date.toISOString().slice(0, 10);
+};
+
+const toCalendarTime = (date) =>
+  `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+
+const toDayOfWeek = (date) => {
+  const day = date.getDay();
+  return day === 0 ? 7 : day;
 };
 
 const sessionTitle = (session) => {
@@ -164,6 +171,7 @@ const ScheduleCalendar = () => {
             status: statusLabel(session.status),
             day: dayLabel(session.dayOfWeek),
             locked: session.isLocked,
+            session,
           },
         };
       }),
@@ -216,6 +224,47 @@ const ScheduleCalendar = () => {
 
   const handleEventClick = (info) => {
     navigate(`/edit-class-session/${info.event.id}`);
+  };
+
+  const handleEventDrop = async (info) => {
+    const session = info.event.extendedProps?.session;
+
+    if (!session?.documentId || !info.event.start || !info.event.end) {
+      info.revert();
+      return;
+    }
+
+    if (session.isLocked) {
+      info.revert();
+      Swal.fire('Sesión bloqueada', 'Desbloquea la sesión antes de reprogramarla.', 'info');
+      return;
+    }
+
+    const dayOfWeek = toDayOfWeek(info.event.start);
+
+    if (dayOfWeek < 1 || dayOfWeek > 6) {
+      info.revert();
+      Swal.fire('Día inválido', 'Solo se permiten clases de lunes a sábado.', 'error');
+      return;
+    }
+
+    try {
+      await patchClassSession(session.documentId, {
+        dayOfWeek,
+        startTime: toCalendarTime(info.event.start),
+        endTime: toCalendarTime(info.event.end),
+      });
+      await loadSessions();
+      Swal.fire({
+        icon: 'success',
+        title: 'Sesión reprogramada',
+        timer: 1200,
+        showConfirmButton: false,
+      });
+    } catch (err) {
+      info.revert();
+      Swal.fire('No se pudo reprogramar', err.message || 'Verifica las reglas del horario.', 'error');
+    }
   };
 
   const handleFilterChange = (event) => {
@@ -390,7 +439,11 @@ const ScheduleCalendar = () => {
                       nowIndicator={false}
                       businessHours={businessHours}
                       events={[...lunchEvents, ...calendarEvents]}
+                      editable
+                      eventDurationEditable={false}
+                      eventStartEditable
                       eventClick={handleEventClick}
+                      eventDrop={handleEventDrop}
                       eventContent={eventContent}
                     />
                   </div>
