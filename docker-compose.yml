@@ -54,6 +54,23 @@ services:
       - CHOKIDAR_USEPOLLING=true
     command: sh -c "npm install && npm start"
 
+  load-test-dashboard:
+    build:
+      context: .
+      dockerfile: tools/load-test-dashboard/Dockerfile
+    container_name: planify-load-test-dashboard
+    depends_on:
+      - strapi
+      - frontend
+    ports:
+      - "4010:4010"
+    environment:
+      - PLANIFY_API_URL=http://strapi:1337
+      - PLANIFY_FRONTEND_URL=http://frontend:3000
+      - PLANIFY_LOAD_EMAIL=coordinator@planify.edu
+      - PLANIFY_LOAD_PASSWORD=Planify123*
+      - PORT=4010
+
 volumes:
   planify_postgres_data:
   planify_strapi_node_modules:

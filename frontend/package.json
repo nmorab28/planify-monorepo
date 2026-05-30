@@ -57,6 +57,8 @@
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "verify:demo": "cd .. && node scripts/verify-demo.mjs",
+    "test:load": "cd .. && node scripts/load-test.mjs",
+    "test:stress": "cd .. && PLANIFY_LOAD_MODE=stress node scripts/load-test.mjs",
     "eject": "react-scripts eject",
     "sass": "node-sass --watch src/assets/scss/main.scss src/assets/css/style.css --source-map src/assets/css/style.css.map",
     "lint": "eslint .",

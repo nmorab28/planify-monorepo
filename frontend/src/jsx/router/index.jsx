@@ -28,6 +28,7 @@ import AllProfessor from './../pages/professors/AllProfessor';
 import AddProfessor from './../pages/professors/AddProfessor';
 import EditProfessor from './../pages/professors/EditProfessor';
 import ProfileProfessor from './../pages/professors/ProfileProfessor';
+import ImportProfessors from './../pages/professors/ImportProfessors';
 
 //Availability
 import AllAvailability from './../pages/availabilities/AllAvailability';
@@ -187,6 +188,7 @@ const Markup = () => {
     //Professors
     { url: 'all-professors', component: <AllProfessor /> },
     { url: 'add-professor', component: <AddProfessor /> },
+    { url: 'import-professors', component: <ImportProfessors /> },
     { url: 'edit-professor/:documentId', component: <EditProfessor /> },
     { url: 'professor-profile', component: <ProfileProfessor /> },
 

@@ -36,6 +36,7 @@ export const getAcademicGroups = async () => {
   params.set('populate[course]', 'true');
   params.set('populate[teacher]', 'true');
   params.set('populate[scheduleConfig]', 'true');
+  params.set('pagination[pageSize]', '1000');
   params.set('sort', 'code:asc');
 
   const res = await fetch(`${API_URL}/api/academic-groups?${params.toString()}`, {

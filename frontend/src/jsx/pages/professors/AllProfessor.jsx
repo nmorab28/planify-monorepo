@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Dropdown, Row, Nav, Tab } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -21,15 +21,11 @@ const theadData = [
 ];
 
 const AllProfessor = () => {
-  const [sort, setSortata] = useState(10);
+  const [sort, setSort] = useState(10);
   const [feeData, setFeeDate] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const [data, setData] = useState([]);
-
-  const activePag = useRef(0);
-  const [test, settest] = useState(0);
-
   const [iconData, setIconDate] = useState({ complete: false, ind: Number });
+  const [currentPage, setCurrentPage] = useState(0);
 
   // FETCH DESDE STRAPI
   const fetchTeachers = async () => {
@@ -61,33 +57,24 @@ const AllProfessor = () => {
     fetchTeachers();
   }, []);
 
-  // PAGINACIÓN
-  const chageData = (frist, sec) => {
-    const table = document.querySelectorAll('#holidayList tbody tr');
-    for (let i = 0; i < table.length; ++i) {
-      if (i >= frist && i < sec) {
-        table[i].classList.remove('d-none');
-      } else {
-        table[i].classList.add('d-none');
-      }
-    }
-  };
-
-  useEffect(() => {
-    setData(document.querySelectorAll('#holidayList tbody tr'));
-  }, [test, feeData]);
-
-  activePag.current === 0 && chageData(0, sort);
-
-  let paggination = Array(Math.ceil(data.length / sort))
+  const pageCount = Math.max(1, Math.ceil(feeData.length / sort));
+  const paggination = Array(pageCount)
     .fill()
     .map((_, i) => i + 1);
 
   const onClick = (i) => {
-    activePag.current = i;
-    chageData(activePag.current * sort, (activePag.current + 1) * sort);
-    settest(i);
+    setCurrentPage(i);
   };
+
+  const handlePageSize = (value) => {
+    setSort(value);
+    setCurrentPage(0);
+  };
+
+  const paginatedData = useMemo(() => {
+    const start = currentPage * sort;
+    return feeData.slice(start, start + sort);
+  }, [currentPage, feeData, sort]);
 
   // SORT
   function SotingData(name) {
@@ -100,15 +87,17 @@ const AllProfessor = () => {
     }
 
     setFeeDate(sorted);
+    setCurrentPage(0);
   }
 
   // SEARCH
   function DataSearch(e) {
     const filtered = originalData.filter((item) =>
-      `${item.name} ${item.email}`.toLowerCase().includes(e.target.value.toLowerCase())
+      `${item.code} ${item.name} ${item.email}`.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
     setFeeDate(filtered);
+    setCurrentPage(0);
   }
 
   // DELETE
@@ -149,9 +138,14 @@ const AllProfessor = () => {
                 <div className="card">
                   <div className="card-header">
                     <h4 className="card-title">Docentes</h4>
-                    <Link to={'/add-professor'} className="btn btn-primary">
-                      + Nuevo docente
-                    </Link>
+                    <div>
+                      <Link to={'/import-professors'} className="btn btn-outline-primary me-2">
+                        Importar CSV
+                      </Link>
+                      <Link to={'/add-professor'} className="btn btn-primary">
+                        + Nuevo docente
+                      </Link>
+                    </div>
                   </div>
 
                   <div className="card-body">
@@ -165,9 +159,15 @@ const AllProfessor = () => {
                               <Dropdown className="search-drop">
                                 <Dropdown.Toggle as="div">{sort}</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item onClick={() => setSortata(10)}>10</Dropdown.Item>
-                                  <Dropdown.Item onClick={() => setSortata(20)}>20</Dropdown.Item>
-                                  <Dropdown.Item onClick={() => setSortata(30)}>30</Dropdown.Item>
+                                  <Dropdown.Item onClick={() => handlePageSize(10)}>
+                                    10
+                                  </Dropdown.Item>
+                                  <Dropdown.Item onClick={() => handlePageSize(20)}>
+                                    20
+                                  </Dropdown.Item>
+                                  <Dropdown.Item onClick={() => handlePageSize(30)}>
+                                    30
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                               registros
@@ -200,8 +200,8 @@ const AllProfessor = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {feeData.map((data, ind) => (
-                              <tr key={ind}>
+                            {paginatedData.map((data) => (
+                              <tr key={data.documentId}>
                                 <td>
                                   <img
                                     className="rounded-circle"
@@ -240,11 +240,9 @@ const AllProfessor = () => {
                         {/* PAGINACIÓN */}
                         <div className="d-sm-flex text-center justify-content-between align-items-center mt-3">
                           <div className="dataTables_info">
-                            Mostrando {activePag.current * sort + 1} a{' '}
-                            {data.length > (activePag.current + 1) * sort
-                              ? (activePag.current + 1) * sort
-                              : data.length}{' '}
-                            de {data.length} registros
+                            Mostrando {feeData.length === 0 ? 0 : currentPage * sort + 1} a{' '}
+                            {Math.min((currentPage + 1) * sort, feeData.length)} de{' '}
+                            {feeData.length} registros
                           </div>
 
                           <div
@@ -252,11 +250,11 @@ const AllProfessor = () => {
                             id="example5_paginate"
                           >
                             <Link
-                              className="paginate_button previous disabled"
+                              className={`paginate_button previous ${
+                                currentPage === 0 ? 'disabled' : ''
+                              }`}
                               to="#"
-                              onClick={() =>
-                                activePag.current > 0 && onClick(activePag.current - 1)
-                              }
+                              onClick={() => currentPage > 0 && onClick(currentPage - 1)}
                             >
                               Anterior
                             </Link>
@@ -266,7 +264,7 @@ const AllProfessor = () => {
                                 <Link
                                   key={i}
                                   to="#"
-                                  className={`paginate_button ${activePag.current === i ? 'current' : ''}`}
+                                  className={`paginate_button ${currentPage === i ? 'current' : ''}`}
                                   onClick={() => onClick(i)}
                                 >
                                   {number}
@@ -278,8 +276,7 @@ const AllProfessor = () => {
                               className="paginate_button next"
                               to="#"
                               onClick={() =>
-                                activePag.current + 1 < paggination.length &&
-                                onClick(activePag.current + 1)
+                                currentPage + 1 < paggination.length && onClick(currentPage + 1)
                               }
                             >
                               Siguiente

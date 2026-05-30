@@ -35,6 +35,7 @@ export const MenuList = [
     content: [
       { title: 'Todos los docentes', to: 'all-professors' },
       { title: 'Crear docente', to: 'add-professor' },
+      { title: 'Importar docentes', to: 'import-professors' },
     ],
   },
   {

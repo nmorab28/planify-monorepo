@@ -61,6 +61,9 @@ const normalizeTime = (value) => {
 const buildAvailabilitiesUrl = ({ teacherDocumentId } = {}) => {
   const params = new URLSearchParams();
   params.set('populate', 'teacher');
+  params.set('pagination[pageSize]', '1000');
+  params.set('sort[0]', 'dayOfWeek:asc');
+  params.set('sort[1]', 'startTime:asc');
 
   if (teacherDocumentId) {
     params.set('filters[teacher][documentId][$eq]', teacherDocumentId);

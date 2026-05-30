@@ -41,6 +41,17 @@ test('coordinador ve las opciones academicas principales', async ({ page }) => {
   await expect(sidebarItem(page, 'Sesiones de clase')).toBeVisible();
 });
 
+test('coordinador puede abrir importacion masiva de docentes', async ({ page }) => {
+  await login(page, credentials.coordinator);
+  await page.goto('/import-professors');
+
+  await expect(page.getByText('Importación masiva de docentes')).toBeVisible();
+  await expect(page.getByText('code, firstName, lastName, email')).toBeVisible();
+  await page.getByRole('button', { name: 'Validar CSV' }).click();
+  await expect(page.getByText('DOC-101')).toBeVisible();
+  await expect(page.getByText('Listo').first()).toBeVisible();
+});
+
 test('docente solo ve disponibilidad y no ve administracion academica', async ({ page }) => {
   await login(page, credentials.teacher);
 

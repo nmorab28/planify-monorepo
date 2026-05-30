@@ -37,7 +37,11 @@ const handleResponse = async (res) => {
 };
 
 export const getTeachers = async () => {
-  const res = await fetch(`${API_URL}/api/teachers`, {
+  const params = new URLSearchParams();
+  params.set('pagination[pageSize]', '1000');
+  params.set('sort', 'firstName:asc');
+
+  const res = await fetch(`${API_URL}/api/teachers?${params.toString()}`, {
     method: 'GET',
     headers: getAuthHeaders(),
   });
