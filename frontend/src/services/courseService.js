@@ -37,7 +37,11 @@ const handleResponse = async (res) => {
 };
 
 export const getCourses = async () => {
-  const res = await fetch(`${API_URL}/api/courses`, {
+  const params = new URLSearchParams();
+  params.set('pagination[pageSize]', '1000');
+  params.set('sort', 'code:asc');
+
+  const res = await fetch(`${API_URL}/api/courses?${params.toString()}`, {
     method: 'GET',
     headers: getAuthHeaders(),
   });

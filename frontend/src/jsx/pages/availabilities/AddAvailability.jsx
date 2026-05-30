@@ -105,6 +105,16 @@ const AddAvailability = () => {
   });
 
   useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      dayOfWeek: prefill.day ? Number(prefill.day) : prev.dayOfWeek,
+      startTime: prefill.start ? formatTime(prefill.start) : prev.startTime,
+      endTime: prefill.end ? formatTime(prefill.end) : prev.endTime,
+      teacherDocumentId: prefill.teacher || prev.teacherDocumentId,
+    }));
+  }, [prefill.day, prefill.end, prefill.start, prefill.teacher]);
+
+  useEffect(() => {
     if (teacherCtx.loading) return;
 
     if (teacherCtx.isCoordinator) {

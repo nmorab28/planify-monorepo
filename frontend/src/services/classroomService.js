@@ -42,6 +42,8 @@ const handleResponse = async (res) => {
 const buildClassroomsUrl = ({ search } = {}) => {
   const params = new URLSearchParams();
   params.set('populate', 'features');
+  params.set('pagination[pageSize]', '1000');
+  params.set('sort', 'code:asc');
 
   if (search && typeof search === 'string' && search.trim().length > 0) {
     params.set('filters[$or][0][code][$containsi]', search.trim());

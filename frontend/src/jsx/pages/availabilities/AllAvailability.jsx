@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Dropdown, Row, Nav, Tab, Card, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
@@ -139,14 +139,11 @@ const AllAvailability = () => {
   const [sort, setSort] = useState(10);
   const [feeData, setFeeData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const [data, setData] = useState([]);
   const [iconData, setIconDate] = useState({ complete: false, ind: Number });
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [teachers, setTeachers] = useState([]);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
-
-  const activePag = useRef(0);
-  const [test, settest] = useState(0);
 
   const teacherOptions = useMemo(
     () => [
@@ -212,35 +209,28 @@ const AllAvailability = () => {
 
   const onTeacherChange = (option) => {
     setSelectedTeacher(option);
+    setCurrentPage(0);
     fetchAvailabilities(option?.value || undefined);
   };
 
-  const chageData = (frist, sec) => {
-    const table = document.querySelectorAll('#availabilityList tbody tr');
-    for (let i = 0; i < table.length; ++i) {
-      if (i >= frist && i < sec) {
-        table[i].classList.remove('d-none');
-      } else {
-        table[i].classList.add('d-none');
-      }
-    }
-  };
-
-  useEffect(() => {
-    setData(document.querySelectorAll('#availabilityList tbody tr'));
-  }, [test, feeData]);
-
-  activePag.current === 0 && chageData(0, sort);
-
-  const paggination = Array(Math.ceil(data.length / sort))
+  const pageCount = Math.max(1, Math.ceil(feeData.length / sort));
+  const paggination = Array(pageCount)
     .fill()
     .map((_, i) => i + 1);
 
   const onClick = (i) => {
-    activePag.current = i;
-    chageData(activePag.current * sort, (activePag.current + 1) * sort);
-    settest(i);
+    setCurrentPage(i);
   };
+
+  const handlePageSize = (value) => {
+    setSort(value);
+    setCurrentPage(0);
+  };
+
+  const paginatedData = useMemo(() => {
+    const start = currentPage * sort;
+    return feeData.slice(start, start + sort);
+  }, [currentPage, feeData, sort]);
 
   const SotingData = (name) => {
     const sorted = [...feeData];
@@ -264,6 +254,7 @@ const AllAvailability = () => {
     }
 
     setFeeData(sorted);
+    setCurrentPage(0);
   };
 
   const DataSearch = (e) => {
@@ -274,6 +265,7 @@ const AllAvailability = () => {
         .includes(term)
     );
     setFeeData(filtered);
+    setCurrentPage(0);
   };
 
   const handleDelete = async (documentId) => {
@@ -420,9 +412,15 @@ const AllAvailability = () => {
                               <Dropdown className="search-drop">
                                 <Dropdown.Toggle as="div">{sort}</Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                  <Dropdown.Item onClick={() => setSort(10)}>10</Dropdown.Item>
-                                  <Dropdown.Item onClick={() => setSort(20)}>20</Dropdown.Item>
-                                  <Dropdown.Item onClick={() => setSort(30)}>30</Dropdown.Item>
+                                  <Dropdown.Item onClick={() => handlePageSize(10)}>
+                                    10
+                                  </Dropdown.Item>
+                                  <Dropdown.Item onClick={() => handlePageSize(20)}>
+                                    20
+                                  </Dropdown.Item>
+                                  <Dropdown.Item onClick={() => handlePageSize(30)}>
+                                    30
+                                  </Dropdown.Item>
                                 </Dropdown.Menu>
                               </Dropdown>
                               registros
@@ -457,8 +455,8 @@ const AllAvailability = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {feeData.map((row, ind) => (
-                              <tr key={ind}>
+                            {paginatedData.map((row) => (
+                              <tr key={row.documentId}>
                                 {teacherCtx.isCoordinator && <td>{row.teacherName}</td>}
                                 <td>{row.dayLabel}</td>
                                 <td>{row.startTime}</td>
@@ -500,11 +498,9 @@ const AllAvailability = () => {
 
                         <div className="d-sm-flex text-center justify-content-between align-items-center mt-3">
                           <div className="dataTables_info">
-                            Mostrando {activePag.current * sort + 1} a{' '}
-                            {data.length > (activePag.current + 1) * sort
-                              ? (activePag.current + 1) * sort
-                              : data.length}{' '}
-                            de {data.length} registros
+                            Mostrando {feeData.length === 0 ? 0 : currentPage * sort + 1} a{' '}
+                            {Math.min((currentPage + 1) * sort, feeData.length)} de{' '}
+                            {feeData.length} registros
                           </div>
 
                           <div
@@ -512,11 +508,11 @@ const AllAvailability = () => {
                             id="example5_paginate"
                           >
                             <Link
-                              className="paginate_button previous disabled"
+                              className={`paginate_button previous ${
+                                currentPage === 0 ? 'disabled' : ''
+                              }`}
                               to="#"
-                              onClick={() =>
-                                activePag.current > 0 && onClick(activePag.current - 1)
-                              }
+                              onClick={() => currentPage > 0 && onClick(currentPage - 1)}
                             >
                               Anterior
                             </Link>
@@ -527,7 +523,7 @@ const AllAvailability = () => {
                                   key={i}
                                   to="#"
                                   className={`paginate_button ${
-                                    activePag.current === i ? 'current' : ''
+                                    currentPage === i ? 'current' : ''
                                   }`}
                                   onClick={() => onClick(i)}
                                 >
@@ -540,8 +536,7 @@ const AllAvailability = () => {
                               className="paginate_button next"
                               to="#"
                               onClick={() =>
-                                activePag.current + 1 < paggination.length &&
-                                onClick(activePag.current + 1)
+                                currentPage + 1 < paggination.length && onClick(currentPage + 1)
                               }
                             >
                               Siguiente

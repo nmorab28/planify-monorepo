@@ -83,6 +83,7 @@ export const getClassSessions = async () => {
   const params = new URLSearchParams();
   params.set('sort[0]', 'dayOfWeek:asc');
   params.set('sort[1]', 'startTime:asc');
+  params.set('pagination[pageSize]', '1000');
 
   const res = await fetch(`${API_URL}/api/class-sessions?${params.toString()}`, {
     method: 'GET',

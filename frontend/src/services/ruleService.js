@@ -76,6 +76,7 @@ export const getRules = async (ruleType) => {
   const endpoint = endpointByType[ruleType];
   const params = new URLSearchParams();
   params.set('populate', 'scheduleConfig');
+  params.set('pagination[pageSize]', '1000');
   params.set('sort', 'code:asc');
 
   const res = await fetch(`${API_URL}/api/${endpoint}?${params.toString()}`, {

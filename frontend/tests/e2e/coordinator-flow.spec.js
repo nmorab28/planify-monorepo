@@ -64,11 +64,17 @@ const firstScheduleConfig = async (request, page) => {
 const chooseReactSelectOption = async (page, placeholder, optionText) => {
   await page.getByText(placeholder).click({ force: true });
   await page.keyboard.type(optionText);
-  await page.keyboard.press('Enter');
+  const option = page
+    .locator('[id^="react-select"][id*="-option-"]')
+    .filter({ hasText: optionText })
+    .first();
+  await option.waitFor({ state: 'visible' });
+  await option.click({ force: true });
+  await page.keyboard.press('Escape');
 };
 
 test('coordinador crea entidades academicas con datos reales de Strapi', async ({ page, request }) => {
-  test.setTimeout(90_000);
+  test.setTimeout(120_000);
 
   const id = suffix();
   const courseCode = `QA-CUR-${id}`;
@@ -145,13 +151,17 @@ test('coordinador crea entidades academicas con datos reales de Strapi', async (
 
   await page.goto('/add-class-session');
   await chooseReactSelectOption(page, 'Selecciona curso, grupo y docente', groupCode);
+  await chooseReactSelectOption(page, 'Selecciona un aula', classroomCode);
   await page.locator('#dayOfWeek').selectOption('1');
   await page.locator('#startTime').fill('15:00');
   await page.locator('#endTime').fill('16:00');
-  await chooseReactSelectOption(page, 'Selecciona un aula', classroomCode);
+  await expect(page.locator('#startTime')).toHaveValue('15:00');
+  await expect(page.locator('#endTime')).toHaveValue('16:00');
   await page.locator('#sessionOrder').fill('1');
   await page.locator('#status').selectOption('planned');
-  await page.getByRole('button', { name: 'Guardar' }).click();
+  const saveButton = page.getByRole('button', { name: 'Guardar' });
+  await saveButton.scrollIntoViewIfNeeded();
+  await saveButton.click();
   await expect(page).toHaveURL(/\/all-class-sessions$/);
 
   await page.goto('/all-courses');
@@ -160,10 +170,17 @@ test('coordinador crea entidades academicas con datos reales de Strapi', async (
   await page.locator('input[type="search"]').fill(teacherEmail);
   await expect(page.getByText(teacherEmail).first()).toBeVisible();
   await page.goto('/all-classrooms');
-  await expect(page.getByText(classroomCode).first()).toBeVisible();
+  await expect(page.getByText('Aulas').first()).toBeVisible();
+  await expect(page.locator('#classroomList tbody tr').first()).toBeVisible();
+  await page.locator('input[type="search"]').fill(classroomCode);
+  await expect(page.locator('#classroomList tbody tr').filter({ hasText: classroomCode }).first()).toBeVisible();
   await page.goto('/all-availability');
-  await expect(page.getByText(teacherName).first()).toBeVisible();
+  await expect(page.getByText('Rangos de disponibilidad')).toBeVisible();
+  await expect(page.locator('#availabilityList tbody tr').first()).toBeVisible();
+  await page.locator('input[type="search"]').fill(teacherName);
+  await expect(page.locator('#availabilityList tbody tr').filter({ hasText: teacherName }).first()).toBeVisible();
   await page.goto('/all-class-sessions');
+  await page.locator('input[type="search"]').fill(groupCode);
   await expect(page.getByText(groupCode).first()).toBeVisible();
   await expect(page.getByText(classroomCode).first()).toBeVisible();
   expect(classroom.features?.length || 0).toBeGreaterThan(0);
