@@ -149,9 +149,14 @@ const AllProfessor = () => {
                 <div className="card">
                   <div className="card-header">
                     <h4 className="card-title">Docentes</h4>
-                    <Link to={'/add-professor'} className="btn btn-primary">
-                      + Nuevo docente
-                    </Link>
+                    <div>
+                      <Link to={'/import-professors'} className="btn btn-outline-primary me-2">
+                        Importar CSV
+                      </Link>
+                      <Link to={'/add-professor'} className="btn btn-primary">
+                        + Nuevo docente
+                      </Link>
+                    </div>
                   </div>
 
                   <div className="card-body">
