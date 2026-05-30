@@ -175,7 +175,7 @@ test('coordinador crea entidades academicas con datos reales de Strapi', async (
   await page.locator('input[type="search"]').fill(classroomCode);
   await expect(page.locator('#classroomList tbody tr').filter({ hasText: classroomCode }).first()).toBeVisible();
   await page.goto('/all-availability');
-  await expect(page.getByText('Rangos de disponibilidad')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Rangos de disponibilidad' })).toBeVisible();
   await expect(page.locator('#availabilityList tbody tr').first()).toBeVisible();
   await page.locator('input[type="search"]').fill(teacherName);
   await expect(page.locator('#availabilityList tbody tr').filter({ hasText: teacherName }).first()).toBeVisible();
